@@ -4,14 +4,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>dev.langchain4j</groupId>
-    <artifactId>quarkus-langchain4j-workshop-03</artifactId>
+    <artifactId>quarkus-langchain4j-workshop</artifactId>
     <version>1.0.0</version>
 
+    <packaging>pom</packaging>
 
     <modules>
         <module>step-01</module>
         <module>step-02</module>
         <module>step-03</module>
         <module>step-04</module>
+        <module>step-05</module>
     </modules>
 </project>
