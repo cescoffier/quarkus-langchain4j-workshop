@@ -11,7 +11,7 @@
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
 
-        <quarkus-langchain4j.version>0.14.2</quarkus-langchain4j.version>
+        <quarkus-langchain4j.version>0.17.2</quarkus-langchain4j.version>
         <quarkus.platform.version>3.14.4</quarkus.platform.version>
 
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
