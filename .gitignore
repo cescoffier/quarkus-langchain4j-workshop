@@ -43,3 +43,5 @@ nb-configuration.xml
 /.quarkus/cli/plugins/
 
 site/
+
+__pycache__/
