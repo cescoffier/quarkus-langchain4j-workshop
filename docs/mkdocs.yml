@@ -1,0 +1,117 @@
+site_name: Quarkus OpenShift Workshop
+repo_url: https://github.com/cescoffier/quarkus-langchain4j-workshop
+edit_uri: edit/main/docs/
+docs_dir: docs
+
+nav:
+  - Presenting the Workshop: 'overview.md'
+  - Software requirements: 'requirements.md'
+  - Step 1 - Introduction to Quarkus LangChain4J: 'step-01.md'
+#  - User Interface: 'web-application.md'
+#  - Creating a REST/HTTP microservices:
+#    - Hero Microservice: 'hero-microservice.md'
+#    - Transactions and ORM: 'transactions-orm.md'
+#    - From Git to OpenShift: 'from-git-to-openshif.md'
+#    - Red Hat Trusted Application Pipelines: 'trusted-apps.md'
+#    - Open API: 'open-api.md'
+#  - One microservice is not microservices:
+#    - Villain microservice: 'villain-microservice.md'
+#    - Intelligent Fight microservice: 'fight-microservice.md'
+#  - Conclusion: 'conclusion-references.md'
+
+theme:
+  name: material
+  custom_dir: mkdocs-customizations/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: amber
+      toggle:
+        icon: material/lightbulb-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: orange
+      toggle:
+        icon: material/lightbulb-on
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Ubuntu Mono
+  icon:
+    repo: fontawesome/brands/github
+  logo: images/logo.png
+  favicon: images/logo.png
+  features:
+    - navigation.sections
+    - content.tabs.link
+    - content.code.annotate
+    - navigation.instant
+    - navigation.indexes
+    - navigation.tracking
+    - navigation.footer
+    - navigation.tabs.sticky
+    - content.code.select
+    - content.code.copy
+
+extra_css:
+  - extra.css
+
+extra_javascript:
+  - https://polyfill.io/v3/polyfill.min.js?features=es6
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+markdown_extensions:
+  - toc:
+      permalink: 
+  - admonition
+  - smarty
+  - attr_list
+  - md_in_html
+  - meta
+  - tables
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.snippets
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.smartsymbols
+  - pymdownx.betterem
+  - pymdownx.superfences
+  - pymdownx.mark
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+plugins:
+  - search
+  - build_plantuml:
+      render: "server"
+      server: "https://www.plantuml.com/plantuml"
+      output_format: "svg"
+      diagram_root: "docs"
+      output_folder: "target"
+      input_folder: "diagrams"
+      input_extensions: "puml"
+  - macros:
+      verbose: true
+      module_name: mkdocs-customizations/macros/docissimo
+      include_dir: mkdocs-customizations/macros
+
+
+extra:
+  snippet_dir: ../
+  manifest: manifest.webmanifest
+  version:
+    provider: mike
