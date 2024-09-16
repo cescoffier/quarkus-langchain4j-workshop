@@ -3,10 +3,11 @@
 
 ## Software requirements
 
-- JDK 21.0 or later
+- JDK 21.0 or later - Download it from [AdoptOpenJDK](https://adoptopenjdk.net/)
 - A key for OpenAI API (provided by the workshop organizer)
-- Podman or Docker
-- Git (not mandatory)
+- Podman or Docker - See [Podman installation](https://podman.io/getting-started/installation) or [Docker installation](https://docs.docker.com/get-docker/)
+  - If you use Podman, Podman Desktop provides a great user experience to manage your containers: [Podman Desktop](https://podman-desktop.io/docs/installation)
+- Git (not mandatory) - See [Git installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - An IDE with Java support (IntelliJ, Eclipse, VSCode with the Java extension, etc.)
 - A terminal
 

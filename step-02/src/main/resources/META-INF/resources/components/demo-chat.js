@@ -25,9 +25,28 @@ export class DemoChat extends LitElement {
         socket.onmessage = function (event) {
             chatBot.hideLastLoading();
             // LLM response
-            chatBot.sendMessage(event.data, {
-                right: false,
-            });
+            var lastMessage;
+            if (chatBot.messages.length > 0) {
+                lastMessage = chatBot.messages[chatBot.messages.length - 1];
+            }
+            if (lastMessage && lastMessage.sender.id === "llm") {
+                if (! lastMessage.msg) {
+                    lastMessage.msg = "";
+                }
+                lastMessage.msg += event.data;
+                let bubbles = chatBot.shadowRoot.querySelectorAll("chat-bubble");
+                let bubble = bubbles.item(bubbles.length - 1);
+                bubble.innerHTML = lastMessage.msg;
+                chatBot.body.scrollTo({ top: chatBot.body.scrollHeight, behavior: 'smooth' })
+            } else {
+                chatBot.sendMessage(event.data, {
+                    right: false,
+                    continued: true,
+                    sender: {
+                        id: "llm"
+                    }
+                });
+            }
         }
 
         const that = this;

@@ -1,4 +1,4 @@
-# Step 01 - LLM configuration
+# Step 02 - LLM configuration
 
 In this step, we will play with various configurations of the language model (LLM) that we will use in the subsequent steps.
 
@@ -28,7 +28,7 @@ The rest of the configuration indicates which model is used (`gpt-4o`) and wheth
     so you have to refresh the page in  your browser.
 
 !!! info 
-    The precise meaning of most model parameters is described on the website of OpenAI: https://platform.openai.com/docs/api-reference/chat/create
+    The precise meaning of most model parameters is described on the website of [OpenAI](https://platform.openai.com/docs/api-reference/chat/create).
 
 ## Temperature
 

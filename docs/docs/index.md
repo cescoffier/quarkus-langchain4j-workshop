@@ -1,32 +1,33 @@
-# Quarkus OpenShift + OpenShift AI Workshop
+# Quarkus Langchain4j Workshop
 
-Welcome to the Quarkus OpenShift Workshop! This workshop is designed to help you get started with Quarkus and OpenShift and OpenShift.ai.
+Welcome to the Quarkus Lanchchain4j Workshop! 
+This workshop is designed to help you get started with AI-Infused applications using Quarkus and Langchain4j.
 You are going to learn about:
 
-- **Red Hat Developer Hub** - the developer portal to initiate and maintain application development
-- **Quarkus** - the Kubernetes Native Java stack tailored for Kubernetes and OpenShift
-- **Red Hat OpenShift** - the Kubernetes platform for enterprise applications
-- **Red Hat Trusted Application Pipelines** - the CI/CD pipeline enhancing security with automatic, integrated checks that catch vulnerabilities early in the software supply chain.
-- **Red Hat OpenShift AI** - the AI/ML platform for OpenShift
+- How to integrate LLMs (Language Models) in your Quarkus application
+- How to build a chatbot using Quarkus
+- How to configure and how to pass prompts to the LLM
+- How to build agentic systems
+- How to build simple and advanced RAG (Retrieval-Augmented Generation) patterns
 
-## The system
+![Quarkus Langchain4j Workshop](images/global-architecture.png)
 
-![The fight user interface, showing a sample fight](images/fight-ui.png)
 
-In this workshop, we will be working on a very simple system composed of four services:
+## Workshop Structure
 
-- a `hero service` - a simple REST service that returns superheroes. It uses a `PostgreSQL` database to store the heroes.
-- a `villain service` - the `hero service` alter-ego storing super villains . It uses a `PostgreSQL` database to store the villains.
-- a `fight service` - a service that orchestrates the fight between heroes and villains. It relies on AI to predict the outcome of the fight and generate a narration of the fight.
-- a `fight ui` - a simple UI to interact with the `fight service`. This service is provided and already deployed in the OpenShift cluster.
+During this workshop we will create an LLM-powered customer support agent chatbot for a car rental company.
+The workshop is divided into 7 steps.
+Each step builds on the previous one, adding new features and functionality.
 
-## The development
+We start from the base functionality (step 1) and add features in the subsequent steps.
+The result after each step is located in a separate directory (`step-XX`).
+The final solution is in the `step-07` directory.
 
-All the development is done in _codespaces_, so you only need a recent web browser. 
-There is no need to install anything on your machine!
-
-You will get access to an OpenShift cluster where you will deploy the services that you will develop.
+We recommend to start by checking out the _main_ branch and then opening the project from `step-01` in your IDE and using that directory throughout the workshop.
+The other option is to make a copy of it.
+If you later need to reset to a particular step, either overwrite your working directory with the directory for the step you want to reset to, or, in your IDE, open the project from the step directory you want to reset to.
 
 ## Let's get started! 
 
-Go to the [overview](./overview.md) page to start the workshop.
+Go to the [requirements](./requirements.md) page to prepare for the workshop.
+Once ready, you can start with [Step 1](./step-01.md).

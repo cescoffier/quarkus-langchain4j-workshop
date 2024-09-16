@@ -1,23 +1,15 @@
-site_name: Quarkus OpenShift Workshop
+site_name: Quarkus Langchain4j Workshop
 repo_url: https://github.com/cescoffier/quarkus-langchain4j-workshop
 edit_uri: edit/main/docs/
 docs_dir: docs
 
 nav:
-  - Presenting the Workshop: 'overview.md'
-  - Software requirements: 'requirements.md'
+  - Requirements: 'requirements.md'
   - Step 1 - Introduction to Quarkus LangChain4J: 'step-01.md'
-#  - User Interface: 'web-application.md'
-#  - Creating a REST/HTTP microservices:
-#    - Hero Microservice: 'hero-microservice.md'
-#    - Transactions and ORM: 'transactions-orm.md'
-#    - From Git to OpenShift: 'from-git-to-openshif.md'
-#    - Red Hat Trusted Application Pipelines: 'trusted-apps.md'
-#    - Open API: 'open-api.md'
-#  - One microservice is not microservices:
-#    - Villain microservice: 'villain-microservice.md'
-#    - Intelligent Fight microservice: 'fight-microservice.md'
-#  - Conclusion: 'conclusion-references.md'
+  - Step 2 - Playing with model parameters: 'step-02.md'
+  - Step 3 - Streaming responses: 'step-03.md'
+  - Step 4 - Using system messages: 'step-04.md'
+
 
 theme:
   name: material
@@ -108,6 +100,7 @@ plugins:
       verbose: true
       module_name: mkdocs-customizations/macros/docissimo
       include_dir: mkdocs-customizations/macros
+  - mkdocs-video
 
 
 extra:
