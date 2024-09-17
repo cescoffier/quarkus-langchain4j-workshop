@@ -3,10 +3,10 @@
 
 ## Software requirements
 
-- JDK 21.0 or later - Download it from [AdoptOpenJDK](https://adoptopenjdk.net/)
+- JDK 21.0 or later - Download it from [Adoptium](https://adoptium.net/)
 - A key for OpenAI API (provided by the workshop organizer)
 - Podman or Docker - See [Podman installation](https://podman.io/getting-started/installation) or [Docker installation](https://docs.docker.com/get-docker/)
-  - If you use Podman, Podman Desktop provides a great user experience to manage your containers: [Podman Desktop](https://podman-desktop.io/docs/installation)
+    - If you use Podman, Podman Desktop provides a great user experience to manage your containers: [Podman Desktop](https://podman-desktop.io/docs/installation)
 - Git (not mandatory) - See [Git installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - An IDE with Java support (IntelliJ, Eclipse, VSCode with the Java extension, etc.)
 - A terminal
@@ -35,7 +35,7 @@ You can run a Quarkus application in _dev mode_ by running the following command
 
 This will start the application in dev mode, which means that the application will be recompiled automatically on every change in the source code.
 Just refresh the browser to see the changes.
-The application severs the application at http://localhost:8080/.
+The application severs the application at [http://localhost:8080/](http://localhost:8080/).
 
 !!! warning "Stopping the application"
     
