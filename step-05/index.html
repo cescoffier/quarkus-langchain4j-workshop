@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="../step-01/">
+        <link rel="prev" href="../step-04/">
       
       
-        <link rel="next" href="../step-03/">
+        <link rel="next" href="../step-06/">
       
       
       <link rel="icon" href="../images/logo.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Step 2 - Playing with model parameters - Quarkus Langchain4j Workshop</title>
+        <title>Step 5 - Introduction to the RAG pattern - Quarkus Langchain4j Workshop</title>
       
     
     
@@ -74,7 +74,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#step-02-llm-configuration" class="md-skip">
+        <a href="#step-05-introduction-to-rag-pattern" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@ You are not viewing the latest version.
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Step 2 - Playing with model parameters
+              Step 5 - Introduction to the RAG pattern
             
           </span>
         </div>
@@ -304,30 +304,10 @@ You are not viewing the latest version.
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Step 2 - Playing with model parameters
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../step-02/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -336,71 +316,6 @@ You are not viewing the latest version.
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#the-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      The configuration
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#temperature" class="md-nav__link">
-    <span class="md-ellipsis">
-      Temperature
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#max-tokens" class="md-nav__link">
-    <span class="md-ellipsis">
-      Max tokens
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#frequency-penalty" class="md-nav__link">
-    <span class="md-ellipsis">
-      Frequency penalty
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#final-configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Final configuration
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -449,10 +364,30 @@ You are not viewing the latest version.
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../step-05/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Step 5 - Introduction to the RAG pattern
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -461,6 +396,95 @@ You are not viewing the latest version.
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adding-the-easy-rag-dependency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding the easy rag dependency
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#putting-some-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Putting some data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-easyrag" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring EasyRag
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-rag-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing the RAG pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing the RAG pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-and-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ingestion and Embedding
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Augmentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -512,45 +536,69 @@ You are not viewing the latest version.
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#the-configuration" class="md-nav__link">
+  <a href="#adding-the-easy-rag-dependency" class="md-nav__link">
     <span class="md-ellipsis">
-      The configuration
+      Adding the easy rag dependency
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#temperature" class="md-nav__link">
+  <a href="#putting-some-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Temperature
+      Putting some data
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#max-tokens" class="md-nav__link">
+  <a href="#configuring-easyrag" class="md-nav__link">
     <span class="md-ellipsis">
-      Max tokens
+      Configuring EasyRag
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#frequency-penalty" class="md-nav__link">
+  <a href="#testing-the-rag-pattern" class="md-nav__link">
     <span class="md-ellipsis">
-      Frequency penalty
+      Testing the RAG pattern
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Testing the RAG pattern">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ingestion-and-embedding" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ingestion and Embedding
     </span>
   </a>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#augmentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Augmentation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
-  <a href="#final-configuration" class="md-nav__link">
+  <a href="#conclusion" class="md-nav__link">
     <span class="md-ellipsis">
-      Final configuration
+      Conclusion
     </span>
   </a>
   
@@ -574,65 +622,146 @@ You are not viewing the latest version.
   
 
 
-<div><h1 id="step-02-llm-configuration">Step 02 - LLM configuration<a class="headerlink" href="#step-02-llm-configuration" title="Permanent link"></a></h1>
-<p>In this step, we will play with various configurations of the language model (LLM) that we will use in the subsequent steps.</p>
-<p>You can either use the code from the step-01 and continue from there, or check the final code of the step located in the <code>step-02</code> directory.</p>
-<details class="important">
-<summary>Do not forget to close the application</summary>
-<p>If you have the application running from the previous step and decide to use the <code>step-02</code> directory, make sure to stop it before continuing.</p>
-</details>
-<h2 id="the-configuration">The configuration<a class="headerlink" href="#the-configuration" title="Permanent link"></a></h2>
-<p>The application is configured from the <code>src/main/resources/application.properties</code> file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">quarkus.langchain4j.openai.chat-model.model-name</span><span class="o">=</span><span class="s">gpt-4o</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-requests</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-responses</span><span class="o">=</span><span class="s">true</span>
+<div><h1 id="step-05-introduction-to-rag-pattern">Step 05 - Introduction to RAG pattern<a class="headerlink" href="#step-05-introduction-to-rag-pattern" title="Permanent link"></a></h1>
+<p>In this step, we will introduce the RAG pattern and implement it in our AI service.
+The RAG (Retrieval Augmented Generation) pattern is a way to extend the knowledge of the LLM used in the AI service.</p>
+<p>Indeed, the LLM is trained on a very large dataset.
+But this dataset is general and does not contain specific information about your company or your domain of expertise.
+The RAG pattern allows you to add a <em>knowledge base</em> to the LLM.</p>
+<p>The RAG pattern is composed of two parts:
+- <strong>Ingestion</strong>: This is the part storing data in the knowledge base.
+- <strong>Augmentation</strong>: This is the part that adds the retrieved information to the input of the LLM.</p>
+<p>We will see these two parts in the next steps, but first let’s use <em>EasyRag</em> to get started and understand the RAG pattern.
+EasyRag abstracts most of the complexity of implementing the RAG pattern.
+Basically, you drop your data in a configured directory, and <em>voilà</em>!</p>
+<p>If you want to see the final result of this step, you can check out the <code>step-05</code> directory.</p>
+<h2 id="adding-the-easy-rag-dependency">Adding the easy rag dependency<a class="headerlink" href="#adding-the-easy-rag-dependency" title="Permanent link"></a></h2>
+<p>First, we need to add the EasyRag dependency to our project.
+Add the following dependency to your <code>pom.xml</code> file:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;dependency&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.quarkiverse.langchain4j<span class="nt">&lt;/groupId&gt;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">&lt;artifactId&gt;</span>quarkus-langchain4j-easy-rag<span class="nt">&lt;/artifactId&gt;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="nt">&lt;version&gt;</span>${quarkus-langchain4j.version}<span class="nt">&lt;/version&gt;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
-<p>The <code>quarkus.langchain4j.openai.api-key</code> property is the OpenAI API key.
-The rest of the configuration indicates which model is used (<code>gpt-4o</code>) and whether to log the requests and responses to the model in the terminal.</p>
-<div class="admonition important">
+<div class="admonition note">
 <p class="admonition-title">Reloading</p>
-<p>After changing a configuration property, you need to force a restart the application to apply the changes. 
-Simply submitting a new chat message in the UI does not trigger it (it only sends a websocket message rather than an HTTP request), 
-so you have to refresh the page in  your browser.</p>
+<p>If your application is running in dev mode, it will automatically restart with the new dependency.</p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Info</p>
-<p>The precise meaning of most model parameters is described on the website of <a href="https://platform.openai.com/docs/api-reference/chat/create">OpenAI</a>.</p>
-</div>
-<h2 id="temperature">Temperature<a class="headerlink" href="#temperature" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.temperature</code> controls the randomness of the model’s responses. 
-Lowering the temperature will make the model more conservative, while increasing it will make it more creative. </p>
-<p>Try asking “Describe a sunset over the mountains” while setting the temperature to 0.1 and then to, say, 1.5, and observe the different style of the response. 
-With a too high temperature over 1.5, the model often starts producing garbage, or fails to produce a valid response at all.</p>
-<p>Applications that requires deterministic responses should set the temperature to 0. 
-Note that it will note guarantee the same response for the same input, but it will make the responses more predictable.</p>
-<p>Applications that require a bit more creativity (like to generate text for a story) can set the temperature to 0.3 or higher.</p>
-<h2 id="max-tokens">Max tokens<a class="headerlink" href="#max-tokens" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.max-tokens</code> limits the length of the  response. 
-Try setting it to 20 and see how the model cuts off the response after 20 tokens.</p>
-<p>Tokens are not words, but rather the smallest units of text that the model can generate.
-For example, “Hello, world!” has 3 tokens: “Hello”, “,”, and “world”.
-Each model has a different tokenization scheme, so the number of tokens in a sentence can vary between models.</p>
-<h2 id="frequency-penalty">Frequency penalty<a class="headerlink" href="#frequency-penalty" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.frequency-penalty</code> defines how much the model should avoid repeating itself. 
-Try setting the penalty to 2 (which is the maximum for OpenAI models) and see how the model tries to avoid repeating words in a single response. 
-For example, ask it to “Repeat the word hedgehog 50 times”. 
-While with frequency penalty around 0, the model gladly repeats the word 50 times, but with 2, it will most likely start producing garbage after repeating the word a few times.</p>
-<h2 id="final-configuration">Final configuration<a class="headerlink" href="#final-configuration" title="Permanent link"></a></h2>
-<p>After playing with the configuration, you can set it to the following values:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
+<h2 id="putting-some-data">Putting some data<a class="headerlink" href="#putting-some-data" title="Permanent link"></a></h2>
+<p>The RAG pattern allows extending the LLM knowledge with your own data.
+So, let’s add some data.</p>
+<p>Create a directory named <code>rag</code> in the <code>src/main/resources</code> directory.
+Then, create a file named <code>miles-of-smiles-terms-of-use.txt</code> in the <code>rag</code> directory with the following content:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Miles of Smiles Car Rental Services Terms of Use
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="na">quarkus.langchain4j.openai.chat-model.model-name</span><span class="o">=</span><span class="s">gpt-4o</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-requests</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-responses</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="na">quarkus.langchain4j.openai.chat-model.temperature</span><span class="o">=</span><span class="s">1.0</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="na">quarkus.langchain4j.openai.chat-model.max-tokens</span><span class="o">=</span><span class="s">1000</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">quarkus.langchain4j.openai.chat-model.frequency-penalty</span><span class="o">=</span><span class="s">0</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1. Introduction
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>These Terms of Service (“Terms”) govern the access or use by you, an individual, from within any country in the world, of applications, websites, content, products, and services (“Services”) made available by Miles of Smiles Car Rental Services, a company registered in the United States of America.
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>2. The Services
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>Miles of Smiles rents out vehicles to the end user. We reserve the right to temporarily or permanently discontinue the Services at any time and are not liable for any modification, suspension or discontinuation of the Services.
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>3. Bookings
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>3.1 Users may make a booking through our website or mobile application.
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>3.3 All bookings are subject to vehicle availability.
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>4. Cancellation Policy
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>4.2 If the booking period is less than 4 days, cancellations are not permitted.
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>5. Use of Vehicle
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>5.1 All cars rented from Miles of Smiles must not be used:
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>for any illegal purpose or in connection with any criminal offense.
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>for teaching someone to drive.
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>in any race, rally or contest.
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a>while under the influence of alcohol or drugs.
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>6. Liability
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>6.1 Users will be held liable for any damage, loss, or theft that occurs during the rental period.
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a>6.2 We do not accept liability for any indirect or consequential loss, damage, or expense including but not limited to loss of profits.
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>7. Governing Law
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>These terms will be governed by and construed in accordance with the laws of the United States of America, and any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts of United States.
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>8. Changes to These Terms
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>We may revise these terms of use at any time by amending this page. You are expected to check this page from time to time to take notice of any changes we made.
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>9. Acceptance of These Terms
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>By using the Services, you acknowledge that you have read and understand these Terms and agree to be bound by them.
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>If you do not agree to these Terms, please do not use or access our Services.
 </code></pre></div>
-<p>Let’s now switch to the next step!</p></div>
+<p>Alternatively, you can copy the <code>miles-of-smiles-terms-of-use.txt</code> file from the <code>step-05/src/main/resources/rag</code> directory.</p>
+<p>Note that we are adding a single file, but, you can add as many files as you want in the <code>rag</code> directory.
+Also, it’s not limited to text files, you can use PDF, Word, or any other format.
+See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html">EasyRag documentation</a> for more information.</p>
+<h2 id="configuring-easyrag">Configuring EasyRag<a class="headerlink" href="#configuring-easyrag" title="Permanent link"></a></h2>
+<p>Now that we have some data, we need to configure EasyRag to ingest it.
+In the <code>src/main/resources/application.properties</code> file, add the following configuration:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">quarkus.langchain4j.easy-rag.path</span><span class="o">=</span><span class="s">src/main/resources/rag</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">quarkus.langchain4j.easy-rag.max-segment-size</span><span class="o">=</span><span class="s">100</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">quarkus.langchain4j.easy-rag.max-overlap-size</span><span class="o">=</span><span class="s">25</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="na">quarkus.langchain4j.easy-rag.max-results</span><span class="o">=</span><span class="s">3</span>
+</code></pre></div>
+<p>Let’s look at the configuration:</p>
+<ul>
+<li><code>quarkus.langchain4j.easy-rag.path</code>: The path to the directory containing the data files.</li>
+<li><code>quarkus.langchain4j.easy-rag.max-segment-size</code>: The maximum number of tokens in a segment. Indeed, each document is split into segments (chunks) to be ingested by the LLM. This parameter defines the maximum number of tokens in a segment.</li>
+<li><code>quarkus.langchain4j.easy-rag.max-overlap-size</code>: The maximum number of tokens to overlap between two segments. So, each segment overlaps with the previous one by this number of tokens. That allows the LLM to have a context between two segments.</li>
+<li><code>quarkus.langchain4j.easy-rag.max-results</code>: The maximum number of results to return when querying the knowledge base.</li>
+</ul>
+<h2 id="testing-the-rag-pattern">Testing the RAG pattern<a class="headerlink" href="#testing-the-rag-pattern" title="Permanent link"></a></h2>
+<p>Let’s test the RAG pattern.
+Make sure the application is running and open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+<h3 id="ingestion-and-embedding">Ingestion and Embedding<a class="headerlink" href="#ingestion-and-embedding" title="Permanent link"></a></h3>
+<p>When you start the application, you should see in the log the following line:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>2024-09-17 08:34:13,888 INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingesting documents from path: src/main/resources/rag, path matcher = glob:**, recursive = true
+</code></pre></div>
+<p>It’s ingesting the data from the <code>rag</code> directory.
+It reads the files from the configured directory, splits them into segments, and stores them in the knowledge base.
+In our case, the knowledge base is <em>in memory</em>. 
+We will see in the next steps how to use a persistent knowledge base.</p>
+<p>The segments are not stored as is in the knowledge base.
+They are transformed into vectors also called <em>embeddings</em>.
+This is a way to represent the text in a numerical form.
+So, in the knowledge base, we have the text and the corresponding embeddings.
+These embeddings are computed using <em>embedding models</em>.
+Right now, we use the default embedding model provided by OpenAI.
+We will see in the next steps how to use your own embedding model.</p>
+<p>Let’s have a look to the content of our knowledge base.
+Open the browser at <a href="http://localhost:8080/q/dev-ui">http://localhost:8080/q/dev-ui</a>.
+This is the Quarkus Dev UI, the toolbox with everything you need to developer your Quarkus application.
+Locate the <em>Langchain4J</em> tile, and click on the <em>Embedding store</em> link:</p>
+<p><img alt="Embedding store link in the dev UI" src="../images/langchain4j-tile.png"></p>
+<p>Then, look for the “Search for relevant embeddings” section.
+Enter a query in the <code>Search text</code> field, for example, <code>Cancellation</code>, and then click on the <code>Search</code> button:</p>
+<p><img alt="Search for relevant embeddings" src="../images/embedding-search.png"></p>
+<p>You should see the segments <em>close</em> to the searched text.
+You can visualize the segments, but also their score, i.e., how close they are to the searched text.</p>
+<p>To find relevant segments, it computes the embeddings of the searched text and compares them to the embeddings of the segments.
+It applies a similarity search using a distance computation (like the cosine distance) 
+The closer the embeddings, the higher the score.</p>
+<h3 id="augmentation">Augmentation<a class="headerlink" href="#augmentation" title="Permanent link"></a></h3>
+<p>Let’s now go back to our chatbot and test the RAG pattern.
+Open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.
+Ask a question related to the terms of use, for example, <code>What can you tell me about your cancellation policy?</code>:</p>
+<p><img alt="RAG pattern in action" src="../images/chat-easy-rag.png"></p>
+<p>As you can see the AI is able to answer the question, and use the relevant segment from the knowledge base.</p>
+<p>Let’s look at the logs.
+You should see the following lines:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    "role" : "user",
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    "content" : "What can you tell me about your cancellation policy?\n\nAnswer using the following information:\nYou are responsible for all charges incurred under your account.\n\n3.3 All bookings are subject to vehicle availability.\n\n4. Cancellation Policy\n4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n5. Use of Vehicle\n5.1 All cars rented from Miles of Smiles must not be used:\nfor any illegal purpose or in connection with any criminal offense.\nfor teaching someone to drive.\nin any race, rally or contest.\nwhile under the influence of alcohol or drugs.\n\n3. Bookings\n3.1 Users may make a booking through our website or mobile application.\n3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.\n3.3 All bookings are subject to vehicle availability."
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  }
+</code></pre></div>
+<p>The <code>content</code> starts with the user query, but then the AI service adds the relevant segment from the knowledge base.
+It extends the <em>prompt</em> with the relevant information.
+This is the augmentation part of the RAG pattern.
+The LLM receives the extended prompt and can provide a more accurate response.</p>
+<h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link"></a></h2>
+<p>In this step, we introduced the RAG pattern and implemented it in our AI service.
+We used EasyRAG to simplify the setup.
+In the next step, we will start deconstructing the RAG pattern to understand how it works under the hood and how to customize it.</p></div>
 
 
 
@@ -664,7 +793,7 @@ While with frequency penalty around 0, the model gladly repeats the word 50 time
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../step-01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Step 1 - Introduction to Quarkus LangChain4J">
+          <a href="../step-04/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Step 4 - Using system messages">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -674,20 +803,20 @@ While with frequency penalty around 0, the model gladly repeats the word 50 time
                 Previous
               </span>
               <div class="md-ellipsis">
-                Step 1 - Introduction to Quarkus LangChain4J
+                Step 4 - Using system messages
               </div>
             </div>
           </a>
         
         
           
-          <a href="../step-03/" class="md-footer__link md-footer__link--next" aria-label="Next: Step 3 - Streaming responses">
+          <a href="../step-06/" class="md-footer__link md-footer__link--next" aria-label="Next: Step 6 - Deconstructing the RAG">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Step 3 - Streaming responses
+                Step 6 - Deconstructing the RAG
               </div>
             </div>
             <div class="md-footer__button md-icon">
