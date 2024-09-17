@@ -8,6 +8,7 @@ But this dataset is general and does not contain specific information about your
 The RAG pattern allows you to add a _knowledge base_ to the LLM.
 
 The RAG pattern is composed of two parts:
+
 - **Ingestion**: This is the part storing data in the knowledge base.
 - **Augmentation**: This is the part that adds the retrieved information to the input of the LLM.
 
