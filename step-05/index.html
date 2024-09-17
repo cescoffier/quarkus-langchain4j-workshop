@@ -509,6 +509,26 @@ You are not viewing the latest version.
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../step-07/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Step 7 - Function calling and tools
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -628,9 +648,11 @@ The RAG (Retrieval Augmented Generation) pattern is a way to extend the knowledg
 <p>Indeed, the LLM is trained on a very large dataset.
 But this dataset is general and does not contain specific information about your company or your domain of expertise.
 The RAG pattern allows you to add a <em>knowledge base</em> to the LLM.</p>
-<p>The RAG pattern is composed of two parts:
-- <strong>Ingestion</strong>: This is the part storing data in the knowledge base.
-- <strong>Augmentation</strong>: This is the part that adds the retrieved information to the input of the LLM.</p>
+<p>The RAG pattern is composed of two parts:</p>
+<ul>
+<li><strong>Ingestion</strong>: This is the part storing data in the knowledge base.</li>
+<li><strong>Augmentation</strong>: This is the part that adds the retrieved information to the input of the LLM.</li>
+</ul>
 <p>We will see these two parts in the next steps, but first let’s use <em>EasyRag</em> to get started and understand the RAG pattern.
 EasyRag abstracts most of the complexity of implementing the RAG pattern.
 Basically, you drop your data in a configured directory, and <em>voilà</em>!</p>
