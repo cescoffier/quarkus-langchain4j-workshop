@@ -35,7 +35,7 @@ You can run a Quarkus application in _dev mode_ by running the following command
 
 This will start the application in dev mode, which means that the application will be recompiled automatically on every change in the source code.
 Just refresh the browser to see the changes.
-The application severs the application at http://localhost:8080/.
+The application severs the application at [http://localhost:8080/](http://localhost:8080/).
 
 !!! warning "Stopping the application"
     
