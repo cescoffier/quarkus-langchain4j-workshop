@@ -137,7 +137,7 @@ public class RagIngestion {
      * Ingests the documents from the given location into the embedding store.
      *
      * @param ev             the startup event to trigger the ingestion when the application starts
-     * @param store          the embedding store the embedding store (Redis in our case)
+     * @param store          the embedding store the embedding store (PostGreSQL in our case)
      * @param embeddingModel the embedding model to use for the embedding (BGE-Small-EN-Quantized in our case)
      * @param documents      the location of the documents to ingest
      */
