@@ -103,7 +103,8 @@ plugins:
       verbose: true
       module_name: mkdocs-customizations/macros/docissimo
       include_dir: mkdocs-customizations/macros
-  - mkdocs-video
+  - mkdocs-video:
+      is_video: True
 
 
 extra:

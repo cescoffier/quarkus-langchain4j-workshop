@@ -300,7 +300,7 @@ Alright, let's try now to cancel an invalid booking:
 AI:  I'm sorry, but it seems that your booking from 2024-07-10 to 2024-07-15 cannot be cancelled. If you need further assistance or have any questions, please let me know!
 ```
 
-![type:video](images/chat-booking.mp4)
+![type:video](images/chat-booking.mp4){: style='width: 80%'}
 
 ## Conclusion
 
