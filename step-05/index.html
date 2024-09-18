@@ -673,8 +673,8 @@ Add the following dependency to your <code>pom.xml</code> file:</p>
 <h2 id="putting-some-data">Putting some data<a class="headerlink" href="#putting-some-data" title="Permanent link"></a></h2>
 <p>The RAG pattern allows extending the LLM knowledge with your own data.
 So, let’s add some data.</p>
-<p>Create a directory named <code>rag</code> in the <code>src/main/resources</code> directory.
-Then, create a file named <code>miles-of-smiles-terms-of-use.txt</code> in the <code>rag</code> directory with the following content:</p>
+<p><mark>Create a directory named <code>rag</code> in the <code>src/main/resources</code> directory.
+Then, create a file named <code>miles-of-smiles-terms-of-use.txt</code> in the <code>rag</code> directory with the following content:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Miles of Smiles Car Rental Services Terms of Use
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>1. Introduction
@@ -719,7 +719,7 @@ Also, it’s not limited to text files, you can use PDF, Word, or any other form
 See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html">EasyRag documentation</a> for more information.</p>
 <h2 id="configuring-easyrag">Configuring EasyRag<a class="headerlink" href="#configuring-easyrag" title="Permanent link"></a></h2>
 <p>Now that we have some data, we need to configure EasyRag to ingest it.
-In the <code>src/main/resources/application.properties</code> file, add the following configuration:</p>
+<mark>In the <code>src/main/resources/application.properties</code> file, add the following configuration:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="na">quarkus.langchain4j.easy-rag.path</span><span class="o">=</span><span class="s">src/main/resources/rag</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="na">quarkus.langchain4j.easy-rag.max-segment-size</span><span class="o">=</span><span class="s">100</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="na">quarkus.langchain4j.easy-rag.max-overlap-size</span><span class="o">=</span><span class="s">25</span>
@@ -751,12 +751,12 @@ These embeddings are computed using <em>embedding models</em>.
 Right now, we use the default embedding model provided by OpenAI.
 We will see in the next steps how to use your own embedding model.</p>
 <p>Let’s have a look to the content of our knowledge base.
-Open the browser at <a href="http://localhost:8080/q/dev-ui">http://localhost:8080/q/dev-ui</a>.
+<mark>Open the browser at <a href="http://localhost:8080/q/dev-ui">http://localhost:8080/q/dev-ui</a>.
 This is the Quarkus Dev UI, the toolbox with everything you need to developer your Quarkus application.
-Locate the <em>Langchain4J</em> tile, and click on the <em>Embedding store</em> link:</p>
+Locate the <em>Langchain4J</em> tile, and click on the <em>Embedding store</em> link:</mark></p>
 <p><img alt="Embedding store link in the dev UI" src="../images/langchain4j-tile.png"></p>
-<p>Then, look for the “Search for relevant embeddings” section.
-Enter a query in the <code>Search text</code> field, for example, <code>Cancellation</code>, and then click on the <code>Search</code> button:</p>
+<p><mark>Then, look for the “Search for relevant embeddings” section.
+Enter a query in the <code>Search text</code> field, for example, <code>Cancellation</code>, and then click on the <code>Search</code> button:</mark></p>
 <p><img alt="Search for relevant embeddings" src="../images/embedding-search.png"></p>
 <p>You should see the segments <em>close</em> to the searched text.
 You can visualize the segments, but also their score, i.e., how close they are to the searched text.</p>
@@ -765,8 +765,8 @@ It applies a similarity search using a distance computation (like the cosine dis
 The closer the embeddings, the higher the score.</p>
 <h3 id="augmentation">Augmentation<a class="headerlink" href="#augmentation" title="Permanent link"></a></h3>
 <p>Let’s now go back to our chatbot and test the RAG pattern.
-Open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.
-Ask a question related to the terms of use, for example, <code>What can you tell me about your cancellation policy?</code>:</p>
+<mark>Open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.
+Ask a question related to the terms of use, for example, <code>What can you tell me about your cancellation policy?</code>:</mark></p>
 <p><img alt="RAG pattern in action" src="../images/chat-easy-rag.png"></p>
 <p>As you can see the AI is able to answer the question, and use the relevant segment from the knowledge base.</p>
 <p>Let’s look at the logs.

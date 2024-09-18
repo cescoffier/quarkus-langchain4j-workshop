@@ -584,7 +584,7 @@ Initially, our AI service looked like this:</p>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div>
 <p>Note that the return type of the <code>chat</code> method is <code>String</code>.
-We will change it to <code>Multi&lt;String&gt;</code> to indicate that the response will be streamed.</p>
+<mark>We will change it to <code>Multi&lt;String&gt;</code> to indicate that the response will be streamed.</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkiverse.langchain4j.RegisterAiService</span><span class="p">;</span>
@@ -632,7 +632,7 @@ But, we need to modify our websocket endpoint to handle this stream and send it 
 <a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="p">}</span>
 </code></pre></div>
-<p>Let’s modify the <code>onTextMessage</code> method to send the response to the client as it arrives.</p>
+<p><mark>Let’s modify the <code>onTextMessage</code> method to send the response to the client as it arrives.</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Do not forget to import io.smallrye.mutiny.Multi if your IDE does not do it automatically</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nd">@OnTextMessage</span>
@@ -647,7 +647,7 @@ This is because Quarkus understands that the return type is a <code>Multi</code>
 <p>To test the streaming, you can use the same chat interface as before.
 So, make sure the application runs (with <code>./mvnw quarkus:dev</code>), open the browser, and start chatting.
 If you ask simple questions, you may not notice the difference.</p>
-<p>Ask something like, “Tell me a story containing 500 words” and you will see the response being displayed as it arrives.</p>
+<p><mark>Ask something like, “Tell me a story containing 500 words” and you will see the response being displayed as it arrives.</mark></p>
 <p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls alt="type:video"><source src="../images/streaming.mp4" type="video/mp4"></source></video></div></p>
 <p>Let’s now switch to the next step!</p></div>
 

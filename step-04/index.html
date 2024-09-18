@@ -559,7 +559,7 @@ You are not viewing the latest version.
 
 
 <div><h1 id="step-04-system-messages">Step 04 - System messages<a class="headerlink" href="#step-04-system-messages" title="Permanent link"></a></h1>
-<p>In <a href="../step-01/">step 01</a>, we have seen 3 types of messages:</p>
+<p>In <a href="../step-01/">step 01</a>, we have seen two types of messages:</p>
 <ul>
 <li>User messages (<code>User</code>)</li>
 <li>AI responses (<code>Assistant</code>)</li>
@@ -574,7 +574,7 @@ System messages are crucial for shaping the model’s output, ensuring it aligns
 formality, topic focus, or specific task execution. Unlike user input, the system message remains hidden from the
 conversation but influences the overall experience.</p>
 <p>To add a system message, we need to extend our <code>CustomerSupportAgent</code> interface.
-If you are following the workshop, update the <code>CustomerSupportAgent</code> interface content to become:</p>
+<mark>Update the <code>CustomerSupportAgent</code> interface content to become:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">dev.langchain4j.service.SystemMessage</span><span class="p">;</span>
@@ -612,7 +612,7 @@ We only remove the user and AI messages.</p>
 <h2 id="playing-with-the-system-message">Playing with the system message<a class="headerlink" href="#playing-with-the-system-message" title="Permanent link"></a></h2>
 <p>Now, let’s test the system message.
 Make sure the application is running and open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
-<p>Let’s try to chat with the AI and ask for a <em>story</em>:</p>
+<p><mark>Let’s try to chat with the AI and ask for a <em>story</em>:</mark></p>
 <p><img alt="Out of context" src="../images/out-of-context.png"></p>
 <p>The AI should respond with a message that it is out of context.
 You can relatively easily work around this by asking for a <em>car rental story</em>, but there are other solution to this
