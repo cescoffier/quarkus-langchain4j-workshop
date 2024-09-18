@@ -414,6 +414,33 @@ You are not viewing the latest version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#warming-the-caches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming the caches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warming-up-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming up Maven
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warming-up-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming up Docker images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-the-project-in-your-ide" class="md-nav__link">
     <span class="md-ellipsis">
       Import the project in your IDE
@@ -725,6 +752,33 @@ You are not viewing the latest version.
 </li>
         
           <li class="md-nav__item">
+  <a href="#warming-the-caches" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming the caches
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warming-up-maven" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming up Maven
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#warming-up-docker-images" class="md-nav__link">
+    <span class="md-ellipsis">
+      Warming up Docker images
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#import-the-project-in-your-ide" class="md-nav__link">
     <span class="md-ellipsis">
       Import the project in your IDE
@@ -807,11 +861,28 @@ It is only available when the application is running in dev mode.</p>
 </code></pre></div>
 <h4 id="direct-download">Direct Download<a class="headerlink" href="#direct-download" title="Permanent link"></a></h4>
 <p>If you didn’t use the <code>git</code> approach, you can download the repository as a zip file from the <a href="https://github.com/cescoffier/quarkus-langchain4j-workshop/archive/refs/heads/main.zip">GitHub repository</a>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>workshop.zip<span class="w"> </span>https://github.com/langchain4j/quarkus-langchain4j-uphill-workshop/archive/refs/heads/main.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>-L<span class="w"> </span>-o<span class="w"> </span>workshop.zip<span class="w"> </span>https://github.com/cescoffier/quarkus-langchain4j-workshop/archive/refs/heads/main.zip
 </code></pre></div>
 <p>Then unzip the file and navigate to the directory:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>unzip<span class="w"> </span>workshop.zip
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">cd</span><span class="w"> </span>quarkus-langchain4j-workshop-main
+</code></pre></div>
+<h3 id="warming-the-caches">Warming the caches<a class="headerlink" href="#warming-the-caches" title="Permanent link"></a></h3>
+<p>This workshop needs to download all sorts of Maven artifacts and Docker images.
+Some of these artifacts are large, and because we have to share internet connexions at the workshop location, it is better to download them before the workshop.</p>
+<p>If you’re getting ready for a workshop, you might find it helpful to pre-download some of these artifacts.
+This can save strain on shared bandwidth.
+If, however, you’re already attending a workshop, don’t worry about warming anything up.</p>
+<h3 id="warming-up-maven">Warming up Maven<a class="headerlink" href="#warming-up-maven" title="Permanent link"></a></h3>
+<p>To warm up Maven, you can run the following command in the root directory of the project:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./mvnw<span class="w"> </span>verify
+</code></pre></div>
+<h3 id="warming-up-docker-images">Warming up Docker images<a class="headerlink" href="#warming-up-docker-images" title="Permanent link"></a></h3>
+<p>To download the Docker images, you can run the following command:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># With Podman:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>podman<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># With Docker:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
 </code></pre></div>
 <h3 id="import-the-project-in-your-ide">Import the project in your IDE<a class="headerlink" href="#import-the-project-in-your-ide" title="Permanent link"></a></h3>
 <p>Then, open the project from the <code>step-01</code> directory in your IDE and use that directory throughout the workshop.</p>
