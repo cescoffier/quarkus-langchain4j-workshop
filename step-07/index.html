@@ -12,6 +12,8 @@
         <link rel="prev" href="../step-06/">
       
       
+        <link rel="next" href="../conclusion/">
+      
       
       <link rel="icon" href="../images/logo.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
@@ -521,6 +523,26 @@ You are not viewing the latest version.
   
 
     
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../conclusion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Conclusion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
   </ul>
 </nav>
                   </div>
@@ -881,9 +903,13 @@ In the chatbot, let’s try the following interactions:</p>
 </code></pre></div>
 <p><div class="video-container"><video style="width: 80%" controls alt="type:video"><source src="../images/chat-booking.mp4" type="video/mp4"></source></video></div></p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link"></a></h2>
-<p>In this step, we have seen how to implement function calling in our application.
-That allows creating <em>agents</em>: LLM that can reason and interact with the application.</p>
-<p>With this pattern, we can imagine going one step further and define function calling LLMs or other AI models. </p></div>
+<p>In this step, we explored how to implement function calling within our application, enabling us to create <em>agents</em>—LLMs that can not only reason but also interact dynamically with the system.</p>
+<p>A function in this context is simply a method from your application annotated with <code>@Tool</code>. 
+The actual implementation of the function is entirely customizable.
+For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources. 
+Additionally, you can leverage more specialized LLMs, routing specific queries—such as legal or insurance-related questions—to models trained in those domains.</p>
+<p>However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection. 
+In the next step, we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.</p></div>
 
 
 
@@ -930,6 +956,22 @@ That allows creating <em>agents</em>: LLM that can reason and interact with the 
             </div>
           </a>
         
+        
+          
+          <a href="../conclusion/" class="md-footer__link md-footer__link--next" aria-label="Next: Conclusion">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Conclusion
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
         
       </nav>
     
