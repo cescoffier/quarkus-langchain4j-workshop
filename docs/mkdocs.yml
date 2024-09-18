@@ -12,6 +12,7 @@ nav:
   - Step 5 - Introduction to the RAG pattern: 'step-05.md'
   - Step 6 - Deconstructing the RAG: 'step-06.md'
   - Step 7 - Function calling and tools: 'step-07.md'
+  - Conclusion: 'conclusion.md'
 
 
 theme:
