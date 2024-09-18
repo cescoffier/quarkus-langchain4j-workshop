@@ -1,5 +1,6 @@
 package dev.langchain4j.quarkus.workshop;
 
+import io.quarkus.logging.Log;
 import io.quarkus.websockets.next.OnOpen;
 import io.quarkus.websockets.next.OnTextMessage;
 import io.quarkus.websockets.next.WebSocket;
@@ -20,6 +21,11 @@ public class CustomerSupportAgentWebSocket {
 
     @OnTextMessage
     public String onTextMessage(String message) {
-        return customerSupportAgent.chat(message);
+        try {
+            return customerSupportAgent.chat(message);
+        } catch (Exception e) {
+            Log.error("Error calling the LLM", e);
+            return "Sorry, I am unable to process your request at the moment. Please try again later.";
+        }
     }
 }

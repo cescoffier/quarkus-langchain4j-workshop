@@ -2,6 +2,7 @@ package dev.langchain4j.quarkus.workshop;
 
 import dev.langchain4j.service.SystemMessage;
 import io.quarkiverse.langchain4j.RegisterAiService;
+import io.quarkiverse.langchain4j.guardrails.InputGuardrails;
 import jakarta.enterprise.context.SessionScoped;
 
 @SessionScoped
@@ -15,5 +16,6 @@ public interface CustomerSupportAgent {
             
             Today is {current_date}.
             """)
+    @InputGuardrails(PromptInjectionGuard.class)
     String chat(String userMessage);
 }
