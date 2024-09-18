@@ -61,7 +61,7 @@ While with frequency penalty around 0, the model gladly repeats the word 50 time
 
 ## Final configuration
 
-After playing with the configuration, you can set it to the following values:
+==After playing with the configuration, you can set it to the following values:==
 
 ```properties
 quarkus.langchain4j.openai.api-key=${OPENAI_API_KEY}

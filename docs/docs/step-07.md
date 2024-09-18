@@ -28,7 +28,7 @@ However, we recommend you follow the step-by-step guide to understand how it wor
 ## A couple of new dependencies
 
 Before starting, we need to install a couple of new dependencies.
-Open the `pom.xml` file and add the following dependencies:
+==Open the `pom.xml` file and add the following dependencies:==
 
 ```xml
 <dependency>
@@ -51,7 +51,7 @@ We are going to store a list of booking in the database.
 Each booking is associated with a customer.
 A customer can have multiple bookings.
 
-Create the `dev.langchain4j.quarkus.workshop.Customer` entity class with the following content:
+==Create the `dev.langchain4j.quarkus.workshop.Customer` entity class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -67,7 +67,7 @@ public class Customer extends PanacheEntity {
 }
 ```
 
-Then, create the `dev.langchain4j.quarkus.workshop.Booking` entity class with the following content:
+==Then, create the `dev.langchain4j.quarkus.workshop.Booking` entity class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -88,7 +88,7 @@ public class Booking extends PanacheEntity {
 }
 ```
 
-While we are at it, let's create the `dev.langchain4j.quarkus.workshop.Exceptions` class containing a set of `Exception` we will be using:
+==While we are at it, let's create the `dev.langchain4j.quarkus.workshop.Exceptions` class containing a set of `Exception` we will be using:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -117,7 +117,7 @@ public class Exceptions {
 Alright, we have our entities and exceptions.
 Let's add some data to the database.
 
-Create the `src/main/resources/import.sql` file with the following content:
+==Create the `src/main/resources/import.sql` file with the following content:==
 
 ```sql
 INSERT INTO customer (id, firstName, lastName) VALUES (1, 'Speedy', 'McWheels');
@@ -154,7 +154,7 @@ Without specific configuration, it will only be applied in dev mode (`./mvnw qua
 Alright, we have now everything we need to create a function that allows the LLM to retrieve data from the database.
 We are going to create a `BookingRepository` class that will contain a set of functions to interact with the database.
 
-Create the `dev.langchain4j.quarkus.workshop.BookingRepository` class with the following content:
+==Create the `dev.langchain4j.quarkus.workshop.BookingRepository` class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -224,7 +224,7 @@ The optional value of the annotation can gives more information about the tool, 
 
 ## Giving a toolbox to the LLM
 
-Let's now modify our AI service interface (`dev.langchain4j.quarkus.workshop.CustomerSupportAgent`):
+==Let's now modify our AI service interface (`dev.langchain4j.quarkus.workshop.CustomerSupportAgent`):==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -277,7 +277,7 @@ Also note that we have added a new placeholder `{current_date}` in the system pr
 
 
 Let's test the function calling.
-Make sure the application is running (`./mvnw quarkus:dev`).
+==Make sure the application is running (`./mvnw quarkus:dev`).==
 
 Open your browser and go to [http://localhost:8080](http://localhost:8080).
 In the chatbot, let's try the following interactions:

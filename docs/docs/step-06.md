@@ -12,7 +12,7 @@ Otherwise, let's get started!
 ## A bit of cleanup 
 
 Let's start with a bit of cleanup.
-First, open the `src/main/resources/application.properties` file and remove the following configuration:
+==First, open the `src/main/resources/application.properties` file and remove the following configuration:==
 
 ```properties
 quarkus.langchain4j.easy-rag.path=src/main/resources/rag
@@ -21,7 +21,7 @@ quarkus.langchain4j.easy-rag.max-overlap-size=25
 quarkus.langchain4j.easy-rag.max-results=3
 ```
 
-Then, open the `pom.xml` file and remove the following dependency:
+==Then, open the `pom.xml` file and remove the following dependency:==
 
 ```xml
 <dependency>
@@ -43,7 +43,7 @@ But, you can use your own embedding model.
 
 In this step, we will use the [bge-small-en-q](https://huggingface.co/BAAI/bge-small-en-q) embedding model.
 
-Add the following dependency to your `pom.xml` file:
+==Add the following dependency to your `pom.xml` file:==
 
 ```xml
 <dependency>
@@ -71,7 +71,7 @@ But, we can use a persistent store to keep the embeddings between restarts.
 There are many options to store the embeddings, like Redis, Infinispan, specialized databases (like Chroma), etc.
 Here, we will use PostGreSQL, a popular relational database.
 
-Add the following dependency to your `pom.xml` file:
+==Add the following dependency to your `pom.xml` file:==
 
 ```xml
 <dependency>
@@ -82,7 +82,7 @@ Add the following dependency to your `pom.xml` file:
 ```
 
 This embedding store (like many others) needs to know in advanced the size of the embeddings that will be stored.
-Open the `src/main/resources/application.properties` file and add the following configuration:
+==Open the `src/main/resources/application.properties` file and add the following configuration:==
 
 ```properties
 quarkus.langchain4j.pgvector.dimension=384
@@ -94,7 +94,7 @@ Now, we will be able to use the `io.quarkiverse.langchain4j.pgvector.PgVectorEmb
 
 ## Ingesting documents into the vector store
 
-While your are editing the `src/main/resources/application.properties` file, add the following configuration:
+==While you are editing the `src/main/resources/application.properties` file, add the following configuration:==
 
 ```properties
 rag.location=src/main/resources/rag
@@ -109,7 +109,7 @@ Remember that the role of the _ingestor_ is to read the documents and store thei
 
 ![The ingestion process](images/ingestion.png)
 
-Create the `dev.langchain4j.quarkus.workshop.RagIngestion` class with the following content:
+==Create the `dev.langchain4j.quarkus.workshop.RagIngestion` class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -190,8 +190,7 @@ The augmentor is responsible for extending the prompt with the retrieved segment
 
 ![The augmentation process](images/augmentation.png)
 
-
-Create the `dev.langchain4j.quarkus.workshop.RagRetriever` class with the following content:
+==Create the `dev.langchain4j.quarkus.workshop.RagRetriever` class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -249,21 +248,22 @@ But let's keep it simple for now.
 ## Testing the application
 
 Let's see if everything works as expected.
-If you stopped the application, restart it with the following command:
+==If you stopped the application, restart it with the following command:==
 
 ```shell
 ./mvnw quarkus:dev
 ```
 
-It requires Podman or Docker to automatically start a PostgreSQL database.
-So make sure you have one of them installed and running.
+!!! important "Podman or Docker"
+    The application requires Podman or Docker to automatically start a PostGreSQL database.
+    So make sure you have one of them installed and running.
 
 When the application starts, it will ingest the documents into the vector store.
 
 You can use the dev UI to verify the ingestion like we did in the previous step.
 But, let's test the chatbot.
-Open your browser and go to `http://localhost:8080`.
-Ask a question to the chatbot and see if it retrieves the relevant segments and builds a cohesive answer.
+==Open your browser and go to `http://localhost:8080`.
+Ask a question to the chatbot and see if it retrieves the relevant segments and builds a cohesive answer.==
 
 ## Advanced RAG
 
@@ -300,7 +300,7 @@ Please, only use the following information:
 - <segment 3>
 ```
 
-Edit the `create` method in the `RagRetriever` class to:
+==Edit the `create` method in the `RagRetriever` class to:==
 
 ```java
 @Produces

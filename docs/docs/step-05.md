@@ -39,8 +39,8 @@ Add the following dependency to your `pom.xml` file:
 The RAG pattern allows extending the LLM knowledge with your own data.
 So, let's add some data.
 
-Create a directory named `rag` in the `src/main/resources` directory.
-Then, create a file named `miles-of-smiles-terms-of-use.txt` in the `rag` directory with the following content:
+==Create a directory named `rag` in the `src/main/resources` directory.
+Then, create a file named `miles-of-smiles-terms-of-use.txt` in the `rag` directory with the following content:==
 
 ```txt
 Miles of Smiles Car Rental Services Terms of Use
@@ -91,7 +91,7 @@ See the [EasyRag documentation](https://docs.quarkiverse.io/quarkus-langchain4j/
 ## Configuring EasyRag
 
 Now that we have some data, we need to configure EasyRag to ingest it.
-In the `src/main/resources/application.properties` file, add the following configuration:
+==In the `src/main/resources/application.properties` file, add the following configuration:==
 
 ```properties
 quarkus.langchain4j.easy-rag.path=src/main/resources/rag
@@ -134,14 +134,14 @@ Right now, we use the default embedding model provided by OpenAI.
 We will see in the next steps how to use your own embedding model.
 
 Let's have a look to the content of our knowledge base.
-Open the browser at [http://localhost:8080/q/dev-ui](http://localhost:8080/q/dev-ui).
+==Open the browser at [http://localhost:8080/q/dev-ui](http://localhost:8080/q/dev-ui).
 This is the Quarkus Dev UI, the toolbox with everything you need to developer your Quarkus application.
-Locate the _Langchain4J_ tile, and click on the _Embedding store_ link:
+Locate the _Langchain4J_ tile, and click on the _Embedding store_ link:==
 
 ![Embedding store link in the dev UI](images/langchain4j-tile.png)
 
-Then, look for the "Search for relevant embeddings" section.
-Enter a query in the `Search text` field, for example, `Cancellation`, and then click on the `Search` button:
+==Then, look for the "Search for relevant embeddings" section.
+Enter a query in the `Search text` field, for example, `Cancellation`, and then click on the `Search` button:==
 
 ![Search for relevant embeddings](images/embedding-search.png)
 
@@ -155,8 +155,8 @@ The closer the embeddings, the higher the score.
 ### Augmentation
 
 Let's now go back to our chatbot and test the RAG pattern.
-Open the browser at [http://localhost:8080](http://localhost:8080).
-Ask a question related to the terms of use, for example, `What can you tell me about your cancellation policy?`:
+==Open the browser at [http://localhost:8080](http://localhost:8080).
+Ask a question related to the terms of use, for example, `What can you tell me about your cancellation policy?`:==
 
 ![RAG pattern in action](images/chat-easy-rag.png)
 

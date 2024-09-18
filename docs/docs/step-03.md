@@ -33,7 +33,7 @@ public interface CustomerSupportAgent {
 ```
 
 Note that the return type of the `chat` method is `String`.
-We will change it to `Multi<String>` to indicate that the response will be streamed.
+==We will change it to `Multi<String>` to indicate that the response will be streamed.==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -90,7 +90,7 @@ public class CustomerSupportAgentWebSocket {
 }
 ```
 
-Let's modify the `onTextMessage` method to send the response to the client as it arrives.
+==Let's modify the `onTextMessage` method to send the response to the client as it arrives.==
 
 ```java
 // Do not forget to import io.smallrye.mutiny.Multi if your IDE does not do it automatically
@@ -111,7 +111,7 @@ To test the streaming, you can use the same chat interface as before.
 So, make sure the application runs (with `./mvnw quarkus:dev`), open the browser, and start chatting.
 If you ask simple questions, you may not notice the difference.
 
-Ask something like, "Tell me a story containing 500 words" and you will see the response being displayed as it arrives.
+==Ask something like, "Tell me a story containing 500 words" and you will see the response being displayed as it arrives.==
 
 ![type:video](images/streaming.mp4)
 

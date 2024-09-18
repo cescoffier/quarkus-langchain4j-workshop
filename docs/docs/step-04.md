@@ -1,6 +1,6 @@
 # Step 04 - System messages
 
-In [step 01](step-01.md), we have seen 3 types of messages:
+In [step 01](step-01.md), we have seen two types of messages:
 
 - User messages (`User`)
 - AI responses (`Assistant`)
@@ -18,7 +18,7 @@ formality, topic focus, or specific task execution. Unlike user input, the syste
 conversation but influences the overall experience.
 
 To add a system message, we need to extend our `CustomerSupportAgent` interface.
-If you are following the workshop, update the `CustomerSupportAgent` interface content to become:
+==Update the `CustomerSupportAgent` interface content to become:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -67,7 +67,7 @@ So, the LLM still understand the context and does not change its behavior radica
 Now, let's test the system message.
 Make sure the application is running and open the browser at [http://localhost:8080](http://localhost:8080).
 
-Let's try to chat with the AI and ask for a _story_:
+==Let's try to chat with the AI and ask for a _story_:==
 
 ![Out of context](images/out-of-context.png)
 

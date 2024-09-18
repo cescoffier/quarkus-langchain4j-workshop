@@ -8,11 +8,7 @@ It's a simple chatbot that we will extend in the subsequent steps.
 
 ## Running the application
 
-You can run it as follows
-
-```bash
-./mvnw quarkus:dev
-```
+==You can run it as follows by launching `./mvnw quarkus:dev`.==
 
 ??? note "mvnw permission issue"
     If you run into an error about the `mvnw` maven wrapper, you can give execution permission for the file by navigating to the project folder and executing `chmod +x mvnw`.
@@ -42,7 +38,7 @@ AI: Your name is Clement.
 ![An example of discussion with the chatbot](images/ui.png)
 
 This is how memory is built up for LLMs.
-In the terminal, you can observe the calls that are made to OpenAI behind the scenes, notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).
+==In the terminal, you can observe the calls that are made to OpenAI behind the scenes, notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).==
 
 ```bash
 # The request -> Sending a message to the LLM
