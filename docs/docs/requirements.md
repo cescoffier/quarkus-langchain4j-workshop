@@ -80,7 +80,7 @@ cd quarkus-langchain4j-workshop
 If you didn't use the `git` approach, you can download the repository as a zip file from the [GitHub repository](https://github.com/cescoffier/quarkus-langchain4j-workshop/archive/refs/heads/main.zip):
 
 ```shell
-curl -L -o workshop.zip https://github.com/langchain4j/quarkus-langchain4j-uphill-workshop/archive/refs/heads/main.zip
+curl -L -o workshop.zip https://github.com/cescoffier/quarkus-langchain4j-workshop/archive/refs/heads/main.zip
 ```
 
 Then unzip the file and navigate to the directory:
@@ -88,6 +88,34 @@ Then unzip the file and navigate to the directory:
 ```shell
 unzip workshop.zip
 cd quarkus-langchain4j-workshop-main
+```
+
+### Warming the caches
+
+This workshop needs to download all sorts of Maven artifacts and Docker images.
+Some of these artifacts are large, and because we have to share internet connexions at the workshop location, it is better to download them before the workshop.
+
+If you’re getting ready for a workshop, you might find it helpful to pre-download some of these artifacts.
+This can save strain on shared bandwidth.
+If, however, you’re already attending a workshop, don’t worry about warming anything up.
+
+### Warming up Maven
+
+To warm up Maven, you can run the following command in the root directory of the project:
+
+```shell
+./mvnw verify
+```
+
+### Warming up Docker images
+
+To download the Docker images, you can run the following command:
+
+```shell
+# With Podman:
+podman pull pgvector/pgvector:pg16
+# With Docker:
+docker pull pgvector/pgvector:pg16
 ```
 
 ### Import the project in your IDE
