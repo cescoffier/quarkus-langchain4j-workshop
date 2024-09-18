@@ -304,9 +304,12 @@ AI:  I'm sorry, but it seems that your booking from 2024-07-10 to 2024-07-15 can
 
 ## Conclusion
 
-In this step, we have seen how to implement function calling in our application.
-That allows creating _agents_: LLM that can reason and interact with the application.
+In this step, we explored how to implement function calling within our application, enabling us to create _agents_—LLMs that can not only reason but also interact dynamically with the system.
 
-With this pattern, we can imagine going one step further and define function calling LLMs or other AI models. 
+A function in this context is simply a method from your application annotated with `@Tool`. 
+The actual implementation of the function is entirely customizable.
+For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources. 
+Additionally, you can leverage more specialized LLMs, routing specific queries—such as legal or insurance-related questions—to models trained in those domains.
 
-
+However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection. 
+In the next step, we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.
