@@ -639,7 +639,7 @@ You are not viewing the latest version.
 <p>You can either use the code from the step-01 and continue from there, or check the final code of the step located in the <code>step-02</code> directory.</p>
 <details class="important">
 <summary>Do not forget to close the application</summary>
-<p>If you have the application running from the previous step and decide to use the <code>step-02</code> directory, make sure to stop it before continuing.</p>
+<p>If you have the application running from the previous step and decide to use the <code>step-02</code> directory, make sure to stop it (CTRL+C) before continuing.</p>
 </details>
 <h2 id="the-configuration">The configuration<a class="headerlink" href="#the-configuration" title="Permanent link"></a></h2>
 <p>The application is configured from the <code>src/main/resources/application.properties</code> file:</p>
@@ -653,8 +653,8 @@ You are not viewing the latest version.
 The rest of the configuration indicates which model is used (<code>gpt-4o</code>) and whether to log the requests and responses to the model in the terminal.</p>
 <div class="admonition important">
 <p class="admonition-title">Reloading</p>
-<p>After changing a configuration property, you need to force a restart the application to apply the changes. 
-Simply submitting a new chat message in the UI does not trigger it (it only sends a websocket message rather than an HTTP request), 
+<p>After changing a configuration property, you need to force a restart of the application to apply the changes.
+Simply submitting a new chat message in the UI does not trigger it (it only sends a websocket message rather than an HTTP request),
 so you have to refresh the page in  your browser.</p>
 </div>
 <div class="admonition info">
@@ -662,23 +662,23 @@ so you have to refresh the page in  your browser.</p>
 <p>The precise meaning of most model parameters is described on the website of <a href="https://platform.openai.com/docs/api-reference/chat/create">OpenAI</a>.</p>
 </div>
 <h2 id="temperature">Temperature<a class="headerlink" href="#temperature" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.temperature</code> controls the randomness of the model’s responses. 
-Lowering the temperature will make the model more conservative, while increasing it will make it more creative. </p>
-<p>Try asking “Describe a sunset over the mountains” while setting the temperature to 0.1 and then to, say, 1.5, and observe the different style of the response. 
+<p><code>quarkus.langchain4j.openai.chat-model.temperature</code> controls the randomness of the model’s responses.
+Lowering the temperature will make the model more conservative, while increasing it will make it more creative.</p>
+<p>Try asking “Describe a sunset over the mountains” while setting the temperature to 0.1 and then to, say, 1.5, and observe the different style of the response.
 With a too high temperature over 1.5, the model often starts producing garbage, or fails to produce a valid response at all.</p>
-<p>Applications that requires deterministic responses should set the temperature to 0. 
+<p>Applications that require deterministic responses should set the temperature to 0.
 Note that it will note guarantee the same response for the same input, but it will make the responses more predictable.</p>
-<p>Applications that require a bit more creativity (like to generate text for a story) can set the temperature to 0.3 or higher.</p>
+<p>Applications that require a bit more creativity (eg. to generate text for a story) can set the temperature to 0.3 or higher.</p>
 <h2 id="max-tokens">Max tokens<a class="headerlink" href="#max-tokens" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.max-tokens</code> limits the length of the  response. 
+<p><code>quarkus.langchain4j.openai.chat-model.max-tokens</code> limits the length of the  response.
 Try setting it to 20 and see how the model cuts off the response after 20 tokens.</p>
 <p>Tokens are not words, but rather the smallest units of text that the model can generate.
 For example, “Hello, world!” has 3 tokens: “Hello”, “,”, and “world”.
 Each model has a different tokenization scheme, so the number of tokens in a sentence can vary between models.</p>
 <h2 id="frequency-penalty">Frequency penalty<a class="headerlink" href="#frequency-penalty" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.frequency-penalty</code> defines how much the model should avoid repeating itself. 
-Try setting the penalty to 2 (which is the maximum for OpenAI models) and see how the model tries to avoid repeating words in a single response. 
-For example, ask it to “Repeat the word hedgehog 50 times”. 
+<p><code>quarkus.langchain4j.openai.chat-model.frequency-penalty</code> defines how much the model should avoid repeating itself.
+Try setting the penalty to 2 (which is the maximum for OpenAI models) and see how the model tries to avoid repeating words in a single response.
+For example, ask it to “Repeat the word hedgehog 50 times”.
 While with frequency penalty around 0, the model gladly repeats the word 50 times, but with 2, it will most likely start producing garbage after repeating the word a few times.</p>
 <h2 id="final-configuration">Final configuration<a class="headerlink" href="#final-configuration" title="Permanent link"></a></h2>
 <p><mark>After playing with the configuration, you can set it to the following values:</mark></p>

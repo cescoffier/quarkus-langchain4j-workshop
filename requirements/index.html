@@ -320,9 +320,9 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements_1" class="md-nav__link">
+  <a href="#ai-model-requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements
+      AI Model Requirements
     </span>
   </a>
   
@@ -678,9 +678,9 @@ You are not viewing the latest version.
 </li>
       
         <li class="md-nav__item">
-  <a href="#requirements_1" class="md-nav__link">
+  <a href="#ai-model-requirements" class="md-nav__link">
     <span class="md-ellipsis">
-      Requirements
+      AI Model Requirements
     </span>
   </a>
   
@@ -835,16 +835,14 @@ You are not viewing the latest version.
 <ul>
 <li>JDK 21.0 or later - Download it from <a href="https://adoptium.net/">Adoptium</a></li>
 <li>A key for OpenAI API (provided by the workshop organizer)</li>
-<li>Podman or Docker - See <a href="https://podman.io/getting-started/installation">Podman installation</a> or <a href="https://docs.docker.com/get-docker/">Docker installation</a><ul>
+<li>Podman or Docker - See <a href="https://podman.io/getting-started/installation">Podman installation</a> or <a href="https://docs.docker.com/get-docker/">Docker installation</a></li>
 <li>If you use Podman, Podman Desktop provides a great user experience to manage your containers: <a href="https://podman-desktop.io/docs/installation">Podman Desktop</a></li>
-</ul>
-</li>
 <li>Git (not mandatory) - See <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git installation</a></li>
 <li>An IDE with Java support (IntelliJ, Eclipse, VSCode with the Java extension, etc.)</li>
 <li>A terminal</li>
 </ul>
-<h2 id="requirements_1">Requirements<a class="headerlink" href="#requirements_1" title="Permanent link"></a></h2>
-<p>Before actually starting the workshop, make sure you have set the OpenAI API key as an environment variable:</p>
+<h2 id="ai-model-requirements">AI Model Requirements<a class="headerlink" href="#ai-model-requirements" title="Permanent link"></a></h2>
+<p>Before actually starting the workshop, make sure you have set the OpenAI API key as an environment variable, eg:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>&lt;your-key&gt;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$Env:OPENAI_API_KEY</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">your-key</span><span class="p">&gt;</span>
@@ -856,14 +854,14 @@ You are not viewing the latest version.
 </code></pre></div>
 <p>This will start the application in dev mode, which means that the application will be recompiled automatically on every change in the source code.
 Just refresh the browser to see the changes.
-The application severs the application at <a href="http://localhost:8080/">http://localhost:8080/</a>.</p>
+The application serves the application at <a href="http://localhost:8080/">http://localhost:8080/</a>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Stopping the application</p>
 <p>When switching steps, make sure to stop the running application before starting the next step. 
 You can exit the application by pressing <code>Ctrl+C</code> in the terminal where the application is running.</p>
 </div>
 <h3 id="dev-ui">Dev UI<a class="headerlink" href="#dev-ui" title="Permanent link"></a></h3>
-<p>Quarkus ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+<p>Quarkus ships with a Dev UI, which is available in dev mode only at <a href="http://localhost:8080/q/dev/">http://localhost:8080/q/dev/</a>.
 The Dev UI can be seen as your toolbox when building Quarkus application.
 It is only available when the application is running in dev mode.</p>
 <h3 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link"></a></h3>
@@ -889,7 +887,7 @@ It is only available when the application is running in dev mode.</p>
 </code></pre></div>
 <h3 id="warming-the-caches">Warming the caches<a class="headerlink" href="#warming-the-caches" title="Permanent link"></a></h3>
 <p>This workshop needs to download all sorts of Maven artifacts and Docker images.
-Some of these artifacts are large, and because we have to share internet connexions at the workshop location, it is better to download them before the workshop.</p>
+Some of these artifacts are large, and because we have to share the internet connection at the workshop location, it is better to download them before the workshop.</p>
 <p>If you’re getting ready for a workshop, you might find it helpful to pre-download some of these artifacts.
 This can save strain on shared bandwidth.
 If, however, you’re already attending a workshop, don’t worry about warming anything up.</p>

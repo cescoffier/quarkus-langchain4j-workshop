@@ -627,8 +627,8 @@ Example:</p>
 </code></pre></div>
 <p><img alt="An example of discussion with the chatbot" src="../images/ui.png"></p>
 <p>This is how memory is built up for LLMs.
-<mark>In the terminal, you can observe the calls that are made to OpenAI behind the scenes, notice the roles ‘user’ (<code>UserMessage</code>) and ‘assistant’ (<code>AiMessage</code>).</mark></p>
-<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># The request -&gt; Sending a message to the LLM</span>
+<mark>In the terminal, you can observe the calls that are made to OpenAI behind the scenes. Notice the roles ‘user’ (<code>UserMessage</code>) and ‘assistant’ (<code>AiMessage</code>).</mark></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># The request -&gt; Sending a message to the LLM</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="m">2024</span>-09-16<span class="w"> </span><span class="m">08</span>:33:24,600<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>io.qua.lan.ope.OpenAiRestApi<span class="nv">$OpenAiClientLogger</span><span class="o">]</span><span class="w"> </span><span class="o">(</span>vert.x-eventloop-thread-0<span class="o">)</span><span class="w"> </span>Request:
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>-<span class="w"> </span>method:<span class="w"> </span>POST
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>-<span class="w"> </span>url:<span class="w"> </span>https://api.openai.com/v1/chat/completions
@@ -684,13 +684,13 @@ Example:</p>
 <a id="__codelineno-1-54" name="__codelineno-1-54" href="#__codelineno-1-54"></a><span class="w">  </span><span class="s2">"system_fingerprint"</span>:<span class="w"> </span><span class="s2">"fp_25624ae3a5"</span>
 <a id="__codelineno-1-55" name="__codelineno-1-55" href="#__codelineno-1-55"></a><span class="o">}</span>
 </code></pre></div>
-A very important aspect of the interaction with LLMs is their statelessness.
+<p>A very important aspect of the interaction with LLMs is their statelessness.
 To build a conversation, you need to <em>resend</em> the full list of messages exchanged so far.
 That list includes both the user and the assistant messages.
 This is how the memory is built up and how the LLM can provide contextually relevant responses.
-We will see how to manage this in the subsequent steps.
+We will see how to manage this in the subsequent steps.</p>
 <h2 id="anatomy-of-the-application">Anatomy of the application<a class="headerlink" href="#anatomy-of-the-application" title="Permanent link"></a></h2>
-<p>Before going further, let’s have a look at the code.</p>
+<p>Before going further, let’s take a look at the code.</p>
 <p>If you open the <code>pom.xml</code> file, you will see that the project is a Quarkus application with the <code>quarkus-langchain4j</code> extension.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">&lt;dependency&gt;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="nt">&lt;groupId&gt;</span>io.quarkiverse.langchain4j<span class="nt">&lt;/groupId&gt;</span>
@@ -699,7 +699,7 @@ We will see how to manage this in the subsequent steps.
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nt">&lt;/dependency&gt;</span>
 </code></pre></div>
 <p>Quarkus LangChain4J OpenAI is a Quarkus extension that provides a simple way to interact with language models (LLMs) like GPT-4o from OpenAI.
-It actually can interact with any model serving the OpenAI API (like vLLM or Podman AI Studio).
+It actually can interact with any model serving the OpenAI API (like vLLM or Podman AI Lab).
 Quarkus Langchain4J abstracts the complexity of calling the model and provides a simple API to interact with it.</p>
 <p>In our case, the application is a simple chatbot.
 It uses a <em>WebSocket</em>, this is why you can also see the following dependency in the <code>pom.xml</code> file:</p>
@@ -737,8 +737,8 @@ It uses a <em>WebSocket</em>, this is why you can also see the following depende
 </code></pre></div>
 <p>Basically, it:</p>
 <ol>
-<li>Welcome the user when the connection is opened</li>
-<li>Calls the <code>chat</code> method of the <code>CustomerSupportAgent</code> class when a message is received and send the result back to the user (via the web socket).</li>
+<li>Welcomes the user when the connection is opened</li>
+<li>Calls the <code>chat</code> method of the <code>CustomerSupportAgent</code> class when a message is received and sends the result back to the user (via the web socket).</li>
 </ol>
 <p>Let’s now look at the cornerstone of the application, the <code>CustomerSupportAgent</code> interface.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
@@ -756,23 +756,23 @@ It uses a <em>WebSocket</em>, this is why you can also see the following depende
 <p>This interface is annotated with <code>@RegisterAiService</code> to indicate that it is an AI service.
 An <em>AI service</em> is an object managed by the Quarkus LangChain4J extension.
 It models the interaction with the AI model.
-As you can see it’s an interface. 
+As you can see it’s an interface.
 It’s not a concrete class.
-You do not implement that interface.
-Quarkus LangChain4J will provide an implementation for you, it’s totally hidden.
+You do not implement this interface.
+Quarkus LangChain4J will provide an implementation for you in the background.
 Thus, your application only interacts with the methods defined in the interface.</p>
 <p>There is a single method in the interface, <code>chat</code>.
 It takes a user message as input (as it’s the only parameter, we consider it to be the user message) and returns the response from the AI model.
 How this is done is abstracted away by Quarkus LangChain4J.</p>
 <div class="admonition note">
 <p class="admonition-title"><code>SessionScoped</code>?</p>
-<p>Attentive reader would have noticed the <code>@SessionScoped</code> annotation.
-This is a CDI annotation that scopes the object to the session, in our case the session is the web socket.
+<p>Attentive reader might have noticed the <code>@SessionScoped</code> annotation.
+This is a <a href="https://jakarta.ee/specifications/cdi/">CDI</a> annotation which scopes the object to the session. In our case the session is the web socket.
 The session starts when the user connects to the web socket and ends when the user disconnects.
 This annotation indicates that the <code>CustomerSupportAgent</code> object is created when the session starts and destroyed when the session ends.
 It influences the <em>memory</em> of our chatbot, as it remembers the conversation that happened so far in this session.</p>
 </div>
-<p>So far, so good, let’s move on to the next step.</p></div>
+<p>So far, so good! Let’s move on to the next step.</p></div>
 
 
 
