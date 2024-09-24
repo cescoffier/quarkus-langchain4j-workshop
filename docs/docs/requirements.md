@@ -1,19 +1,18 @@
 # Requirements
 
-
 ## Software requirements
 
 - JDK 21.0 or later - Download it from [Adoptium](https://adoptium.net/)
 - A key for OpenAI API (provided by the workshop organizer)
 - Podman or Docker - See [Podman installation](https://podman.io/getting-started/installation) or [Docker installation](https://docs.docker.com/get-docker/)
-    - If you use Podman, Podman Desktop provides a great user experience to manage your containers: [Podman Desktop](https://podman-desktop.io/docs/installation)
+  - If you use Podman, Podman Desktop provides a great user experience to manage your containers: [Podman Desktop](https://podman-desktop.io/docs/installation)
 - Git (not mandatory) - See [Git installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - An IDE with Java support (IntelliJ, Eclipse, VSCode with the Java extension, etc.)
 - A terminal
 
-## Requirements
+## AI Model Requirements
 
-Before actually starting the workshop, make sure you have set the OpenAI API key as an environment variable:
+Before actually starting the workshop, make sure you have set the OpenAI API key as an environment variable, eg:
 
 ```bash
 export OPENAI_API_KEY=<your-key>
@@ -35,20 +34,17 @@ You can run a Quarkus application in _dev mode_ by running the following command
 
 This will start the application in dev mode, which means that the application will be recompiled automatically on every change in the source code.
 Just refresh the browser to see the changes.
-The application severs the application at [http://localhost:8080/](http://localhost:8080/).
+The application serves the application at [http://localhost:8080/](http://localhost:8080/).
 
 !!! warning "Stopping the application"
-    
     When switching steps, make sure to stop the running application before starting the next step. 
     You can exit the application by pressing `Ctrl+C` in the terminal where the application is running.
 
-
 ### Dev UI
 
-Quarkus ships with a Dev UI, which is available in dev mode only at http://localhost:8080/q/dev/.
+Quarkus ships with a Dev UI, which is available in dev mode only at [http://localhost:8080/q/dev/](http://localhost:8080/q/dev/).
 The Dev UI can be seen as your toolbox when building Quarkus application.
 It is only available when the application is running in dev mode.
-
 
 ### Debugging
 
@@ -63,6 +59,7 @@ It's time to get started with the workshop.
 Either use `git` or download the repository as a zip file.
 
 #### With Git
+
 If you haven't already, clone the repository and checkout the `main` branch.
 
 ```shell
@@ -93,7 +90,7 @@ cd quarkus-langchain4j-workshop-main
 ### Warming the caches
 
 This workshop needs to download all sorts of Maven artifacts and Docker images.
-Some of these artifacts are large, and because we have to share internet connexions at the workshop location, it is better to download them before the workshop.
+Some of these artifacts are large, and because we have to share the internet connection at the workshop location, it is better to download them before the workshop.
 
 If you’re getting ready for a workshop, you might find it helpful to pre-download some of these artifacts.
 This can save strain on shared bandwidth.
@@ -122,6 +119,4 @@ docker pull pgvector/pgvector:pg16
 
 Then, open the project from the `step-01` directory in your IDE and use that directory throughout the workshop.
 
-
 Once done, you can move on to the next step: [Step 1](step-01.md).
-

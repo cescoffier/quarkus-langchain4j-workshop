@@ -16,7 +16,6 @@ It's a simple chatbot that we will extend in the subsequent steps.
 ??? note "Could not expand value OPENAI_API_KEY"
     If you run into an error indicating `java.util.NoSuchElementException: SRCFG00011: Could not expand value OPENAI_API_KEY in property quarkus.langchain4j.openai.api-key`, make sure you have set the environment variable `OPENAI_API_KEY` with your OpenAI API key.
 
-
 This will bring up the page at http://localhost:8080. 
 Open it and click the red robot icon in the bottom right corner to start chatting with the chatbot.
 
@@ -38,7 +37,7 @@ AI: Your name is Clement.
 ![An example of discussion with the chatbot](images/ui.png)
 
 This is how memory is built up for LLMs.
-==In the terminal, you can observe the calls that are made to OpenAI behind the scenes, notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).==
+==In the terminal, you can observe the calls that are made to OpenAI behind the scenes. Notice the roles 'user' (`UserMessage`) and 'assistant' (`AiMessage`).==
 
 ```bash
 # The request -> Sending a message to the LLM
@@ -97,6 +96,7 @@ This is how memory is built up for LLMs.
   "system_fingerprint": "fp_25624ae3a5"
 }
 ```
+
 A very important aspect of the interaction with LLMs is their statelessness.
 To build a conversation, you need to _resend_ the full list of messages exchanged so far.
 That list includes both the user and the assistant messages.
@@ -105,7 +105,7 @@ We will see how to manage this in the subsequent steps.
 
 ## Anatomy of the application
 
-Before going further, let's have a look at the code.
+Before going further, let's take a look at the code.
 
 If you open the `pom.xml` file, you will see that the project is a Quarkus application with the `quarkus-langchain4j` extension.
 
@@ -118,7 +118,7 @@ If you open the `pom.xml` file, you will see that the project is a Quarkus appli
 ```
 
 Quarkus LangChain4J OpenAI is a Quarkus extension that provides a simple way to interact with language models (LLMs) like GPT-4o from OpenAI.
-It actually can interact with any model serving the OpenAI API (like vLLM or Podman AI Studio).
+It actually can interact with any model serving the OpenAI API (like vLLM or Podman AI Lab).
 Quarkus Langchain4J abstracts the complexity of calling the model and provides a simple API to interact with it.
 
 In our case, the application is a simple chatbot.
@@ -163,8 +163,8 @@ public class CustomerSupportAgentWebSocket {
 
 Basically, it:
 
-1. Welcome the user when the connection is opened
-2. Calls the `chat` method of the `CustomerSupportAgent` class when a message is received and send the result back to the user (via the web socket).
+1. Welcomes the user when the connection is opened
+2. Calls the `chat` method of the `CustomerSupportAgent` class when a message is received and sends the result back to the user (via the web socket).
 
 Let's now look at the cornerstone of the application, the `CustomerSupportAgent` interface.
 
@@ -185,10 +185,10 @@ public interface CustomerSupportAgent {
 This interface is annotated with `@RegisterAiService` to indicate that it is an AI service.
 An _AI service_ is an object managed by the Quarkus LangChain4J extension.
 It models the interaction with the AI model.
-As you can see it's an interface. 
+As you can see it's an interface.
 It's not a concrete class.
-You do not implement that interface.
-Quarkus LangChain4J will provide an implementation for you, it's totally hidden.
+You do not implement this interface.
+Quarkus LangChain4J will provide an implementation for you in the background.
 Thus, your application only interacts with the methods defined in the interface.
 
 There is a single method in the interface, `chat`.
@@ -196,11 +196,10 @@ It takes a user message as input (as it's the only parameter, we consider it to 
 How this is done is abstracted away by Quarkus LangChain4J.
 
 !!! note "`SessionScoped`?"
-    Attentive reader would have noticed the `@SessionScoped` annotation.
-    This is a CDI annotation that scopes the object to the session, in our case the session is the web socket.
+    Attentive reader might have noticed the `@SessionScoped` annotation.
+    This is a [CDI](https://jakarta.ee/specifications/cdi/) annotation which scopes the object to the session. In our case the session is the web socket.
     The session starts when the user connects to the web socket and ends when the user disconnects.
     This annotation indicates that the `CustomerSupportAgent` object is created when the session starts and destroyed when the session ends.
     It influences the _memory_ of our chatbot, as it remembers the conversation that happened so far in this session.
 
-So far, so good, let's move on to the next step.
-
+So far, so good! Let's move on to the next step.
