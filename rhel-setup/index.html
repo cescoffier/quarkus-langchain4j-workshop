@@ -540,13 +540,13 @@ You should have received a URL to log in to this virtual environment. Go ahead a
 <p>Once you click on “Access this workshop”, you’ll see the workshop landing page.</p>
 <p><img alt="Workshop Landing Page" src="../images/rhel-workshop-landing-page.png"></p>
 <p>Copy the noVNC Password value, and then click on the noVNC Web URL link. This will give you access to a
-virtual Linux machine based on Red Hat Enterprise Linux (RHEL). In the top left corner you will see an “Activities” button. This is where you can access and search for various programs that have been installed on the machine.</p>
+virtual Linux machine based on Red Hat Enterprise Linux (RHEL).</p>
 <h2 id="open-a-browser-and-the-instructions-in-the-virtual-machine">Open a browser and the instructions in the Virtual Machine<a class="headerlink" href="#open-a-browser-and-the-instructions-in-the-virtual-machine" title="Permanent link"></a></h2>
 <p>Let’s open a browser in the VM and pull up the lab instructions. This will make our lives easier when we need to copy &amp; paste values from the lab instructions into our code editor. Click on the Activities button at the top left. You should see a Firefox icon in the bar at the bottom of the screen, so go ahead and open it.</p>
 <p><img alt="Activities Button" src="../images/rhel-firefox.png"></p>
 <p>Now comes the tricky part. We need to copy and paste the workshop URL from our host to the Virtual Machine. In order to do so, you will need to find the little control bar tab on the left side of the VM screen as seen in the image below.</p>
 <p><img alt="Control Bar" src="../images/rhel-control-bar.png"></p>
-<p>When you click on it, you will see the control bar expand. Select the clipboard icon, and now you should see a clipboard field which will allow you to copy text between your host and your VM. Copy the workshop url: https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup and paste it in this field. Now paste the same value in the Firefox browser address bar to pull up the workshop instructions.</p>
+<p>When you click on it, you will see the control bar expand. Select the clipboard icon, and now you should see a clipboard field which will allow you to copy text between your host and your VM. Copy the workshop url: <a href="https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup">https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup</a> and paste it in this field. Now paste the same value in the Firefox browser address bar to pull up the workshop instructions.</p>
 <p><img alt="Clipboard" src="../images/rhel-clipboard-url.png"></p>
 <p>Whew! You should now see the instructions in your browser. Feel free to hide the clipboard and control bar. Note that you might need to do the same thing to copy/paste the OpenAI API key if you have it somewhere on your host machine.</p>
 <h2 id="launch-the-code-editor-vs-code">Launch the code editor (VS Code)<a class="headerlink" href="#launch-the-code-editor-vs-code" title="Permanent link"></a></h2>
@@ -563,8 +563,7 @@ virtual Linux machine based on Red Hat Enterprise Linux (RHEL). In the top left 
 </div>
 <p>Now finally we can install SDKMAN!, and then use it to install OpenJDK (and while we’re at it, also the Quarkus CLI). We’ll do this in one go with the following command:</p>
 <p><code>curl -s "https://get.sdkman.io" | bash &amp;&amp; source "/home/student/.sdkman/bin/sdkman-init.sh" &amp;&amp; sdk install java 21.0.4-tem &amp;&amp; sdk install quarkus</code></p>
-<p>Well done! You can now go back to the original requirements page and get started with the lab:
-https://cescoffier.github.io/quarkus-langchain4j-workshop/requirements</p></div>
+<p>Well done! You can now go back to the <a href="../requirements/">original requirements page</a> and get started with the lab:</p></div>
 
 
 

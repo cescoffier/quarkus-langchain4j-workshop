@@ -751,9 +751,9 @@ want a more complex user message extended with the user query.</p>
 It will be replaced by the user query when the AI service is called.
 As we have seen in the previous step with <code>Today is {current_date}.</code>, the prompts are templates that can be filled with
 values, here the <code>userQuery</code> parameter.</p>
-<p>The user message follow a <em>few shot learning</em> format.
+<p>The user message follows a <em>few shot learning</em> format.
 It provides examples of user queries and the expected output.
-Thus, the LLM can learn from these examples and understand the expected behavior of the AI service.
+This way the LLM can learn from these examples and understand the expected behavior of the AI service.
 This is a very common technique in AI to <em>train</em> models with a few examples and let them generalize.</p>
 <p>Also notice that the return type of the <code>isInjection</code> method is a double.
 Quarkus Langchain4J can map the return type to the expected output of the AI service.
@@ -788,10 +788,10 @@ While not demonstrated here, it can map LLM response to complex objects using JS
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="p">}</span>
 </code></pre></div>
 <p>Notice that the <code>PromptInjectionGuard</code> class implements the <code>InputGuardrail</code> interface.
-This guardrail will be invoked <strong>before</strong> invoking the <em>chat</em> LLM which has access to the functions and company data (
-from the RAG).
-If the user message does not pass the validation, it will return a failure message, without calling the other AI
-service.</p>
+This guardrail will be invoked <strong>before</strong> invoking the <em>chat</em> LLM which has access to
+ the functions and company data (from the RAG).
+If the user message does not pass the validation, it will return a failure message,
+without calling the other AI service.</p>
 <p>This guardrail uses the <code>PromptInjectionDetectionService</code> to detect prompt injection.
 It calls the <code>isInjection</code> method of the AI service with the user message.
 We use an arbitrary threshold of 0.7 to determine whether the user message is likely to be a prompt injection attack.</p>
@@ -822,8 +822,8 @@ We use an arbitrary threshold of 0.7 to determine whether the user message is li
 <p>Basically, we only added the <code>@InputGuardrails(PromptInjectionGuard.class)</code> annotation to the <code>chat</code> method.</p>
 <p>When the application invokes the <code>chat</code> method, the <code>PromptInjectionGuard</code> guardrail will be executed first.
 If it fails, an exception is thrown and the offensive user message is not passed to <em>main</em> LLM.</p>
-<p>Before going further, we need to update a bit the <code>dev.langchain4j.quarkus.workshop.CustomerSupportAgentWebSocket</code>
-class.
+<p>Before going further, we need to update the
+<code>dev.langchain4j.quarkus.workshop.CustomerSupportAgentWebSocket</code> class a bit.
 <mark>Edit the <code>dev.langchain4j.quarkus.workshop.CustomerSupportAgentWebSocket</code> class to become:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -869,8 +869,8 @@ Make sure the application is running and open the chatbot in your browser (<a hr
 <p><img alt="Prompt injection attack" src="../images/injection-detection.png"></p>
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link"></a></h2>
 <p>In this step, we introduced guardrails to prevent prompt injection attacks.
-You can also use output guardrails to control the behavior of the LLM. 
-One of the main use case is to prevent the LLM from revealing sensitive information or detect hallucinations.</p></div>
+You can also use output guardrails to control the behavior of the LLM.
+One of the main use cases is to prevent the LLM from revealing sensitive information or detect hallucinations.</p></div>
 
 
 

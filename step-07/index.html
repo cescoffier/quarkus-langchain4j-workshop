@@ -673,14 +673,14 @@ You are not viewing the latest version.
 <div><h1 id="step-06-function-calling-and-tools">Step 06 - Function calling and Tools<a class="headerlink" href="#step-06-function-calling-and-tools" title="Permanent link"></a></h1>
 <p>The RAG pattern allows passing knowledge to the LLM based on your own data.
 It’s a very popular pattern, but not the only one that can be used.</p>
-<p>In this step, we are going to see another way to give superpowers to the LLM: the function calling.
+<p>In this step, we are going to see another way to give superpowers to the LLM: Function Calling.
 Basically, we will allow the LLM to call a function that you have defined in your code.
 The LLM will decide when and with which parameters to call the function.
-Of course, makes sure that you do not allow the LLM to call a function that could be harmful to your system.</p>
+Of course, makes sure that you do not allow the LLM to call a function that could be harmful to your system, and make sure to sanitize any input data.</p>
 <h2 id="function-calling">Function calling<a class="headerlink" href="#function-calling" title="Permanent link"></a></h2>
-<p>Function calling is a mechanism offered by some LLM (GPTs, Llama…) that allows the LLM to call a function that you have defined in your application.
+<p>Function calling is a mechanism offered by some LLMs (GPTs, Llama…). It allows the LLM to call a function that you have defined in your application.
 When the application sends the user message to the LLM, it also sends the list of functions that the LLM can call.</p>
-<p>Then, the LLM can decide, if it wants, to call one of these functions with the parameters it wants.
+<p>Then the LLM can decide, if it wants, to call one of these functions with the parameters it wants.
 The application receives the method invocation request and executes the function with the parameters provided by the LLM.
 The result is sent back to the LLM, which can use it to continue the conversation, and compute the next message.</p>
 <p><img alt="Function calling" src="../images/function-calling.png"></p>
@@ -704,7 +704,7 @@ However, we recommend you follow the step-by-step guide to understand how it wor
 You can find more information about Panache <a href="https://quarkus.io/guides/hibernate-orm-panache">here</a>.</p>
 <h2 id="preparing-the-entities">Preparing the entities<a class="headerlink" href="#preparing-the-entities" title="Permanent link"></a></h2>
 <p>Now that we have the dependencies, we can create a couple of entities.
-We are going to store a list of booking in the database.
+We are going to store a list of bookings in the database.
 Each booking is associated with a customer.
 A customer can have multiple bookings.</p>
 <p><mark>Create the <code>dev.langchain4j.quarkus.workshop.Customer</code> entity class with the following content:</mark></p>
@@ -720,7 +720,7 @@ A customer can have multiple bookings.</p>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">lastName</span><span class="p">;</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="p">}</span>
 </code></pre></div>
-<p><mark>Then, create the <code>dev.langchain4j.quarkus.workshop.Booking</code> entity class with the following content:</mark></p>
+<p><mark>Then create the <code>dev.langchain4j.quarkus.workshop.Booking</code> entity class with the following content:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.hibernate.orm.panache.PanacheEntity</span><span class="p">;</span>
@@ -792,7 +792,7 @@ Let’s add some data to the database.</p>
 <p>This file will be executed when the application starts, and will insert some data into the database.
 Without specific configuration, it will only be applied in dev mode (<code>./mvnw quarkus:dev</code>).</p>
 <h2 id="defining-tools">Defining Tools<a class="headerlink" href="#defining-tools" title="Permanent link"></a></h2>
-<p>Alright, we have now everything we need to create a function that allows the LLM to retrieve data from the database.
+<p>Alright, we now have everything we need to create a function that allows the LLM to retrieve data from the database.
 We are going to create a <code>BookingRepository</code> class that will contain a set of functions to interact with the database.</p>
 <p><mark>Create the <code>dev.langchain4j.quarkus.workshop.BookingRepository</code> class with the following content:</mark></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
@@ -890,8 +890,8 @@ It lists the classes that contain the tools that the LLM can call.</p>
 <p>The system message and user messages can contain placeholders.
 The placeholders are replaced by the values provided by the application.
 You can pass parameters to AI service methods and include them in the prompt.
-It uses the <a href="https://quarkus.io/guides/qute">Qute</a> template engine underneath. 
-Thus, you can have advanced template logic.</p>
+It uses the <a href="https://quarkus.io/guides/qute">Qute</a> template engine underneath.
+This is a powerful feature to allow you to have advanced template logic.</p>
 </div>
 <div class="admonition bug">
 <p class="admonition-title">Tools and streaming responses</p>
@@ -926,10 +926,10 @@ In the chatbot, let’s try the following interactions:</p>
 <p>In this step, we explored how to implement function calling within our application, enabling us to create <em>agents</em>—LLMs that can not only reason but also interact dynamically with the system.</p>
 <p>A function in this context is simply a method from your application annotated with <code>@Tool</code>. 
 The actual implementation of the function is entirely customizable.
-For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources. 
+For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources.
 Additionally, you can leverage more specialized LLMs, routing specific queries—such as legal or insurance-related questions—to models trained in those domains.</p>
-<p>However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection. 
-In the next step, we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.</p></div>
+<p>However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection.
+In the <a href="../step-08/">next step</a>, we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.</p></div>
 
 
 

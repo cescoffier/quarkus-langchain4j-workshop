@@ -415,16 +415,16 @@ You are not viewing the latest version.
         <li class="md-nav__item">
   <a href="#adding-the-easy-rag-dependency" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding the easy rag dependency
+      Adding the Easy Rag dependency
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#putting-some-data" class="md-nav__link">
+  <a href="#adding-some-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Putting some data
+      Adding some data
     </span>
   </a>
   
@@ -598,16 +598,16 @@ You are not viewing the latest version.
         <li class="md-nav__item">
   <a href="#adding-the-easy-rag-dependency" class="md-nav__link">
     <span class="md-ellipsis">
-      Adding the easy rag dependency
+      Adding the Easy Rag dependency
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#putting-some-data" class="md-nav__link">
+  <a href="#adding-some-data" class="md-nav__link">
     <span class="md-ellipsis">
-      Putting some data
+      Adding some data
     </span>
   </a>
   
@@ -697,7 +697,7 @@ The RAG pattern allows you to add a <em>knowledge base</em> to the LLM.</p>
 EasyRag abstracts most of the complexity of implementing the RAG pattern.
 Basically, you drop your data in a configured directory, and <em>voilà</em>!</p>
 <p>If you want to see the final result of this step, you can check out the <code>step-05</code> directory.</p>
-<h2 id="adding-the-easy-rag-dependency">Adding the easy rag dependency<a class="headerlink" href="#adding-the-easy-rag-dependency" title="Permanent link"></a></h2>
+<h2 id="adding-the-easy-rag-dependency">Adding the Easy Rag dependency<a class="headerlink" href="#adding-the-easy-rag-dependency" title="Permanent link"></a></h2>
 <p>First, we need to add the EasyRag dependency to our project.
 Add the following dependency to your <code>pom.xml</code> file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">&lt;dependency&gt;</span>
@@ -710,8 +710,8 @@ Add the following dependency to your <code>pom.xml</code> file:</p>
 <p class="admonition-title">Reloading</p>
 <p>If your application is running in dev mode, it will automatically restart with the new dependency.</p>
 </div>
-<h2 id="putting-some-data">Putting some data<a class="headerlink" href="#putting-some-data" title="Permanent link"></a></h2>
-<p>The RAG pattern allows extending the LLM knowledge with your own data.
+<h2 id="adding-some-data">Adding some data<a class="headerlink" href="#adding-some-data" title="Permanent link"></a></h2>
+<p>The RAG pattern allows to extend the LLM knowledge with your own data.
 So, let’s add some data.</p>
 <p><mark>Create a directory named <code>rag</code> in the <code>src/main/resources</code> directory.
 Then, create a file named <code>miles-of-smiles-terms-of-use.txt</code> in the <code>rag</code> directory with the following content:</mark></p>
@@ -754,7 +754,7 @@ Then, create a file named <code>miles-of-smiles-terms-of-use.txt</code> in the <
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>If you do not agree to these Terms, please do not use or access our Services.
 </code></pre></div>
 <p>Alternatively, you can copy the <code>miles-of-smiles-terms-of-use.txt</code> file from the <code>step-05/src/main/resources/rag</code> directory.</p>
-<p>Note that we are adding a single file, but, you can add as many files as you want in the <code>rag</code> directory.
+<p>Note that we are adding a single file, but you can add as many files as you want in the <code>rag</code> directory.
 Also, it’s not limited to text files, you can use PDF, Word, or any other format.
 See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html">EasyRag documentation</a> for more information.</p>
 <h2 id="configuring-easyrag">Configuring EasyRag<a class="headerlink" href="#configuring-easyrag" title="Permanent link"></a></h2>
@@ -776,23 +776,23 @@ See the <a href="https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.ht
 <p>Let’s test the RAG pattern.
 Make sure the application is running and open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
 <h3 id="ingestion-and-embedding">Ingestion and Embedding<a class="headerlink" href="#ingestion-and-embedding" title="Permanent link"></a></h3>
-<p>When you start the application, you should see in the log the following line:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>2024-09-17 08:34:13,888 INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingesting documents from path: src/main/resources/rag, path matcher = glob:**, recursive = true
+<p>When you start the application, you should see the following line in the log :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="m">2024</span>-09-17<span class="w"> </span><span class="m">08</span>:34:13,888<span class="w"> </span>INFO<span class="w">  </span><span class="o">[</span>io.qua.lan.eas.run.EasyRagIngestor<span class="o">]</span><span class="w"> </span><span class="o">(</span>Quarkus<span class="w"> </span>Main<span class="w"> </span>Thread<span class="o">)</span><span class="w"> </span>Ingesting<span class="w"> </span>documents<span class="w"> </span>from<span class="w"> </span>path:<span class="w"> </span>src/main/resources/rag,<span class="w"> </span>path<span class="w"> </span><span class="nv">matcher</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>glob:**,<span class="w"> </span><span class="nv">recursive</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
 </code></pre></div>
-<p>It’s ingesting the data from the <code>rag</code> directory.
-It reads the files from the configured directory, splits them into segments, and stores them in the knowledge base.
-In our case, the knowledge base is <em>in memory</em>. 
+<p>That data from the <code>rag</code> directory is being ingested.
+The files are read from the configured directory, split into segments, and stored in the knowledge base.
+In our case, the knowledge base is <em>in memory</em>.
 We will see in the next steps how to use a persistent knowledge base.</p>
 <p>The segments are not stored as is in the knowledge base.
-They are transformed into vectors also called <em>embeddings</em>.
+They are transformed into vectors, also called <em>embeddings</em>.
 This is a way to represent the text in a numerical form.
 So, in the knowledge base, we have the text and the corresponding embeddings.
 These embeddings are computed using <em>embedding models</em>.
 Right now, we use the default embedding model provided by OpenAI.
 We will see in the next steps how to use your own embedding model.</p>
-<p>Let’s have a look to the content of our knowledge base.
+<p>Let’s have a look at the content of our knowledge base.
 <mark>Open the browser at <a href="http://localhost:8080/q/dev-ui">http://localhost:8080/q/dev-ui</a>.
-This is the Quarkus Dev UI, the toolbox with everything you need to developer your Quarkus application.
+This is the Quarkus Dev UI, the toolbox with everything you need to develop your Quarkus application.
 Locate the <em>Langchain4J</em> tile, and click on the <em>Embedding store</em> link:</mark></p>
 <p><img alt="Embedding store link in the dev UI" src="../images/langchain4j-tile.png"></p>
 <p><mark>Then, look for the “Search for relevant embeddings” section.
@@ -801,7 +801,7 @@ Enter a query in the <code>Search text</code> field, for example, <code>Cancella
 <p>You should see the segments <em>close</em> to the searched text.
 You can visualize the segments, but also their score, i.e., how close they are to the searched text.</p>
 <p>To find relevant segments, it computes the embeddings of the searched text and compares them to the embeddings of the segments.
-It applies a similarity search using a distance computation (like the cosine distance) 
+It applies a similarity search using a distance computation (like the cosine distance).
 The closer the embeddings, the higher the score.</p>
 <h3 id="augmentation">Augmentation<a class="headerlink" href="#augmentation" title="Permanent link"></a></h3>
 <p>Let’s now go back to our chatbot and test the RAG pattern.
@@ -811,10 +811,10 @@ Ask a question related to the terms of use, for example, <code>What can you tell
 <p>As you can see the AI is able to answer the question, and use the relevant segment from the knowledge base.</p>
 <p>Let’s look at the logs.
 You should see the following lines:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>{
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    "role" : "user",
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    "content" : "What can you tell me about your cancellation policy?\n\nAnswer using the following information:\nYou are responsible for all charges incurred under your account.\n\n3.3 All bookings are subject to vehicle availability.\n\n4. Cancellation Policy\n4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n5. Use of Vehicle\n5.1 All cars rented from Miles of Smiles must not be used:\nfor any illegal purpose or in connection with any criminal offense.\nfor teaching someone to drive.\nin any race, rally or contest.\nwhile under the influence of alcohol or drugs.\n\n3. Bookings\n3.1 Users may make a booking through our website or mobile application.\n3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.\n3.3 All bookings are subject to vehicle availability."
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>  }
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="nt">"role"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"user"</span><span class="p">,</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">"content"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"What can you tell me about your cancellation policy?\n\nAnswer using the following information:\nYou are responsible for all charges incurred under your account.\n\n3.3 All bookings are subject to vehicle availability.\n\n4. Cancellation Policy\n4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n5. Use of Vehicle\n5.1 All cars rented from Miles of Smiles must not be used:\nfor any illegal purpose or in connection with any criminal offense.\nfor teaching someone to drive.\nin any race, rally or contest.\nwhile under the influence of alcohol or drugs.\n\n3. Bookings\n3.1 Users may make a booking through our website or mobile application.\n3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.\n3.3 All bookings are subject to vehicle availability."</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div>
 <p>The <code>content</code> starts with the user query, but then the AI service adds the relevant segment from the knowledge base.
 It extends the <em>prompt</em> with the relevant information.
@@ -823,7 +823,7 @@ The LLM receives the extended prompt and can provide a more accurate response.</
 <h2 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link"></a></h2>
 <p>In this step, we introduced the RAG pattern and implemented it in our AI service.
 We used EasyRAG to simplify the setup.
-In the next step, we will start deconstructing the RAG pattern to understand how it works under the hood and how to customize it.</p></div>
+In the <a href="../step-06/">next step</a>, we will start deconstructing the RAG pattern to understand how it works under the hood and how to customize it.</p></div>
 
 
 
