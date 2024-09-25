@@ -202,4 +202,4 @@ How this is done is abstracted away by Quarkus LangChain4J.
     This annotation indicates that the `CustomerSupportAgent` object is created when the session starts and destroyed when the session ends.
     It influences the _memory_ of our chatbot, as it remembers the conversation that happened so far in this session.
 
-So far, so good! Let's move on to the next step.
+So far, so good! Let's move on to the [next step](./step-02.md).
