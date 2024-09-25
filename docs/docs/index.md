@@ -27,7 +27,7 @@ We recommend to start by checking out the _main_ branch and then opening the pro
 The other option is to make a copy of it.
 If you later need to reset to a particular step, either overwrite your working directory with the directory for the step you want to reset to, or, in your IDE, open the project from the step directory you want to reset to.
 
-## Let's get started! 
+## Let's get started!
 
 Go to the [requirements](./requirements.md) page to prepare for the workshop.
 Once ready, you can start with [Step 1](./step-01.md).

@@ -3,17 +3,17 @@
 The RAG pattern allows passing knowledge to the LLM based on your own data.
 It's a very popular pattern, but not the only one that can be used.
 
-In this step, we are going to see another way to give superpowers to the LLM: the function calling.
+In this step, we are going to see another way to give superpowers to the LLM: Function Calling.
 Basically, we will allow the LLM to call a function that you have defined in your code.
 The LLM will decide when and with which parameters to call the function.
-Of course, makes sure that you do not allow the LLM to call a function that could be harmful to your system.
+Of course, makes sure that you do not allow the LLM to call a function that could be harmful to your system, and make sure to sanitize any input data.
 
 ## Function calling
 
-Function calling is a mechanism offered by some LLM (GPTs, Llama...) that allows the LLM to call a function that you have defined in your application.
+Function calling is a mechanism offered by some LLMs (GPTs, Llama...). It allows the LLM to call a function that you have defined in your application.
 When the application sends the user message to the LLM, it also sends the list of functions that the LLM can call.
 
-Then, the LLM can decide, if it wants, to call one of these functions with the parameters it wants.
+Then the LLM can decide, if it wants, to call one of these functions with the parameters it wants.
 The application receives the method invocation request and executes the function with the parameters provided by the LLM.
 The result is sent back to the LLM, which can use it to continue the conversation, and compute the next message.
 
@@ -47,7 +47,7 @@ You can find more information about Panache [here](https://quarkus.io/guides/hib
 ## Preparing the entities
 
 Now that we have the dependencies, we can create a couple of entities.
-We are going to store a list of booking in the database.
+We are going to store a list of bookings in the database.
 Each booking is associated with a customer.
 A customer can have multiple bookings.
 
@@ -67,7 +67,7 @@ public class Customer extends PanacheEntity {
 }
 ```
 
-==Then, create the `dev.langchain4j.quarkus.workshop.Booking` entity class with the following content:==
+==Then create the `dev.langchain4j.quarkus.workshop.Booking` entity class with the following content:==
 
 ```java
 package dev.langchain4j.quarkus.workshop;
@@ -149,9 +149,9 @@ ALTER SEQUENCE booking_seq RESTART WITH 12;
 This file will be executed when the application starts, and will insert some data into the database.
 Without specific configuration, it will only be applied in dev mode (`./mvnw quarkus:dev`).
 
-## Defining Tools 
+## Defining Tools
 
-Alright, we have now everything we need to create a function that allows the LLM to retrieve data from the database.
+Alright, we now have everything we need to create a function that allows the LLM to retrieve data from the database.
 We are going to create a `BookingRepository` class that will contain a set of functions to interact with the database.
 
 ==Create the `dev.langchain4j.quarkus.workshop.BookingRepository` class with the following content:==
@@ -259,8 +259,8 @@ Also note that we have added a new placeholder `{current_date}` in the system pr
     The system message and user messages can contain placeholders.
     The placeholders are replaced by the values provided by the application.
     You can pass parameters to AI service methods and include them in the prompt.
-    It uses the [Qute](https://quarkus.io/guides/qute) template engine underneath. 
-    Thus, you can have advanced template logic.
+    It uses the [Qute](https://quarkus.io/guides/qute) template engine underneath.
+    This is a powerful feature to allow you to have advanced template logic.
 
 !!! bug "Tools and streaming responses"
     There is a known limitation currently when using (blocking) tools with streaming responses.
@@ -275,14 +275,13 @@ Also note that we have added a new placeholder `{current_date}` in the system pr
 
 ## Testing the function calling
 
-
 Let's test the function calling.
 ==Make sure the application is running (`./mvnw quarkus:dev`).==
 
 Open your browser and go to [http://localhost:8080](http://localhost:8080).
 In the chatbot, let's try the following interactions:
 
-```
+```text
 => YOU: Hello, I would like to cancel a booking.
 AI: Sure, I can help with that. I'll need a bit more information to proceed: 1. Your first and last name to look up the booking. 2. The booking ID associated with your reservation. Please provide these details so I can assist you further.
 
@@ -295,7 +294,7 @@ AI: Your booking from 2024-10-01 to 2024-10-07 has been successfully cancelled. 
 
 Alright, let's try now to cancel an invalid booking:
 
-```
+```text
 => YOU: Can you cancel my booking starting the 2024-07-10?
 AI:  I'm sorry, but it seems that your booking from 2024-07-10 to 2024-07-15 cannot be cancelled. If you need further assistance or have any questions, please let me know!
 ```
@@ -308,8 +307,8 @@ In this step, we explored how to implement function calling within our applicati
 
 A function in this context is simply a method from your application annotated with `@Tool`. 
 The actual implementation of the function is entirely customizable.
-For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources. 
+For instance, you could extend your chatbot with tools for weather forecasting (by integrating with a remote service), personalized recommendations, or other external data sources.
 Additionally, you can leverage more specialized LLMs, routing specific queries—such as legal or insurance-related questions—to models trained in those domains.
 
-However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection. 
-In the next step, we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.
+However, introducing tools and function calling also comes with new risks, such as LLM misbehavior (e.g., calling functions excessively or with incorrect parameters) or vulnerabilities to prompt injection.
+In the [next step](./step-08.md), we’ll explore a straightforward approach to mitigate prompt injection using guardrails, ensuring safer and more reliable interactions.

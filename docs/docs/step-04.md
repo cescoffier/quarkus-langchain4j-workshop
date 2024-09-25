@@ -78,5 +78,5 @@ problem.
 What's important is to have a system message defining the scope of the conversation and the role of the AI.
 This will never be lost, even if the conversation is very long.
 
-Alright, let's now go a bit further and implement a RAG pattern! 
-That's the topic of the next step!
+Alright, let's now go a bit further and implement a RAG pattern!
+That's the topic of the [next step](./step-05.md)!

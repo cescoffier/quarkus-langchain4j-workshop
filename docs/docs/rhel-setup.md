@@ -17,7 +17,7 @@ Once you click on "Access this workshop", you'll see the workshop landing page.
 ![Workshop Landing Page](images/rhel-workshop-landing-page.png)
 
 Copy the noVNC Password value, and then click on the noVNC Web URL link. This will give you access to a
-virtual Linux machine based on Red Hat Enterprise Linux (RHEL). In the top left corner you will see an "Activities" button. This is where you can access and search for various programs that have been installed on the machine.
+virtual Linux machine based on Red Hat Enterprise Linux (RHEL).
 
 ## Open a browser and the instructions in the Virtual Machine
 
@@ -29,7 +29,7 @@ Now comes the tricky part. We need to copy and paste the workshop URL from our h
 
 ![Control Bar](images/rhel-control-bar.png)
 
-When you click on it, you will see the control bar expand. Select the clipboard icon, and now you should see a clipboard field which will allow you to copy text between your host and your VM. Copy the workshop url: https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup and paste it in this field. Now paste the same value in the Firefox browser address bar to pull up the workshop instructions.
+When you click on it, you will see the control bar expand. Select the clipboard icon, and now you should see a clipboard field which will allow you to copy text between your host and your VM. Copy the workshop url: [https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup](https://cescoffier.github.io/quarkus-langchain4j-workshop/rhel-setup) and paste it in this field. Now paste the same value in the Firefox browser address bar to pull up the workshop instructions.
 
 ![Clipboard](images/rhel-clipboard-url.png)
 
@@ -58,5 +58,4 @@ Now finally we can install SDKMAN!, and then use it to install OpenJDK (and whil
 
 `curl -s "https://get.sdkman.io" | bash && source "/home/student/.sdkman/bin/sdkman-init.sh" && sdk install java 21.0.4-tem && sdk install quarkus`
 
-Well done! You can now go back to the original requirements page and get started with the lab:
-https://cescoffier.github.io/quarkus-langchain4j-workshop/requirements
+Well done! You can now go back to the [original requirements page](./requirements.md) and get started with the lab:

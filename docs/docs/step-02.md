@@ -75,4 +75,4 @@ quarkus.langchain4j.openai.chat-model.max-tokens=1000
 quarkus.langchain4j.openai.chat-model.frequency-penalty=0
 ```
 
-Let's now switch to the next step!
+Let's now switch to the [next step](./step-03.md)!

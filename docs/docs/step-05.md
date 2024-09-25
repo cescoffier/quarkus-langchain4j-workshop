@@ -18,7 +18,7 @@ Basically, you drop your data in a configured directory, and _voilà_!
 
 If you want to see the final result of this step, you can check out the `step-05` directory.
 
-## Adding the easy rag dependency
+## Adding the Easy Rag dependency
 
 First, we need to add the EasyRag dependency to our project.
 Add the following dependency to your `pom.xml` file:
@@ -34,9 +34,9 @@ Add the following dependency to your `pom.xml` file:
 !!! note "Reloading"
     If your application is running in dev mode, it will automatically restart with the new dependency.
 
-## Putting some data 
+## Adding some data
 
-The RAG pattern allows extending the LLM knowledge with your own data.
+The RAG pattern allows to extend the LLM knowledge with your own data.
 So, let's add some data.
 
 ==Create a directory named `rag` in the `src/main/resources` directory.
@@ -84,7 +84,7 @@ If you do not agree to these Terms, please do not use or access our Services.
 
 Alternatively, you can copy the `miles-of-smiles-terms-of-use.txt` file from the `step-05/src/main/resources/rag` directory.
 
-Note that we are adding a single file, but, you can add as many files as you want in the `rag` directory.
+Note that we are adding a single file, but you can add as many files as you want in the `rag` directory.
 Also, it's not limited to text files, you can use PDF, Word, or any other format.
 See the [EasyRag documentation](https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html) for more information.
 
@@ -114,28 +114,28 @@ Make sure the application is running and open the browser at [http://localhost:8
 
 ### Ingestion and Embedding
 
-When you start the application, you should see in the log the following line:
+When you start the application, you should see the following line in the log :
 
-```
+```bash
 2024-09-17 08:34:13,888 INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingesting documents from path: src/main/resources/rag, path matcher = glob:**, recursive = true
 ```
 
-It's ingesting the data from the `rag` directory.
-It reads the files from the configured directory, splits them into segments, and stores them in the knowledge base.
-In our case, the knowledge base is _in memory_. 
+That data from the `rag` directory is being ingested.
+The files are read from the configured directory, split into segments, and stored in the knowledge base.
+In our case, the knowledge base is _in memory_.
 We will see in the next steps how to use a persistent knowledge base.
 
 The segments are not stored as is in the knowledge base.
-They are transformed into vectors also called _embeddings_.
+They are transformed into vectors, also called _embeddings_.
 This is a way to represent the text in a numerical form.
 So, in the knowledge base, we have the text and the corresponding embeddings.
 These embeddings are computed using _embedding models_.
 Right now, we use the default embedding model provided by OpenAI.
 We will see in the next steps how to use your own embedding model.
 
-Let's have a look to the content of our knowledge base.
+Let's have a look at the content of our knowledge base.
 ==Open the browser at [http://localhost:8080/q/dev-ui](http://localhost:8080/q/dev-ui).
-This is the Quarkus Dev UI, the toolbox with everything you need to developer your Quarkus application.
+This is the Quarkus Dev UI, the toolbox with everything you need to develop your Quarkus application.
 Locate the _Langchain4J_ tile, and click on the _Embedding store_ link:==
 
 ![Embedding store link in the dev UI](images/langchain4j-tile.png)
@@ -149,7 +149,7 @@ You should see the segments _close_ to the searched text.
 You can visualize the segments, but also their score, i.e., how close they are to the searched text.
 
 To find relevant segments, it computes the embeddings of the searched text and compares them to the embeddings of the segments.
-It applies a similarity search using a distance computation (like the cosine distance) 
+It applies a similarity search using a distance computation (like the cosine distance).
 The closer the embeddings, the higher the score.
 
 ### Augmentation
@@ -165,7 +165,7 @@ As you can see the AI is able to answer the question, and use the relevant segme
 Let's look at the logs.
 You should see the following lines:
 
-```
+```json
 {
     "role" : "user",
     "content" : "What can you tell me about your cancellation policy?\n\nAnswer using the following information:\nYou are responsible for all charges incurred under your account.\n\n3.3 All bookings are subject to vehicle availability.\n\n4. Cancellation Policy\n4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n\n5. Use of Vehicle\n5.1 All cars rented from Miles of Smiles must not be used:\nfor any illegal purpose or in connection with any criminal offense.\nfor teaching someone to drive.\nin any race, rally or contest.\nwhile under the influence of alcohol or drugs.\n\n3. Bookings\n3.1 Users may make a booking through our website or mobile application.\n3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.\n3.3 All bookings are subject to vehicle availability."
@@ -181,4 +181,4 @@ The LLM receives the extended prompt and can provide a more accurate response.
 
 In this step, we introduced the RAG pattern and implemented it in our AI service.
 We used EasyRAG to simplify the setup.
-In the next step, we will start deconstructing the RAG pattern to understand how it works under the hood and how to customize it.
+In the [next step](./step-06.md), we will start deconstructing the RAG pattern to understand how it works under the hood and how to customize it.

@@ -115,4 +115,4 @@ If you ask simple questions, you may not notice the difference.
 
 ![type:video](images/streaming.mp4)
 
-Let's now switch to the next step!
+Let's now switch to the [next step](./step-04.md)!
