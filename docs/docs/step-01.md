@@ -1,14 +1,18 @@
-# Step 01 - Introduction to Quarkus LangChain4J
+# Step 01 - Introduction to Quarkus LangChain4j
 
 To get started, make sure you use the `step-01` directory.
 
 This step is the starting point for the workshop.
-It's a simple Quarkus application that uses the Quarkus LangChain4J extension to interact with OpenAI's GPT-4o model.
+It's a simple Quarkus application that uses the [Quarkus LangChain4j](https://docs.quarkiverse.io/quarkus-langchain4j/dev/index.html){target="_blank"} extension to interact with OpenAI's GPT-4o model.
 It's a simple chatbot that we will extend in the subsequent steps.
 
 ## Running the application
 
-==You can run it as follows by launching `./mvnw quarkus:dev`.==
+Run the application with the following command:
+
+```shell
+./mvnw quarkus:dev
+```
 
 ??? note "mvnw permission issue"
     If you run into an error about the `mvnw` maven wrapper, you can give execution permission for the file by navigating to the project folder and executing `chmod +x mvnw`.
@@ -16,7 +20,7 @@ It's a simple chatbot that we will extend in the subsequent steps.
 ??? note "Could not expand value OPENAI_API_KEY"
     If you run into an error indicating `java.util.NoSuchElementException: SRCFG00011: Could not expand value OPENAI_API_KEY in property quarkus.langchain4j.openai.api-key`, make sure you have set the environment variable `OPENAI_API_KEY` with your OpenAI API key.
 
-This will bring up the page at http://localhost:8080. 
+This will bring up the page at [http://localhost:8080](http://localhost:8080){target="_blank"}. 
 Open it and click the red robot icon in the bottom right corner to start chatting with the chatbot.
 
 ![Miles of Smiles UI](images/ui-no-chatbot.png)
@@ -41,7 +45,7 @@ This is how memory is built up for LLMs.
 
 ```bash
 # The request -> Sending a message to the LLM
-2024-09-16 08:33:24,600 INFO  [io.qua.lan.ope.OpenAiRestApi$OpenAiClientLogger] (vert.x-eventloop-thread-0) Request:
+INFO  [io.qua.lan.ope.OpenAiRestApi$OpenAiClientLogger] (vert.x-eventloop-thread-0) Request:
 - method: POST
 - url: https://api.openai.com/v1/chat/completions
 - headers: [Accept: application/json], [Authorization: Be...ex], [Content-Type: application/json], [User-Agent: langchain4j-openai], [content-length: 378]
@@ -65,9 +69,9 @@ This is how memory is built up for LLMs.
 }
 
 # The response from the LLM
-2024-09-16 08:33:25,013 INFO  [io.qua.lan.ope.OpenAiRestApi$OpenAiClientLogger] (vert.x-eventloop-thread-0) Response:
+INFO  [io.qua.lan.ope.OpenAiRestApi$OpenAiClientLogger] (vert.x-eventloop-thread-0) Response:
 - status code: 200
-- headers: [Date: Mon, 16 Sep 2024 06:33:25 GMT], [Content-Type: application/json], [Transfer-Encoding: chunked], [Connection: keep-alive], [access-control-expose-headers: X-Request-ID], [openai-organization: user-vyycjqq0phctctikkw1zawlm], [openai-processing-ms: 213], [openai-version: 2020-10-01], [strict-transport-security: max-age=15552000; includeSubDomains; preload], [x-ratelimit-limit-requests: 500], [x-ratelimit-limit-tokens: 30000], [x-ratelimit-remaining-requests: 499], [x-ratelimit-remaining-tokens: 29958], [x-ratelimit-reset-requests: 120ms], [x-ratelimit-reset-tokens: 84ms], [x-request-id: req_2ea6d71590bc8d857260b25d9f414c0c], [CF-Cache-Status: DYNAMIC], [Set-Cookie: __...ne], [X-Content-Type-Options: nosniff], [Set-Cookie: _c...ne], [Server: cloudflare], [CF-RAY: 8c3ed3291afc27b2-LYS], [alt-svc: h3=":443"; ma=86400]
+- headers: [Content-Type: application/json], [Transfer-Encoding: chunked], [Connection: keep-alive], [access-control-expose-headers: X-Request-ID], [openai-organization: user-vyycjqq0phctctikkw1zawlm], [openai-processing-ms: 213], [openai-version: 2020-10-01], [strict-transport-security: max-age=15552000; includeSubDomains; preload], [x-ratelimit-limit-requests: 500], [x-ratelimit-limit-tokens: 30000], [x-ratelimit-remaining-requests: 499], [x-ratelimit-remaining-tokens: 29958], [x-ratelimit-reset-requests: 120ms], [x-ratelimit-reset-tokens: 84ms], [x-request-id: req_2ea6d71590bc8d857260b25d9f414c0c], [CF-Cache-Status: DYNAMIC], [Set-Cookie: __...ne], [X-Content-Type-Options: nosniff], [Set-Cookie: _c...ne], [Server: cloudflare], [CF-RAY: 8c3ed3291afc27b2-LYS], [alt-svc: h3=":443"; ma=86400]
 - body: {
   "id": "chatcmpl-A7zaWTn1uMzq7Stw50Ug2Pg9TkBpV",
   "object": "chat.completion",
@@ -107,7 +111,7 @@ We will see how to manage this in the subsequent steps.
 
 Before going further, let's take a look at the code.
 
-If you open the `pom.xml` file, you will see that the project is a Quarkus application with the `quarkus-langchain4j` extension.
+If you open the `pom.xml` file, you will see that the project is a Quarkus application with the [`quarkus-langchain4j-openai`](https://docs.quarkiverse.io/quarkus-langchain4j/dev/openai.html){target="_blank"} extension.
 
 ```xml
 <dependency>
@@ -117,9 +121,9 @@ If you open the `pom.xml` file, you will see that the project is a Quarkus appli
 </dependency>
 ```
 
-Quarkus LangChain4J OpenAI is a Quarkus extension that provides a simple way to interact with language models (LLMs) like GPT-4o from OpenAI.
-It actually can interact with any model serving the OpenAI API (like vLLM or Podman AI Lab).
-Quarkus Langchain4J abstracts the complexity of calling the model and provides a simple API to interact with it.
+[Quarkus LangChain4j OpenAI](https://docs.quarkiverse.io/quarkus-langchain4j/dev/openai.html){target="_blank"} is a Quarkus extension that provides a simple way to interact with language models (LLMs), like [GPT-4o from OpenAI](https://platform.openai.com/docs/models/gpt-4o){target="_blank"}.
+It actually can interact with any model serving the OpenAI API (like [vLLM](https://docs.vllm.ai/en/latest/){target="_blank"} or [Podman AI Lab](https://podman-desktop.io/docs/ai-lab){target="_blank"}).
+Quarkus LangChain4j abstracts the complexity of calling the model and provides a simple API to interact with it.
 
 In our case, the application is a simple chatbot.
 It uses a _WebSocket_, this is why you can also see the following dependency in the `pom.xml` file:
@@ -133,32 +137,8 @@ It uses a _WebSocket_, this is why you can also see the following dependency in 
 
 If you now open the `src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgentWebSocket.java`  file, you can see how the web socket is implemented:
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import io.quarkus.websockets.next.OnOpen;
-import io.quarkus.websockets.next.OnTextMessage;
-import io.quarkus.websockets.next.WebSocket;
-
-@WebSocket(path = "/customer-support-agent")
-public class CustomerSupportAgentWebSocket {
-
-    private final CustomerSupportAgent customerSupportAgent;
-
-    public CustomerSupportAgentWebSocket(CustomerSupportAgent customerSupportAgent) {
-        this.customerSupportAgent = customerSupportAgent;
-    }
-
-    @OnOpen
-    public String onOpen() {
-        return "Welcome to Miles of Smiles! How can I help you today?";
-    }
-
-    @OnTextMessage
-    public String onTextMessage(String message) {
-        return customerSupportAgent.chat(message);
-    }
-}
+```java title="CustomerSupportAgentWebSocket.java"
+--8<-- "../../step-01/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgentWebSocket.java"
 ```
 
 Basically, it:
@@ -168,35 +148,23 @@ Basically, it:
 
 Let's now look at the cornerstone of the application, the `CustomerSupportAgent` interface.
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import io.quarkiverse.langchain4j.RegisterAiService;
-import jakarta.enterprise.context.SessionScoped;
-
-@SessionScoped
-@RegisterAiService
-public interface CustomerSupportAgent {
-
-    String chat(String userMessage);
-}
+```java title="CustomerSupportAgent.java"
+--8<-- "../../step-01/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgent.java"
 ```
 
 This interface is annotated with `@RegisterAiService` to indicate that it is an AI service.
-An _AI service_ is an object managed by the Quarkus LangChain4J extension.
+An [_AI service_](https://docs.quarkiverse.io/quarkus-langchain4j/dev/ai-services.html){target="_blank"} is an object managed by the Quarkus LangChain4j extension.
 It models the interaction with the AI model.
-As you can see it's an interface.
-It's not a concrete class.
-You do not implement this interface.
-Quarkus LangChain4J will provide an implementation for you in the background.
+As you can see it's an interface, not a concrete class, so you don't need to implement anything (thanks Quarkus!).
+Quarkus LangChain4j will provide an implementation for you at build time.
 Thus, your application only interacts with the methods defined in the interface.
 
-There is a single method in the interface, `chat`.
+There is a single method in this interface, `chat`, but you could name the method whatever you wanted.
 It takes a user message as input (as it's the only parameter, we consider it to be the user message) and returns the response from the AI model.
-How this is done is abstracted away by Quarkus LangChain4J.
+How this is done is abstracted away by Quarkus LangChain4j.
 
 !!! note "`SessionScoped`?"
-    Attentive reader might have noticed the `@SessionScoped` annotation.
+    Attentive readers might have noticed the `@SessionScoped` annotation.
     This is a [CDI](https://jakarta.ee/specifications/cdi/) annotation which scopes the object to the session. In our case the session is the web socket.
     The session starts when the user connects to the web socket and ends when the user disconnects.
     This annotation indicates that the `CustomerSupportAgent` object is created when the session starts and destroyed when the session ends.

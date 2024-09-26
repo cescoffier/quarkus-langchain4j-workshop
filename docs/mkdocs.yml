@@ -5,7 +5,7 @@ docs_dir: docs
 
 nav:
   - Requirements: 'requirements.md'
-  - Step 1 - Introduction to Quarkus LangChain4J: 'step-01.md'
+  - Step 1 - Introduction to Quarkus LangChain4j: 'step-01.md'
   - Step 2 - Playing with model parameters: 'step-02.md'
   - Step 3 - Streaming responses: 'step-03.md'
   - Step 4 - Using system messages: 'step-04.md'
@@ -76,7 +76,11 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.snippets
+  - pymdownx.snippets:
+      check_paths: true
+      base_path: !relative $docs_dir
+      restrict_base_path: false
+      dedent_subsections: true
   - pymdownx.inlinehilite
   - pymdownx.details
   - pymdownx.smartsymbols

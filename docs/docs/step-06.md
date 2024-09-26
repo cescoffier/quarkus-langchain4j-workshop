@@ -1,6 +1,6 @@
 # Step 06 - Deconstructing the RAG pattern
 
-In the previous step, we implemented a RAG (Retrieval Augmented Generation) pattern in our AI service using EasyRag.
+In the previous step, we implemented a RAG (Retrieval Augmented Generation) pattern in our AI service using [EasyRag](https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html){target="_blank"}.
 Most of the complexity was hidden by EasyRag.
 
 In this step, we will deconstruct the RAG pattern to understand how it works under the hood.
@@ -14,22 +14,22 @@ Otherwise, let's get started!
 Let's start with a bit of cleanup.
 ==First, open the `src/main/resources/application.properties` file and remove the following configuration:==
 
-```properties
-quarkus.langchain4j.easy-rag.path=src/main/resources/rag
-quarkus.langchain4j.easy-rag.max-segment-size=100
-quarkus.langchain4j.easy-rag.max-overlap-size=25
-quarkus.langchain4j.easy-rag.max-results=3
+```properties title="application.properties"
+--8<-- "../../step-05/src/main/resources/application.properties:easy-rag"
 ```
 
 ==Then, open the `pom.xml` file and remove the following dependency:==
 
-```xml
-<dependency>
-    <groupId>io.quarkiverse.langchain4j</groupId>
-    <artifactId>quarkus-langchain4j-easy-rag</artifactId>
-    <version>${quarkus-langchain4j.version}</version>
-</dependency>
+```xml title="pom.xml"
+--8<-- "../../step-05/pom.xml:easy-rag"
 ```
+
+!!! tip
+    You could also open another terminal and run
+
+    ```shell
+    ./mvnw quarkus:remove-extension -Dextension=easy-rag
+    ```
 
 ## Embedding model
 
@@ -41,17 +41,20 @@ Selecting a good embedding model is crucial.
 In the previous step, we used the default embedding model provided by OpenAI.
 You can however use your own embedding model as well.
 
-In this step, we will use the [bge-small-en-q](https://huggingface.co/BAAI/bge-small-en-q) embedding model.
+In this step, we will use the [bge-small-en-q](https://huggingface.co/neuralmagic/bge-small-en-v1.5-quant){target="_blank"} embedding model.
 
 ==Add the following dependency to your `pom.xml` file:==
 
-```xml
-<dependency>
-    <groupId>dev.langchain4j</groupId>
-    <artifactId>langchain4j-embeddings-bge-small-en-q</artifactId>
-    <version>0.34.0</version>
-</dependency>
+```xml title="pom.xml"
+--8<-- "../../step-06/pom.xml:embedding-bge"
 ```
+
+!!! tip
+    You could also open another terminal and run
+
+    ```shell
+    ./mvnw quarkus:add-extension -Dextension=dev.langchain4j:langchain4j-embeddings-bge-small-en-q:0.34.0
+    ```
 
 This dependency provides the `bge-small-en-q` embedding model.
 It will run locally, on your machine.
@@ -60,7 +63,7 @@ Thus, you do not have to send your document to a remote service to compute the e
 This embedding model generates vectors of size 384.
 It's a small model, but it's enough for our use case.
 
-To use the model, we will use the `dev.langchain4j.model.embedding.onnx.bgesmallenq.BgeSmallEnQuantizedEmbeddingModel` CDI bean automatically created by Quarkus.
+To use the model, we will use the [`dev.langchain4j.model.embedding.onnx.bgesmallenq.BgeSmallEnQuantizedEmbeddingModel`](https://github.com/langchain4j/langchain4j-embeddings/blob/main/langchain4j-embeddings-bge-small-en-q/src/main/java/dev/langchain4j/model/embedding/onnx/bgesmallenq/BgeSmallEnQuantizedEmbeddingModel.java){target="_blank"} CDI bean automatically created by Quarkus.
 
 ## Vector store
 
@@ -68,27 +71,30 @@ Now that we have our embedding model, we need to store the embeddings.
 In the previous step, we used an _in memory_ store.
 Now we will use a persistent store to keep the embeddings between restarts.
 
-There are many options to store the embeddings, like Redis, Infinispan, specialized databases (like Chroma), etc.
-Here, we will use PostGreSQL, a popular relational database.
+There are many options to store the embeddings, like [Redis](https://docs.quarkiverse.io/quarkus-langchain4j/dev/redis-store.html){target="_blank"}, [Infinispan](https://docs.quarkiverse.io/quarkus-langchain4j/dev/infinispan-store.html){target="_blank"}, specialized databases (like [Chroma](https://docs.quarkiverse.io/quarkus-langchain4j/dev/chroma-store.html){target="_blank"}), etc.
+Here, we will use the [PostgreSQL pgVector store](https://docs.quarkiverse.io/quarkus-langchain4j/dev/pgvector-store.html){target="_blank"}, a popular relational database.
 
 ==Add the following dependency to your `pom.xml` file:==
 
-```xml
-<dependency>
-    <groupId>io.quarkiverse.langchain4j</groupId>
-    <artifactId>quarkus-langchain4j-pgvector</artifactId>
-    <version>${quarkus-langchain4j.version}</version>
-</dependency>
+```xml title="pom.xml"
+--8<-- "../../step-06/pom.xml:pgvector"
 ```
+
+!!! tip
+    You could also open another terminal and run
+
+    ```shell
+    ./mvnw quarkus:add-extension -Dextension=langchain4j-pgvector
+    ```
 
 This embedding store (like many others) needs to know the size of the embeddings that will be stored in advance.
 ==Open the `src/main/resources/application.properties` file and add the following configuration:==
 
-```properties
-quarkus.langchain4j.pgvector.dimension=384
+```properties title="application.properties"
+--8<-- "../../step-06/src/main/resources/application.properties:pgvector"
 ```
 
-The `384` value is the size of the vectors generated by the `bge-small-en-q` embedding model.
+The value is the size of the vectors generated by the `bge-small-en-q` embedding model.
 
 Now we will be able to use the `io.quarkiverse.langchain4j.pgvector.PgVectorEmbeddingStore` bean to store and retrieve the embeddings.
 
@@ -96,8 +102,8 @@ Now we will be able to use the `io.quarkiverse.langchain4j.pgvector.PgVectorEmbe
 
 ==While you are editing the `src/main/resources/application.properties` file, add the following configuration:==
 
-```properties
-rag.location=src/main/resources/rag
+```properties title="application.properties"
+--8<-- "../../step-06/src/main/resources/application.properties:rag"
 ```
 
 This is a custom config property that we will use to specify the location of the documents that will be ingested into the vector store.
@@ -110,56 +116,12 @@ Remember that the role of the _ingestor_ is to read the documents and store thei
 
 ==Create the `dev.langchain4j.quarkus.workshop.RagIngestion` class with the following content:==
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import dev.langchain4j.data.document.Document;
-import dev.langchain4j.data.document.loader.FileSystemDocumentLoader;
-import dev.langchain4j.model.embedding.onnx.bgesmallenq.BgeSmallEnQuantizedEmbeddingModel;
-import dev.langchain4j.store.embedding.EmbeddingStoreIngestor;
-import io.quarkiverse.langchain4j.pgvector.PgVectorEmbeddingStore;
-import io.quarkus.logging.Log;
-import io.quarkus.runtime.StartupEvent;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
-
-import java.nio.file.Path;
-import java.util.List;
-
-import static dev.langchain4j.data.document.splitter.DocumentSplitters.recursive;
-
-@ApplicationScoped
-public class RagIngestion {
-
-    /**
-     * Ingests the documents from the given location into the embedding store.
-     *
-     * @param ev             the startup event to trigger the ingestion when the application starts
-     * @param store          the embedding store the embedding store (PostGreSQL in our case)
-     * @param embeddingModel the embedding model to use for the embedding (BGE-Small-EN-Quantized in our case)
-     * @param documents      the location of the documents to ingest
-     */
-    public void ingest(@Observes StartupEvent ev,
-                       PgVectorEmbeddingStore store, 
-                       BgeSmallEnQuantizedEmbeddingModel embeddingModel,
-                       @ConfigProperty(name = "rag.location") Path documents) {
-        store.removeAll(); // cleanup the store to start fresh (just for demo purposes)
-        List<Document> list = FileSystemDocumentLoader.loadDocumentsRecursively(documents);
-        EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
-                .embeddingStore(store)
-                .embeddingModel(embeddingModel)
-                .documentSplitter(recursive(100, 25))
-                .build();
-        ingestor.ingest(list);
-        Log.info("Documents ingested successfully");
-    }
-
-}
+```java title="RagIngestion.java"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagIngestion.java"
 ```
 
 This class ingests the documents from the `rag.location` location into the vector store.
-It runs when the application starts (thanks to the `@Observes StartupEvent ev` parameter).
+It runs when the application starts (thanks to the [`@Observes StartupEvent ev`](https://quarkus.io/guides/lifecycle#listening-for-startup-and-shutdown-events){target="_blank"} parameter).
 
 Additionally, it receives:
 
@@ -192,33 +154,9 @@ The augmentor is responsible for extending the prompt with the retrieved segment
 
 ==Create the `dev.langchain4j.quarkus.workshop.RagRetriever` class with the following content:==
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import dev.langchain4j.model.embedding.onnx.bgesmallenq.BgeSmallEnQuantizedEmbeddingModel;
-import dev.langchain4j.rag.DefaultRetrievalAugmentor;
-import dev.langchain4j.rag.RetrievalAugmentor;
-import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
-import io.quarkiverse.langchain4j.pgvector.PgVectorEmbeddingStore;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.inject.Produces;
-
-public class RagRetriever {
-
-    @Produces
-    @ApplicationScoped
-    public RetrievalAugmentor create(PgVectorEmbeddingStore store, BgeSmallEnQuantizedEmbeddingModel model) {
-        EmbeddingStoreContentRetriever contentRetriever = EmbeddingStoreContentRetriever.builder()
-                .embeddingModel(model)
-                .embeddingStore(store)
-                .maxResults(3)
-                .build();
-
-        return DefaultRetrievalAugmentor.builder()
-                .contentRetriever(contentRetriever)
-                .build();
-    }
-}
+```java title="RagRetriever.java"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagRetriever.java:ragretriever-1"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagRetriever.java:ragretriever-2"
 ```
 
 The `create` method handles both the retrieval and the prompt augmentation.
@@ -255,7 +193,7 @@ Let's see if everything works as expected.
 ```
 
 !!! important "Podman or Docker"
-    The application requires Podman or Docker to automatically start a PostGreSQL database.
+    The application requires Podman or Docker to automatically start a PostgreSQL database.
     So make sure you have one of them installed and running.
 
 When the application starts, it will ingest the documents into the vector store.
@@ -263,7 +201,11 @@ When the application starts, it will ingest the documents into the vector store.
 You can use the dev UI to verify the ingestion like we did in the previous step.
 This time, let's test with the chatbot instead:
 ==Open your browser and go to `http://localhost:8080`.
-Ask a question to the chatbot and see if it retrieves the relevant segments and builds a cohesive answer.==
+Ask the question to the chatbot and see if it retrieves the relevant segments and builds a cohesive answer:==
+
+```
+What can you tell me about your cancellation policy?
+```
 
 ## Advanced RAG
 
@@ -303,32 +245,39 @@ Please, only use the following information:
 
 ==Edit the `create` method in the `RagRetriever` class to:==
 
-```java
-@Produces
-@ApplicationScoped
-public RetrievalAugmentor create(PgVectorEmbeddingStore store, BgeSmallEnQuantizedEmbeddingModel model) {
-    EmbeddingStoreContentRetriever contentRetriever = EmbeddingStoreContentRetriever.builder()
-            .embeddingModel(model)
-            .embeddingStore(store)
-            .maxResults(3)
-            .build();
-
-    return DefaultRetrievalAugmentor.builder()
-            .contentRetriever(contentRetriever)
-            .contentInjector(new ContentInjector() {
-                @Override
-                public UserMessage inject(List<Content> list, UserMessage userMessage) {
-                    StringBuffer prompt = new StringBuffer(userMessage.singleText());
-                    prompt.append("\nPlease, only use the following information:\n");
-                    list.forEach(content -> prompt.append("- ").append(content.textSegment().text()).append("\n"));
-                    return new UserMessage(prompt.toString());
-                }
-            })
-            .build();
-}
+```java hl_lines="30-38" title="RagRetriever.java"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagRetriever.java:ragretriever-1"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagRetriever.java:ragretriever-3"
+--8<-- "../../step-06/src/main/java/dev/langchain4j/quarkus/workshop/RagRetriever.java:ragretriever-2"
 ```
 
-Now if you ask a question to the chatbot, you will get a different prompt.
+Now if you ask the question to the chatbot, you will get a different prompt. You can see this if you examine the latest logs:
+
+```shell hl_lines="12"
+INFO  [io.qua.lan.ope.OpenAiRestApi$OpenAiClientLogger] (vert.x-eventloop-thread-0) Request:
+- method: POST
+- url: https://api.openai.com/v1/chat/completions
+- headers: [Accept: text/event-stream], [Authorization: Be...1f], [Content-Type: application/json], [User-Agent: langchain4j-openai], [content-length: 886]
+- body: {
+  "model" : "gpt-4o",
+  "messages" : [ {
+    "role" : "system",
+    "content" : "You are a customer support agent of a car rental company 'Miles of Smiles'.\nYou are friendly, polite and concise.\nIf the question is unrelated to car rental, you should politely redirect the customer to the right department.\n"
+  }, {
+    "role" : "user",
+    "content" : "What can you tell me about your cancellation policy?\nPlease, only use the following information:\n- 4. Cancellation Policy\n- 4. Cancellation Policy 4.1 Reservations can be cancelled up to 11 days prior to the start of the\n- booking period.\n4.2 If the booking period is less than 4 days, cancellations are not permitted.\n"
+  } ],
+  "temperature" : 0.3,
+  "top_p" : 1.0,
+  "stream" : true,
+  "stream_options" : {
+    "include_usage" : true
+  },
+  "max_tokens" : 1000,
+  "presence_penalty" : 0.0,
+  "frequency_penalty" : 0.0
+}
+```
 
 This injector is a simple example.
 It does not change the behavior of the RAG pattern.

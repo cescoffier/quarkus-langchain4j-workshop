@@ -40,11 +40,13 @@
             <version>${quarkus-langchain4j.version}</version>
         </dependency>
 
+        <!-- -8<- [start:easy-rag]       -->
         <dependency>
             <groupId>io.quarkiverse.langchain4j</groupId>
             <artifactId>quarkus-langchain4j-easy-rag</artifactId>
             <version>${quarkus-langchain4j.version}</version>
         </dependency>
+        <!-- -8<- [end:easy-rag]       -->
 
         <dependency>
             <groupId>io.quarkus</groupId>

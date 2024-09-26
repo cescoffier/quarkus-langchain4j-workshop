@@ -1,7 +1,7 @@
 # Step 03 - Streaming responses
 
 LLM responses can be long.
-Imagine you ask the model to generate a story.
+Imagine asking the model to generate a story. It could potentially produce hundreds of lines of text.
 
 In the current application, the entire response is accumulated before being sent to the client.
 During that generation, the client is waiting for the response, and the server is waiting for the model to finish generating the response.
@@ -18,40 +18,19 @@ However, we recommend you to follow the instructions below to get there, and con
 The first step is to ask the LLM to return the response in chunks.
 Initially, our AI service looked like this:
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import io.quarkiverse.langchain4j.RegisterAiService;
-import jakarta.enterprise.context.SessionScoped;
-
-@SessionScoped
-@RegisterAiService
-public interface CustomerSupportAgent {
-
-    String chat(String userMessage);
-}
+```java title="CustomerSupportAgent.java"
+--8<-- "../../step-02/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgent.java"
 ```
 
 Note that the return type of the `chat` method is `String`.
-==We will change it to `Multi<String>` to indicate that the response will be streamed.==
+==We will change it to `Multi<String>` to indicate that the response will be streamed instead of returned synchronously.==
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import io.quarkiverse.langchain4j.RegisterAiService;
-import io.smallrye.mutiny.Multi;
-import jakarta.enterprise.context.SessionScoped;
-
-@SessionScoped
-@RegisterAiService
-public interface CustomerSupportAgent {
-
-    Multi<String> chat(String userMessage);
-}
+```java title="CustomerSupportAgent.java"
+--8<-- "../../step-03/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgent.java"
 ```
 
 A `Multi<String>` is a stream of strings.
-`Multi` is a type from the Mutiny library that represents a stream of items, possibly infinite.
+`Multi` is a type from the [Mutiny](https://smallrye.io/smallrye-mutiny/latest/){target="_blank"} library that represents a stream of items, possibly infinite.
 In this case, it will be a stream of strings representing the response from the LLM, and it will be finite (fortunately).
 A `Multi` has other characteristics, such as the ability to handle back pressure, which we will not cover in this workshop.
 
@@ -62,43 +41,14 @@ But, we need to modify our websocket endpoint to handle this stream and send it 
 
 Currently, our websocket endpoint looks like this:
 
-```java
-package dev.langchain4j.quarkus.workshop;
-
-import io.quarkus.websockets.next.OnOpen;
-import io.quarkus.websockets.next.OnTextMessage;
-import io.quarkus.websockets.next.WebSocket;
-
-@WebSocket(path = "/customer-support-agent")
-public class CustomerSupportAgentWebSocket {
-
-    private final CustomerSupportAgent customerSupportAgent;
-
-    public CustomerSupportAgentWebSocket(CustomerSupportAgent customerSupportAgent) {
-        this.customerSupportAgent = customerSupportAgent;
-    }
-
-    @OnOpen
-    public String onOpen() {
-        return "Welcome to Miles of Smiles! How can I help you today?";
-    }
-
-    @OnTextMessage
-    public String onTextMessage(String message) {
-        return customerSupportAgent.chat(message);
-    }
-}
+```java title="CustomerSupportAgentWebSocket.java"
+--8<-- "../../step-02/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgentWebSocket.java"
 ```
 
 ==Let's modify the `onTextMessage` method to send the response to the client as it arrives.==
 
-```java
-// Do not forget to import io.smallrye.mutiny.Multi if your IDE does not do it automatically
-
-@OnTextMessage
-public Multi<String> onTextMessage(String message) { // Change the return type to Multi<String>
-    return customerSupportAgent.chat(message);
-}
+```java hl_lines="22-25" title="CustomerSupportAgentWebSocket.java"
+--8<-- "../../step-03/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgentWebSocket.java"
 ```
 
 That's it!
@@ -108,11 +58,17 @@ This is because Quarkus understands that the return type is a `Multi` _natively_
 ## Testing the streaming
 
 To test the streaming, you can use the same chat interface as before.
-So, make sure the application runs (with `./mvnw quarkus:dev`), open the browser, and start chatting.
+The application should still be running. Go back to the browser, refresh the page, and start chatting.
 If you ask simple questions, you may not notice the difference.
 
-==Ask something like, "Tell me a story containing 500 words" and you will see the response being displayed as it arrives.==
+Ask something like
 
-![type:video](images/streaming.mp4)
+```
+Tell me a story containing 500 words
+```
+
+and you will see the response being displayed as it arrives.
+
+![type:video](images/streaming.mp4){autoplay=true}
 
 Let's now switch to the [next step](./step-04.md)!

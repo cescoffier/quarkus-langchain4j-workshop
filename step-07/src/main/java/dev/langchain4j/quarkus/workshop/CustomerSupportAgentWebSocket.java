@@ -17,9 +17,10 @@ public class CustomerSupportAgentWebSocket {
     public String onOpen() {
         return "Welcome to Miles of Smiles! How can I help you today?";
     }
-
+    // --8<-- [start:tools]
     @OnTextMessage
     public String onTextMessage(String message) {
         return customerSupportAgent.chat(message);
     }
+    // --8<-- [end:tools]
 }

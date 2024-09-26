@@ -2,7 +2,7 @@
 
 Alright, this is the end! I hope you enjoyed this tutorial and gained valuable insights into building AI-infused applications.
 
-In just a few hours, we built an intelligent chatbot using Quarkus and Quarkus Langchain4J, demonstrating how to integrate cutting-edge AI capabilities into a modern application. 
+In just a few hours, we built an intelligent chatbot using Quarkus and Quarkus LangChain4j, demonstrating how to integrate cutting-edge AI capabilities into a modern application. 
 Throughout the process, we explored key concepts, including:
 
 - Integrating a large language model (LLM) seamlessly within a Quarkus application

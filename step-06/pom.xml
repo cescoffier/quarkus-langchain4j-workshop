@@ -40,16 +40,20 @@
             <version>${quarkus-langchain4j.version}</version>
         </dependency>
 
+        <!-- -8<- [start:embedding-bge]       -->
         <dependency>
             <groupId>dev.langchain4j</groupId>
             <artifactId>langchain4j-embeddings-bge-small-en-q</artifactId>
             <version>0.34.0</version>
         </dependency>
+        <!-- -8<- [end:embedding-bge]       -->
+        <!-- -8<- [start:pgvector]       -->
         <dependency>
             <groupId>io.quarkiverse.langchain4j</groupId>
             <artifactId>quarkus-langchain4j-pgvector</artifactId>
             <version>${quarkus-langchain4j.version}</version>
         </dependency>
+        <!-- -8<- [end:pgvector]       -->
 
         <dependency>
             <groupId>io.quarkus</groupId>
