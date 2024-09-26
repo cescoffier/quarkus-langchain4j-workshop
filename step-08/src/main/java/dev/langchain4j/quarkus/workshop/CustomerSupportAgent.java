@@ -8,7 +8,7 @@ import io.quarkiverse.langchain4j.ToolBox;
 import io.quarkiverse.langchain4j.guardrails.InputGuardrails;
 
 @SessionScoped
-@RegisterAiService(tools = BookingRepository.class)
+@RegisterAiService
 public interface CustomerSupportAgent {
 
     @SystemMessage("""
