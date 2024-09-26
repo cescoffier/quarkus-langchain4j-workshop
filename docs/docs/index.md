@@ -1,7 +1,7 @@
-# Quarkus Langchain4j Workshop
+# Quarkus LangChain4j Workshop
 
 Welcome to the Quarkus Lanchchain4j Workshop! 
-This workshop is designed to help you get started with AI-Infused applications using Quarkus and Langchain4j.
+This workshop is designed to help you get started with AI-Infused applications using Quarkus and LangChain4j.
 You are going to learn about:
 
 - How to integrate LLMs (Language Models) in your Quarkus application
@@ -10,7 +10,7 @@ You are going to learn about:
 - How to build agentic systems
 - How to build simple and advanced RAG (Retrieval-Augmented Generation) patterns
 
-![Quarkus Langchain4j Workshop](images/global-architecture.png)
+![Quarkus LangChain4j Workshop](images/global-architecture.png)
 
 
 ## Workshop Structure

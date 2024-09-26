@@ -21,7 +21,7 @@ conversation but influences the overall experience.
 To add a system message, we need to enhance our `CustomerSupportAgent` interface.
 ==Update the `CustomerSupportAgent` interface content to become:==
 
-```java hl_lines="13-17" title="CustomerSupportAgent.java"
+```java hl_lines="12-16" title="CustomerSupportAgent.java"
 --8<-- "../../step-04/src/main/java/dev/langchain4j/quarkus/workshop/CustomerSupportAgent.java"
 ```
 

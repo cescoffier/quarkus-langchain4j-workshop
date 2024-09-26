@@ -1,6 +1,6 @@
 # quarkus-langchain4j-workshop
 
-A workshop to learn how to build AI-Infused applications with Quarkus and Langchain4j.
+A workshop to learn how to build AI-Infused applications with Quarkus and LangChain4j.
 
 
 The workshop is divided into several steps.

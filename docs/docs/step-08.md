@@ -32,7 +32,7 @@ In the following sections, we will explore how to implement guardrails to protec
 injection.
 We will use another AI Service to detect the presence of malicious content in the user's input and prevent the LLM from
 executing potentially harmful functions.
-That will also highlight a few more capabilities of Quarkus Langchain4j.
+That will also highlight a few more capabilities of Quarkus LangChain4j.
 
 The final code of this step is available in the `step-08` directory.
 
