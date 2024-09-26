@@ -1,11 +1,13 @@
 package dev.langchain4j.quarkus.workshop;
 
-import dev.langchain4j.service.SystemMessage;
-import io.quarkiverse.langchain4j.RegisterAiService;
 import jakarta.enterprise.context.SessionScoped;
 
+import dev.langchain4j.service.SystemMessage;
+import io.quarkiverse.langchain4j.RegisterAiService;
+import io.quarkiverse.langchain4j.ToolBox;
+
 @SessionScoped
-@RegisterAiService(tools = BookingRepository.class)
+@RegisterAiService
 public interface CustomerSupportAgent {
 
     @SystemMessage("""
@@ -15,5 +17,6 @@ public interface CustomerSupportAgent {
             
             Today is {current_date}.
             """)
+    @ToolBox(BookingRepository.class)
     String chat(String userMessage);
 }

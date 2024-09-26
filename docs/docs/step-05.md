@@ -1,18 +1,18 @@
-# Step 05 - Introduction to RAG pattern
+# Step 05 - Introduction to the RAG pattern
 
 In this step, we will introduce the RAG pattern and implement it in our AI service.
-The RAG (Retrieval Augmented Generation) pattern is a way to extend the knowledge of the LLM used in the AI service.
+The [RAG (Retrieval Augmented Generation) pattern](https://research.ibm.com/blog/retrieval-augmented-generation-RAG){target="_blank"} is a way to extend the knowledge of the LLM used in the AI service.
 
 Indeed, the LLM is trained on a very large dataset.
-But this dataset is general and does not contain specific information about your company or your domain of expertise.
+But this dataset is general and does not contain specific information about your company, your domain of expertise, or any information that could change frequently.
 The RAG pattern allows you to add a _knowledge base_ to the LLM.
 
 The RAG pattern is composed of two parts:
 
-- **Ingestion**: This is the part storing data in the knowledge base.
+- **Ingestion**: This is the part that stores data in the knowledge base.
 - **Augmentation**: This is the part that adds the retrieved information to the input of the LLM.
 
-We will see these two parts in the next steps, but first let's use _EasyRag_ to get started and understand the RAG pattern.
+We will see these two parts in the next steps, but first let's use [_EasyRag_](https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html){target="_blank"} to get started and understand the RAG pattern.
 EasyRag abstracts most of the complexity of implementing the RAG pattern.
 Basically, you drop your data in a configured directory, and _voilà_!
 
@@ -23,13 +23,16 @@ If you want to see the final result of this step, you can check out the `step-05
 First, we need to add the EasyRag dependency to our project.
 Add the following dependency to your `pom.xml` file:
 
-```xml
-<dependency>
-    <groupId>io.quarkiverse.langchain4j</groupId>
-    <artifactId>quarkus-langchain4j-easy-rag</artifactId>
-    <version>${quarkus-langchain4j.version}</version>
-</dependency>
+```xml title="pom.xml"
+--8<-- "../../step-05/pom.xml:easy-rag"
 ```
+
+!!! tip
+    You could also open another terminal and run
+
+    ```shell
+    ./mvnw quarkus:add-extension -Dextension=easy-rag
+    ```
 
 !!! note "Reloading"
     If your application is running in dev mode, it will automatically restart with the new dependency.
@@ -42,62 +45,22 @@ So, let's add some data.
 ==Create a directory named `rag` in the `src/main/resources` directory.
 Then, create a file named `miles-of-smiles-terms-of-use.txt` in the `rag` directory with the following content:==
 
-```txt
-Miles of Smiles Car Rental Services Terms of Use
-
-1. Introduction
-These Terms of Service (“Terms”) govern the access or use by you, an individual, from within any country in the world, of applications, websites, content, products, and services (“Services”) made available by Miles of Smiles Car Rental Services, a company registered in the United States of America.
-
-2. The Services
-Miles of Smiles rents out vehicles to the end user. We reserve the right to temporarily or permanently discontinue the Services at any time and are not liable for any modification, suspension or discontinuation of the Services.
-
-3. Bookings
-3.1 Users may make a booking through our website or mobile application.
-3.2 You must provide accurate, current and complete information during the reservation process. You are responsible for all charges incurred under your account.
-3.3 All bookings are subject to vehicle availability.
-
-4. Cancellation Policy
-4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.
-4.2 If the booking period is less than 4 days, cancellations are not permitted.
-
-5. Use of Vehicle
-5.1 All cars rented from Miles of Smiles must not be used:
-for any illegal purpose or in connection with any criminal offense.
-for teaching someone to drive.
-in any race, rally or contest.
-while under the influence of alcohol or drugs.
-
-6. Liability
-6.1 Users will be held liable for any damage, loss, or theft that occurs during the rental period.
-6.2 We do not accept liability for any indirect or consequential loss, damage, or expense including but not limited to loss of profits.
-
-7. Governing Law
-These terms will be governed by and construed in accordance with the laws of the United States of America, and any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts of United States.
-
-8. Changes to These Terms
-We may revise these terms of use at any time by amending this page. You are expected to check this page from time to time to take notice of any changes we made.
-
-9. Acceptance of These Terms
-By using the Services, you acknowledge that you have read and understand these Terms and agree to be bound by them.
-If you do not agree to these Terms, please do not use or access our Services.
+```text title="miles-of-smiles-terms-of-use.txt"
+--8<-- "../../step-05/src/main/resources/rag/miles-of-smiles-terms-of-use.txt"
 ```
-
 Alternatively, you can copy the `miles-of-smiles-terms-of-use.txt` file from the `step-05/src/main/resources/rag` directory.
 
 Note that we are adding a single file, but you can add as many files as you want in the `rag` directory.
 Also, it's not limited to text files, you can use PDF, Word, or any other format.
-See the [EasyRag documentation](https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html) for more information.
+See the [EasyRag documentation](https://docs.quarkiverse.io/quarkus-langchain4j/dev/easy-rag.html){target="_blank"} for more information.
 
 ## Configuring EasyRag
 
 Now that we have some data, we need to configure EasyRag to ingest it.
 ==In the `src/main/resources/application.properties` file, add the following configuration:==
 
-```properties
-quarkus.langchain4j.easy-rag.path=src/main/resources/rag
-quarkus.langchain4j.easy-rag.max-segment-size=100
-quarkus.langchain4j.easy-rag.max-overlap-size=25
-quarkus.langchain4j.easy-rag.max-results=3
+```properties title="application.properties"
+--8<-- "../../step-05/src/main/resources/application.properties:easy-rag"
 ```
 
 Let's look at the configuration:
@@ -114,10 +77,11 @@ Make sure the application is running and open the browser at [http://localhost:8
 
 ### Ingestion and Embedding
 
-When you start the application, you should see the following line in the log :
+When you start the application, you should see the following lines in the log :
 
 ```bash
-2024-09-17 08:34:13,888 INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingesting documents from path: src/main/resources/rag, path matcher = glob:**, recursive = true
+INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingesting documents from path: src/main/resources/rag, path matcher = glob:**, recursive = true
+INFO  [io.qua.lan.eas.run.EasyRagIngestor] (Quarkus Main Thread) Ingested 1 files as 8 documents
 ```
 
 That data from the `rag` directory is being ingested.
@@ -125,22 +89,22 @@ The files are read from the configured directory, split into segments, and store
 In our case, the knowledge base is _in memory_.
 We will see in the next steps how to use a persistent knowledge base.
 
-The segments are not stored as is in the knowledge base.
+The segments are not stored as-is in the knowledge base.
 They are transformed into vectors, also called _embeddings_.
 This is a way to represent the text in a numerical form.
 So, in the knowledge base, we have the text and the corresponding embeddings.
 These embeddings are computed using _embedding models_.
-Right now, we use the default embedding model provided by OpenAI.
+Right now, we use the [default embedding model provided by OpenAI](https://platform.openai.com/docs/guides/embeddings){target="_blank"}.
 We will see in the next steps how to use your own embedding model.
 
 Let's have a look at the content of our knowledge base.
-==Open the browser at [http://localhost:8080/q/dev-ui](http://localhost:8080/q/dev-ui).
+==Open the browser to [http://localhost:8080/q/dev-ui](http://localhost:8080/q/dev-ui/).
 This is the Quarkus Dev UI, the toolbox with everything you need to develop your Quarkus application.
-Locate the _Langchain4J_ tile, and click on the _Embedding store_ link:==
+Locate the _LangChain4j_ tile, and click on the _Embedding store_ link:==
 
 ![Embedding store link in the dev UI](images/langchain4j-tile.png)
 
-==Then, look for the "Search for relevant embeddings" section.
+==Then, look for the `Search for relevant embeddings` section.
 Enter a query in the `Search text` field, for example, `Cancellation`, and then click on the `Search` button:==
 
 ![Search for relevant embeddings](images/embedding-search.png)
@@ -149,14 +113,18 @@ You should see the segments _close_ to the searched text.
 You can visualize the segments, but also their score, i.e., how close they are to the searched text.
 
 To find relevant segments, it computes the embeddings of the searched text and compares them to the embeddings of the segments.
-It applies a similarity search using a distance computation (like the cosine distance).
+It applies a similarity search using a distance computation (like the [cosine similarity](https://en.wikipedia.org/wiki/Cosine_similarity){target="_blank"}).
 The closer the embeddings, the higher the score.
 
 ### Augmentation
 
 Let's now go back to our chatbot and test the RAG pattern.
 ==Open the browser at [http://localhost:8080](http://localhost:8080).
-Ask a question related to the terms of use, for example, `What can you tell me about your cancellation policy?`:==
+Ask a question related to the terms of use:==
+
+```
+What can you tell me about your cancellation policy?
+```
 
 ![RAG pattern in action](images/chat-easy-rag.png)
 
