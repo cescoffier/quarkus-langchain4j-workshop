@@ -291,7 +291,7 @@ You are not viewing the latest version.
         
   
   <span class="md-ellipsis">
-    Step 1 - Introduction to Quarkus LangChain4J
+    Step 1 - Introduction to Quarkus LangChain4j
   </span>
   
 
@@ -643,19 +643,19 @@ You are not viewing the latest version.
 </details>
 <h2 id="the-configuration">The configuration<a class="headerlink" href="#the-configuration" title="Permanent link"></a></h2>
 <p>The application is configured from the <code>src/main/resources/application.properties</code> file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
+<div class="highlight"><span class="filename">application.properties</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="na">quarkus.langchain4j.openai.chat-model.model-name</span><span class="o">=</span><span class="s">gpt-4o</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-requests</span><span class="o">=</span><span class="s">true</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-responses</span><span class="o">=</span><span class="s">true</span>
 </code></pre></div>
-<p>The <code>quarkus.langchain4j.openai.api-key</code> property is the OpenAI API key.
-The rest of the configuration indicates which model is used (<code>gpt-4o</code>) and whether to log the requests and responses to the model in the terminal.</p>
+<p>The <code>quarkus.langchain4j.openai.api-key</code> property is the OpenAI API key. In our case we are configuring it to read from the <code>OPENAI_API_KEY</code> environment variable.</p>
+<p>The rest of the configuration indicates which model is used (<code>gpt-4o</code>) and whether to log the requests and responses to the model in the terminal.</p>
 <div class="admonition important">
 <p class="admonition-title">Reloading</p>
 <p>After changing a configuration property, you need to force a restart of the application to apply the changes.
 Simply submitting a new chat message in the UI does not trigger it (it only sends a websocket message rather than an HTTP request),
-so you have to refresh the page in  your browser.</p>
+so you have to refresh the page in your browser.</p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -664,33 +664,52 @@ so you have to refresh the page in  your browser.</p>
 <h2 id="temperature">Temperature<a class="headerlink" href="#temperature" title="Permanent link"></a></h2>
 <p><code>quarkus.langchain4j.openai.chat-model.temperature</code> controls the randomness of the model’s responses.
 Lowering the temperature will make the model more conservative, while increasing it will make it more creative.</p>
-<p>Try asking “Describe a sunset over the mountains” while setting the temperature to 0.1 and then to, say, 1.5, and observe the different style of the response.
-With a too high temperature over 1.5, the model often starts producing garbage, or fails to produce a valid response at all.</p>
+<p>Try adding</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">quarkus.langchain4j.openai.chat-model.temperature</span><span class="o">=</span><span class="s">0.1</span>
+</code></pre></div>
+<p>to <code>src/main/resources/application.properties</code> and try asking </p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Describe a sunset over the mountains
+</code></pre></div>
+<p>then set the temperature to<code>1.5</code> and ask the question again, observing the different styles of the responses. With a too high temperature, the model often starts producing garbage, takes way too long to respond, or fails to produce a valid response at all.</p>
 <p>Applications that require deterministic responses should set the temperature to 0.
 Note that it will note guarantee the same response for the same input, but it will make the responses more predictable.</p>
 <p>Applications that require a bit more creativity (eg. to generate text for a story) can set the temperature to 0.3 or higher.</p>
+<p>For now, set the temperature to <code>1.0</code>.</p>
 <h2 id="max-tokens">Max tokens<a class="headerlink" href="#max-tokens" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.max-tokens</code> limits the length of the  response.
-Try setting it to 20 and see how the model cuts off the response after 20 tokens.</p>
+<p><code>quarkus.langchain4j.openai.chat-model.max-tokens</code> limits the length of the  response.</p>
+<p>Try adding</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="na">quarkus.langchain4j.openai.chat-model.max-tokens</span><span class="o">=</span><span class="s">20</span>
+</code></pre></div>
+<p>to <code>src/main/resources/application.properties</code> and see how the model cuts off the response after 20 tokens.</p>
 <p>Tokens are not words, but rather the smallest units of text that the model can generate.
 For example, “Hello, world!” has 3 tokens: “Hello”, “,”, and “world”.
 Each model has a different tokenization scheme, so the number of tokens in a sentence can vary between models.</p>
+<p>For now, set the max tokens to <code>1000</code>.</p>
 <h2 id="frequency-penalty">Frequency penalty<a class="headerlink" href="#frequency-penalty" title="Permanent link"></a></h2>
-<p><code>quarkus.langchain4j.openai.chat-model.frequency-penalty</code> defines how much the model should avoid repeating itself.
-Try setting the penalty to 2 (which is the maximum for OpenAI models) and see how the model tries to avoid repeating words in a single response.
-For example, ask it to “Repeat the word hedgehog 50 times”.
-While with frequency penalty around 0, the model gladly repeats the word 50 times, but with 2, it will most likely start producing garbage after repeating the word a few times.</p>
+<p><code>quarkus.langchain4j.openai.chat-model.frequency-penalty</code> defines how much the model should avoid repeating itself.</p>
+<p>Try adding</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="na">quarkus.langchain4j.openai.chat-model.frequency-penalty</span><span class="o">=</span><span class="s">2</span>
+</code></pre></div>
+<p>to <code>src/main/resources/application.properties</code> then ask</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Repeat the word hedgehog 50 times
+</code></pre></div>
+<p>The model will most likely start producing garbage after repeating the word a few times.</p>
+<p>Change the value to <code>0</code> and you will likely see the model repeat the word 50 times.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The maximum penalty for OpenAI models is <code>2</code>.</p>
+</div>
 <h2 id="final-configuration">Final configuration<a class="headerlink" href="#final-configuration" title="Permanent link"></a></h2>
 <p><mark>After playing with the configuration, you can set it to the following values:</mark></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="na">quarkus.langchain4j.openai.chat-model.model-name</span><span class="o">=</span><span class="s">gpt-4o</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-requests</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-responses</span><span class="o">=</span><span class="s">true</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="na">quarkus.langchain4j.openai.chat-model.temperature</span><span class="o">=</span><span class="s">1.0</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="na">quarkus.langchain4j.openai.chat-model.max-tokens</span><span class="o">=</span><span class="s">1000</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="na">quarkus.langchain4j.openai.chat-model.frequency-penalty</span><span class="o">=</span><span class="s">0</span>
+<div class="highlight"><span class="filename">application.properties</span><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="na">quarkus.langchain4j.openai.api-key</span><span class="o">=</span><span class="s">${OPENAI_API_KEY}</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="na">quarkus.langchain4j.openai.chat-model.model-name</span><span class="o">=</span><span class="s">gpt-4o</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-requests</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="na">quarkus.langchain4j.openai.chat-model.log-responses</span><span class="o">=</span><span class="s">true</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="na">quarkus.langchain4j.openai.chat-model.temperature</span><span class="o">=</span><span class="s">1.0</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="na">quarkus.langchain4j.openai.chat-model.max-tokens</span><span class="o">=</span><span class="s">1000</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="na">quarkus.langchain4j.openai.chat-model.frequency-penalty</span><span class="o">=</span><span class="s">0</span>
 </code></pre></div>
 <p>Let’s now switch to the <a href="../step-03/">next step</a>!</p></div>
 
@@ -724,7 +743,7 @@ While with frequency penalty around 0, the model gladly repeats the word 50 time
       <nav class="md-footer__inner md-grid" aria-label="Footer" >
         
           
-          <a href="../step-01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Step 1 - Introduction to Quarkus LangChain4J">
+          <a href="../step-01/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Step 1 - Introduction to Quarkus LangChain4j">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
@@ -734,7 +753,7 @@ While with frequency penalty around 0, the model gladly repeats the word 50 time
                 Previous
               </span>
               <div class="md-ellipsis">
-                Step 1 - Introduction to Quarkus LangChain4J
+                Step 1 - Introduction to Quarkus LangChain4j
               </div>
             </div>
           </a>

@@ -291,7 +291,7 @@ You are not viewing the latest version.
         
   
   <span class="md-ellipsis">
-    Step 1 - Introduction to Quarkus LangChain4J
+    Step 1 - Introduction to Quarkus LangChain4j
   </span>
   
 
@@ -600,7 +600,7 @@ You are not viewing the latest version.
 
 <div><h1 id="step-03-streaming-responses">Step 03 - Streaming responses<a class="headerlink" href="#step-03-streaming-responses" title="Permanent link"></a></h1>
 <p>LLM responses can be long.
-Imagine you ask the model to generate a story.</p>
+Imagine asking the model to generate a story. It could potentially produce hundreds of lines of text.</p>
 <p>In the current application, the entire response is accumulated before being sent to the client.
 During that generation, the client is waiting for the response, and the server is waiting for the model to finish generating the response.
 Sure there is the “…” bubble indicating that something is happening, but it is not the best user experience.</p>
@@ -611,7 +611,7 @@ However, we recommend you to follow the instructions below to get there, and con
 <h2 id="asking-the-llm-to-return-chunks">Asking the LLM to return chunks<a class="headerlink" href="#asking-the-llm-to-return-chunks" title="Permanent link"></a></h2>
 <p>The first step is to ask the LLM to return the response in chunks.
 Initially, our AI service looked like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<div class="highlight"><span class="filename">CustomerSupportAgent.java</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkiverse.langchain4j.RegisterAiService</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">jakarta.enterprise.context.SessionScoped</span><span class="p">;</span>
@@ -624,8 +624,8 @@ Initially, our AI service looked like this:</p>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
 </code></pre></div>
 <p>Note that the return type of the <code>chat</code> method is <code>String</code>.
-<mark>We will change it to <code>Multi&lt;String&gt;</code> to indicate that the response will be streamed.</mark></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<mark>We will change it to <code>Multi&lt;String&gt;</code> to indicate that the response will be streamed instead of returned synchronously.</mark></p>
+<div class="highlight"><span class="filename">CustomerSupportAgent.java</span><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkiverse.langchain4j.RegisterAiService</span><span class="p">;</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.smallrye.mutiny.Multi</span><span class="p">;</span>
@@ -639,14 +639,14 @@ Initially, our AI service looked like this:</p>
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
 </code></pre></div>
 <p>A <code>Multi&lt;String&gt;</code> is a stream of strings.
-<code>Multi</code> is a type from the Mutiny library that represents a stream of items, possibly infinite.
+<code>Multi</code> is a type from the <a href="https://smallrye.io/smallrye-mutiny/latest/" target="_blank">Mutiny</a> library that represents a stream of items, possibly infinite.
 In this case, it will be a stream of strings representing the response from the LLM, and it will be finite (fortunately).
 A <code>Multi</code> has other characteristics, such as the ability to handle back pressure, which we will not cover in this workshop.</p>
 <h2 id="serving-streams-from-the-websocket">Serving streams from the websocket<a class="headerlink" href="#serving-streams-from-the-websocket" title="Permanent link"></a></h2>
 <p>Ok, now our AI Service returns a stream of strings.
 But, we need to modify our websocket endpoint to handle this stream and send it to the client.</p>
 <p>Currently, our websocket endpoint looks like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<div class="highlight"><span class="filename">CustomerSupportAgentWebSocket.java</span><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.websockets.next.OnOpen</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.websockets.next.OnTextMessage</span><span class="p">;</span>
@@ -673,22 +673,45 @@ But, we need to modify our websocket endpoint to handle this stream and send it 
 <a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="p">}</span>
 </code></pre></div>
 <p><mark>Let’s modify the <code>onTextMessage</code> method to send the response to the client as it arrives.</mark></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Do not forget to import io.smallrye.mutiny.Multi if your IDE does not do it automatically</span>
+<div class="highlight"><span class="filename">CustomerSupportAgentWebSocket.java</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nd">@OnTextMessage</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kd">public</span><span class="w"> </span><span class="n">Multi</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">onTextMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Change the return type to Multi&lt;String&gt;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">customerSupportAgent</span><span class="p">.</span><span class="na">chat</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">}</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.websockets.next.OnOpen</span><span class="p">;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.websockets.next.OnTextMessage</span><span class="p">;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkus.websockets.next.WebSocket</span><span class="p">;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.smallrye.mutiny.Multi</span><span class="p">;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="nd">@WebSocket</span><span class="p">(</span><span class="n">path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/customer-support-agent"</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CustomerSupportAgentWebSocket</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">CustomerSupportAgent</span><span class="w"> </span><span class="n">customerSupportAgent</span><span class="p">;</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CustomerSupportAgentWebSocket</span><span class="p">(</span><span class="n">CustomerSupportAgent</span><span class="w"> </span><span class="n">customerSupportAgent</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">customerSupportAgent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">customerSupportAgent</span><span class="p">;</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nd">@OnOpen</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">onOpen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"Welcome to Miles of Smiles! How can I help you today?"</span><span class="p">;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="hll"><span class="w">    </span><span class="nd">@OnTextMessage</span>
+</span><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="hll"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">Multi</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">onTextMessage</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">message</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+</span><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="hll"><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">customerSupportAgent</span><span class="p">.</span><span class="na">chat</span><span class="p">(</span><span class="n">message</span><span class="p">);</span>
+</span><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="hll"><span class="w">    </span><span class="p">}</span>
+</span><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="p">}</span>
 </code></pre></div>
 <p>That’s it!
 Now the response will be streamed to the client as it arrives.
 This is because Quarkus understands that the return type is a <code>Multi</code> <em>natively</em>, and it knows how to handle it.</p>
 <h2 id="testing-the-streaming">Testing the streaming<a class="headerlink" href="#testing-the-streaming" title="Permanent link"></a></h2>
 <p>To test the streaming, you can use the same chat interface as before.
-So, make sure the application runs (with <code>./mvnw quarkus:dev</code>), open the browser, and start chatting.
+The application should still be running. Go back to the browser, refresh the page, and start chatting.
 If you ask simple questions, you may not notice the difference.</p>
-<p><mark>Ask something like, “Tell me a story containing 500 words” and you will see the response being displayed as it arrives.</mark></p>
-<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls alt="type:video"><source src="../images/streaming.mp4" type="video/mp4"></source></video></div></p>
+<p>Ask something like</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Tell me a story containing 500 words
+</code></pre></div>
+<p>and you will see the response being displayed as it arrives.</p>
+<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" controls alt="type:video" autoplay="true"><source src="../images/streaming.mp4" type="video/mp4"></source></video></div></p>
 <p>Let’s now switch to the <a href="../step-04/">next step</a>!</p></div>
 
 

@@ -473,7 +473,7 @@ You are not viewing the latest version.
         
   
   <span class="md-ellipsis">
-    Step 1 - Introduction to Quarkus LangChain4J
+    Step 1 - Introduction to Quarkus LangChain4j
   </span>
   
 
@@ -833,22 +833,33 @@ You are not viewing the latest version.
 <div><h1 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link"></a></h1>
 <h2 id="software-requirements">Software requirements<a class="headerlink" href="#software-requirements" title="Permanent link"></a></h2>
 <ul>
-<li>JDK 21.0 or later - Download it from <a href="https://adoptium.net/">Adoptium</a></li>
+<li>JDK 21.0 or later - Download it from <a href="https://adoptium.net/" target="_blank">Adoptium</a></li>
 <li>A key for OpenAI API (provided by the workshop organizer)</li>
-<li>Podman or Docker - See <a href="https://podman.io/getting-started/installation">Podman installation</a> or <a href="https://docs.docker.com/get-docker/">Docker installation</a></li>
-<li>If you use Podman, Podman Desktop provides a great user experience to manage your containers: <a href="https://podman-desktop.io/docs/installation">Podman Desktop</a></li>
-<li>Git (not mandatory) - See <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">Git installation</a></li>
+<li>Podman or Docker - See <a href="https://podman.io/getting-started/installation" target="_blank">Podman installation</a> or <a href="https://docs.docker.com/get-docker/" target="_blank">Docker installation</a></li>
+<li>If you use Podman, Podman Desktop provides a great user experience to manage your containers: <a href="https://podman-desktop.io/docs/installation" target="_blank">Podman Desktop</a></li>
+<li>Git (not mandatory) - See <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank">Git installation</a></li>
 <li>An IDE with Java support (IntelliJ, Eclipse, VSCode with the Java extension, etc.)</li>
 <li>A terminal</li>
 </ul>
+<details class="note" open="open">
+<summary>Want to use our environment rather than yours?</summary>
+<p>If you are running this as part of an instructor-led workshop and have been provided a virtual machine, <a href="../rhel-setup/">click here</a> to learn about how to use it if you’d prefer it over using your own laptop.</p>
+</details>
 <h2 id="ai-model-requirements">AI Model Requirements<a class="headerlink" href="#ai-model-requirements" title="Permanent link"></a></h2>
-<p>Before actually starting the workshop, make sure you have set the OpenAI API key as an environment variable, eg:</p>
+<p>You will need an OpenAI API key to complete this workshop. If your instructor has provided one for you to use, use it! <a href="https://platform.openai.com/docs/quickstart/create-and-export-an-api-key" target="_blank">Click here</a> to create one if you do not have one. </p>
+<details class="info">
+<summary>Did your instructor not provide a key?</summary>
+<p>You should receive $5 in free OpenAI trial credits if this is the first time you are creating an OpenAI developer account. If you already have an account and have used your free trial credits, then you will need to fund your account.</p>
+<p>Don’t worry, this workshop will not cost much. You can <a href="https://openai.com/api/pricing/" target="_blank">check out the OpenAI pricing calculator</a>.</p>
+<p>The cost for going through this workshop should not exceed $0.25 (~€0.22).</p>
+</details>
+<p>Once you have an OpenAI API key, make sure you have set it as an environment variable, eg:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span>&lt;your-key&gt;
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$Env:OPENAI_API_KEY</span> <span class="p">=</span> <span class="p">&lt;</span><span class="n">your-key</span><span class="p">&gt;</span>
 </code></pre></div>
 <h2 id="good-to-know">Good to know<a class="headerlink" href="#good-to-know" title="Permanent link"></a></h2>
-<p>You can run a Quarkus application in <em>dev mode</em> by running the following command in the project directory:</p>
+<p>You can run a Quarkus application in <a href="https://quarkus.io/guides/maven-tooling#dev-mode" target="_blank"><em>dev mode</em></a> by running the following command in the project directory:</p>
 <h3 id="quarkus-dev-mode">Quarkus dev mode<a class="headerlink" href="#quarkus-dev-mode" title="Permanent link"></a></h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>./mvnw<span class="w"> </span>quarkus:dev
 </code></pre></div>
@@ -861,11 +872,10 @@ The application serves the application at <a href="http://localhost:8080/">http:
 You can exit the application by pressing <code>Ctrl+C</code> in the terminal where the application is running.</p>
 </div>
 <h3 id="dev-ui">Dev UI<a class="headerlink" href="#dev-ui" title="Permanent link"></a></h3>
-<p>Quarkus ships with a Dev UI, which is available in dev mode only at <a href="http://localhost:8080/q/dev/">http://localhost:8080/q/dev/</a>.
-The Dev UI can be seen as your toolbox when building Quarkus application.
-It is only available when the application is running in dev mode.</p>
+<p>Quarkus ships with a <a href="https://quarkus.io/guides/dev-ui" target="_blank">Dev UI</a>, which is available only in dev mode only at <a href="http://localhost:8080/q/dev/">http://localhost:8080/q/dev/</a>.
+The Dev UI can be seen as your toolbox when building Quarkus applications.</p>
 <h3 id="debugging">Debugging<a class="headerlink" href="#debugging" title="Permanent link"></a></h3>
-<p>For debugging a Quarkus application running in dev mode, put your breakpoints and select <code>Run &gt; Attach to Process</code>, then select the Quarkus process (in IntelliJ)</p>
+<p>For debugging a Quarkus application running in dev mode, put your breakpoints and select <code>Run &gt; Attach to Process</code>, then select the Quarkus process (in IntelliJ).</p>
 <h2 id="lets-get-started">Let’s get started<a class="headerlink" href="#lets-get-started" title="Permanent link"></a></h2>
 <p>It’s time to get started with the workshop.</p>
 <h3 id="getting-the-workshop-material">Getting the workshop material<a class="headerlink" href="#getting-the-workshop-material" title="Permanent link"></a></h3>
@@ -896,14 +906,21 @@ If, however, you’re already attending a workshop, don’t worry about warming 
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>./mvnw<span class="w"> </span>verify
 </code></pre></div>
 <h3 id="warming-up-docker-images">Warming up Docker images<a class="headerlink" href="#warming-up-docker-images" title="Permanent link"></a></h3>
-<p>To download the Docker images, you can run the following command:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># With Podman:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>podman<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># With Docker:</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
+<p>To download the Docker images, you can run one of the following commands:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Podman</label><label for="__tabbed_1_2">Docker</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>podman<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>pgvector/pgvector:pg16
+</code></pre></div>
+</div>
+</div>
+</div>
 <h3 id="import-the-project-in-your-ide">Import the project in your IDE<a class="headerlink" href="#import-the-project-in-your-ide" title="Permanent link"></a></h3>
-<p>Then, open the project from the <code>step-01</code> directory in your IDE and use that directory throughout the workshop.</p>
+<p>Then, open the project from the <code>step-01</code> directory in your IDE and use that directory throughout the workshop. If you get stuck anywhere and would like to move on, simply switch to the <code>step-xx</code> directory of the last step you completed.</p>
 <p>Once done, you can move on to the next step: <a href="../step-01/">Step 1</a>.</p></div>
 
 
@@ -937,13 +954,13 @@ If, however, you’re already attending a workshop, don’t worry about warming 
         
         
           
-          <a href="../step-01/" class="md-footer__link md-footer__link--next" aria-label="Next: Step 1 - Introduction to Quarkus LangChain4J">
+          <a href="../step-01/" class="md-footer__link md-footer__link--next" aria-label="Next: Step 1 - Introduction to Quarkus LangChain4j">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Step 1 - Introduction to Quarkus LangChain4J
+                Step 1 - Introduction to Quarkus LangChain4j
               </div>
             </div>
             <div class="md-footer__button md-icon">

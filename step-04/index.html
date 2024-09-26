@@ -291,7 +291,7 @@ You are not viewing the latest version.
         
   
   <span class="md-ellipsis">
-    Step 1 - Introduction to Quarkus LangChain4J
+    Step 1 - Introduction to Quarkus LangChain4j
   </span>
   
 
@@ -599,23 +599,23 @@ You are not viewing the latest version.
 
 
 <div><h1 id="step-04-system-messages">Step 04 - System messages<a class="headerlink" href="#step-04-system-messages" title="Permanent link"></a></h1>
-<p>In <a href="../step-01/">step 01</a>, we have seen two types of messages:</p>
+<p>In <a href="../step-01/">step 1</a>, we saw two types of messages:</p>
 <ul>
 <li>User messages (<code>User</code>)</li>
 <li>AI responses (<code>Assistant</code>)</li>
 </ul>
 <p>There are other types of messages, and this step is about <em>System message</em>.
 It’s an important type of message.
-It provides the <em>scope</em> of the conversation and provide instructions to the LLM.</p>
+It provides the <em>scope</em> of the conversation and provides instructions to the LLM.</p>
 <h2 id="system-messages">System messages<a class="headerlink" href="#system-messages" title="Permanent link"></a></h2>
 <p>A <em>system message</em> in a LLM is a directive that helps guide the model’s behavior and tone during an interaction.
-It typically sets the context, role, or boundaries for the model, defining how it should respond to the user.
-System messages are crucial for shaping the model’s output, ensuring it aligns with specific requirements such as
+It typically sets the context, role, or boundaries for the model, defining how it should respond to the user.</p>
+<p>System messages are crucial for shaping the model’s output, ensuring it aligns with specific requirements such as
 formality, topic focus, or specific task execution. Unlike user input, the system message remains hidden from the
 conversation but influences the overall experience.</p>
-<p>To add a system message, we need to extend our <code>CustomerSupportAgent</code> interface.
+<p>To add a system message, we need to enhance our <code>CustomerSupportAgent</code> interface.
 <mark>Update the <code>CustomerSupportAgent</code> interface content to become:</mark></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
+<div class="highlight"><span class="filename">CustomerSupportAgent.java</span><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">package</span><span class="w"> </span><span class="nn">dev.langchain4j.quarkus.workshop</span><span class="p">;</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">dev.langchain4j.service.SystemMessage</span><span class="p">;</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">io.quarkiverse.langchain4j.RegisterAiService</span><span class="p">;</span>
@@ -626,14 +626,13 @@ conversation but influences the overall experience.</p>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nd">@RegisterAiService</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CustomerSupportAgent</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="c1">// Added SystemMessage annotation:</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="nd">@SystemMessage</span><span class="p">(</span><span class="s">"""</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="s">            You are a customer support agent of a car rental company 'Miles of Smiles'.</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="s">            You are friendly, polite and concise.</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="s">            If the question is unrelated to car rental, you should politely redirect the customer to the right department.</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="s">            """</span><span class="p">)</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="n">Multi</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userMessage</span><span class="p">);</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="p">}</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="w">    </span><span class="nd">@SystemMessage</span><span class="p">(</span><span class="s">"""</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="hll"><span class="s">            You are a customer support agent of a car rental company 'Miles of Smiles'.</span>
+</span><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="hll"><span class="s">            You are friendly, polite and concise.</span>
+</span><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="hll"><span class="s">            If the question is unrelated to car rental, you should politely redirect the customer to the right department.</span>
+</span><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="hll"><span class="s">            """</span><span class="p">)</span>
+</span><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="hll"><span class="w">    </span><span class="n">Multi</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">userMessage</span><span class="p">);</span>
+</span><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="p">}</span>
 </code></pre></div>
 <p>If you do not follow the workshop, the <code>step-04</code> directory already contains the updated <code>CustomerSupportAgent</code>
 interface.</p>
@@ -641,19 +640,21 @@ interface.</p>
 This is how we add a system message to the LLM.
 We define the context, tone, and scope of the conversation.</p>
 <h2 id="system-message-and-memory">System message and memory<a class="headerlink" href="#system-message-and-memory" title="Permanent link"></a></h2>
-<p>Remember the <em>conversation memory</em> we talked about in <a href="../step-01/">step 01</a>?
+<p>Remember the <em>conversation memory</em> we talked about in <a href="../step-01/">step 1</a>?
 We are sending all the messages exchanged between the user and the AI to the LLM, so the LLM can provide a context-aware
 response.</p>
 <p>At some point, we may have too many message and we need to evict some of them.
 In general, we remove the oldest message.
 However, we always keep the system message.
 We only remove the user and AI messages.</p>
-<p>So, the LLM still understand the context and does not change its behavior radically because of the memory eviction.</p>
+<p>So, the LLM still understands the context and does not change its behavior radically because of the memory eviction.</p>
 <h2 id="playing-with-the-system-message">Playing with the system message<a class="headerlink" href="#playing-with-the-system-message" title="Permanent link"></a></h2>
 <p>Now, let’s test the system message.
 Make sure the application is running and open the browser at <a href="http://localhost:8080">http://localhost:8080</a>.</p>
-<p><mark>Let’s try to chat with the AI and ask for a <em>story</em>:</mark></p>
-<p><img alt="Out of context" src="../images/out-of-context.png"></p>
+<p><mark>Let’s ask the LLM to tell us a <em>story</em></mark></p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Tell me a story
+</code></pre></div>
+<img alt="Out of context" src="../images/out-of-context.png">
 <p>The AI should respond with a message that it is out of context.
 You can relatively easily work around this by asking for a <em>car rental story</em>, but there are other solution to this
 problem.</p>
