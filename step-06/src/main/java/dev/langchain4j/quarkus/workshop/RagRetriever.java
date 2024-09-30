@@ -7,19 +7,19 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.inject.Produces;
 
 import dev.langchain4j.data.message.UserMessage;
-import dev.langchain4j.model.embedding.onnx.bgesmallenq.BgeSmallEnQuantizedEmbeddingModel;
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.rag.DefaultRetrievalAugmentor;
 import dev.langchain4j.rag.RetrievalAugmentor;
 import dev.langchain4j.rag.content.Content;
 import dev.langchain4j.rag.content.injector.ContentInjector;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
-import io.quarkiverse.langchain4j.pgvector.PgVectorEmbeddingStore;
+import dev.langchain4j.store.embedding.EmbeddingStore;
 
 public class RagRetriever {
 
     @Produces
     @ApplicationScoped
-    public RetrievalAugmentor create(PgVectorEmbeddingStore store, BgeSmallEnQuantizedEmbeddingModel model) {
+    public RetrievalAugmentor create(EmbeddingStore store, EmbeddingModel model) {
         var contentRetriever = EmbeddingStoreContentRetriever.builder()
                 .embeddingModel(model)
                 .embeddingStore(store)
