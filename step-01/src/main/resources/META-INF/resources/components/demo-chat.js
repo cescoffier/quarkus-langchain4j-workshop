@@ -21,39 +21,45 @@ export class DemoChat extends LitElement {
     connectedCallback() {
         const chatBot = document.getElementsByTagName("chat-bot")[0];
 
-        const socket = new WebSocket("ws://" + window.location.host + "/customer-support-agent");
+        const protocol = (window.location.protocol === 'https:') ? 'wss' : 'ws';
+        const socket = new WebSocket(protocol + '://' + window.location.host + '/customer-support-agent');
+
+        const that = this;
         socket.onmessage = function (event) {
             chatBot.hideLastLoading();
             // LLM response
-            var lastMessage;
+            let lastMessage;
             if (chatBot.messages.length > 0) {
                 lastMessage = chatBot.messages[chatBot.messages.length - 1];
             }
-            if (lastMessage && lastMessage.sender.id === "llm") {
+            if (lastMessage && lastMessage.sender.name === "Bot"  && ! lastMessage.loading) {
                 if (! lastMessage.msg) {
                     lastMessage.msg = "";
                 }
                 lastMessage.msg += event.data;
                 let bubbles = chatBot.shadowRoot.querySelectorAll("chat-bubble");
                 let bubble = bubbles.item(bubbles.length - 1);
-                bubble.innerHTML = lastMessage.msg;
+                if (lastMessage.message) {
+                    bubble.innerHTML = that._stripHtml(lastMessage.message) + lastMessage.msg;
+                } else {
+                    bubble.innerHTML = lastMessage.msg;
+                }
                 chatBot.body.scrollTo({ top: chatBot.body.scrollHeight, behavior: 'smooth' })
             } else {
                 chatBot.sendMessage(event.data, {
                     right: false,
-                    continued: true,
                     sender: {
-                        id: "llm"
+                        name: "Bot"
                     }
                 });
             }
         }
 
-        const that = this;
         chatBot.addEventListener("sent", function (e) {
-            if (e.detail.message.right === true) {
+            if (e.detail.message.sender.name !== "Bot") {
                 // User message
-                socket.send(that._stripHtml(e.detail.message.message));
+                const msg = that._stripHtml(e.detail.message.message);
+                socket.send(msg);
                 chatBot.sendMessage("", {
                     right: false,
                     loading: true
