@@ -1,7 +1,7 @@
 # Step 05 - Introduction to the RAG pattern
 
 In this step, we will introduce the RAG pattern and implement it in our AI service.
-The [RAG (Retrieval Augmented Generation) pattern](https://research.ibm.com/blog/retrieval-augmented-generation-RAG){target="_blank"} is a way to extend the knowledge of the LLM used in the AI service.
+The [RAG (Retrieval Augmented Generation) pattern](https://research.ibm.com/blog/retrieval-augmented-generation-RAG){:target="_blank"} is a way to extend the knowledge of the LLM used in the AI service.
 
 Indeed, the LLM is trained on a very large dataset.
 But this dataset is general and does not contain specific information about your company, your domain of expertise, or any information that could change frequently.
