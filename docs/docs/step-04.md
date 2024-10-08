@@ -38,7 +38,7 @@ Remember the _conversation memory_ we talked about in [step 1](step-01.md)?
 We are sending all the messages exchanged between the user and the AI to the LLM, so the LLM can provide a context-aware
 response.
 
-At some point, we may have too many message and we need to evict some of them.
+At some point, we may have too many messages and we need to evict some of them.
 In general, we remove the oldest message.
 However, we always keep the system message.
 We only remove the user and AI messages.
