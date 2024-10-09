@@ -53,7 +53,7 @@ In this step, we will use the [bge-small-en-q](https://huggingface.co/neuralmagi
     You could also open another terminal and run
 
     ```shell
-    ./mvnw quarkus:add-extension -Dextension=dev.langchain4j:langchain4j-embeddings-bge-small-en-q:0.34.0
+    ./mvnw quarkus:add-extension -Dextension=dev.langchain4j:langchain4j-embeddings-bge-small-en-q:0.35.0
     ```
 
 This dependency provides the `bge-small-en-q` embedding model.
