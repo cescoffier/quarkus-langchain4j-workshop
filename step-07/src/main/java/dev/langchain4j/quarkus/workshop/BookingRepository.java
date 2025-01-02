@@ -32,12 +32,12 @@ public class BookingRepository implements PanacheRepository<Booking> {
     }
 
     @Tool("List booking for a customer")
-    public List<Booking> listBookingsForCustomer(String customerName, String customerSurname) {
-        var found = Customer.findByFirstAndLastName(customerName, customerSurname);
+    public List<Booking> listBookingsForCustomer(String customerFirstName, String customerLastName) {
+        var found = Customer.findByFirstAndLastName(customerFirstName, customerLastName);
 
         return found
           .map(customer -> list("customer", customer))
-          .orElseThrow(() -> new CustomerNotFoundException(customerName, customerSurname));
+          .orElseThrow(() -> new CustomerNotFoundException(customerFirstName, customerLastName));
     }
 
 

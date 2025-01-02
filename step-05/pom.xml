@@ -16,8 +16,8 @@
 
         <compiler-plugin.version>3.13.0</compiler-plugin.version>
 
-        <quarkus.platform.version>3.15.1</quarkus.platform.version>
-        <quarkus-langchain4j.version>0.18.0</quarkus-langchain4j.version>
+        <quarkus.platform.version>3.17.5</quarkus.platform.version>
+        <quarkus-langchain4j.version>0.22.0</quarkus-langchain4j.version>
     </properties>
 
     <dependencyManagement>
@@ -33,12 +33,6 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <dependency>
-            <groupId>io.quarkiverse.langchain4j</groupId>
-            <artifactId>quarkus-langchain4j-openai</artifactId>
-            <version>${quarkus-langchain4j.version}</version>
-        </dependency>
 
         <!-- -8<- [start:easy-rag]       -->
         <dependency>
@@ -115,4 +109,38 @@
 
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>openai</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+                <property>
+                    <name>openai</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.quarkiverse.langchain4j</groupId>
+                    <artifactId>quarkus-langchain4j-openai</artifactId>
+                    <version>${quarkus-langchain4j.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <id>ollama</id>
+            <activation>
+                <property>
+                    <name>ollama</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>io.quarkiverse.langchain4j</groupId>
+                    <artifactId>quarkus-langchain4j-ollama</artifactId>
+                    <version>${quarkus-langchain4j.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 </project>

@@ -6,6 +6,7 @@ import io.quarkus.websockets.next.OnTextMessage;
 import io.quarkus.websockets.next.WebSocket;
 
 import io.quarkiverse.langchain4j.runtime.aiservice.GuardrailException;
+import jakarta.enterprise.context.control.ActivateRequestContext;
 
 @WebSocket(path = "/customer-support-agent")
 public class CustomerSupportAgentWebSocket {
@@ -22,6 +23,7 @@ public class CustomerSupportAgentWebSocket {
     }
 
     @OnTextMessage
+    @ActivateRequestContext
     public String onTextMessage(String message) {
         try {
             return customerSupportAgent.chat(message);
