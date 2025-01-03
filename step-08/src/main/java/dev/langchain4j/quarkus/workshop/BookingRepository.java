@@ -32,6 +32,7 @@ public class BookingRepository implements PanacheRepository<Booking> {
     }
 
     @Tool("List booking for a customer")
+    @Transactional
     public List<Booking> listBookingsForCustomer(String customerFirstName, String customerLastName) {
         var found = Customer.find("firstName = ?1 and lastName = ?2", customerFirstName, customerLastName).singleResultOptional();
         if (found.isEmpty()) {
@@ -40,8 +41,8 @@ public class BookingRepository implements PanacheRepository<Booking> {
         return list("customer", found.get());
     }
 
-
     @Tool("Get booking details")
+    @Transactional
     public Booking getBookingDetails(long bookingId, String customerFirstName, String customerLastName) {
         Booking found = findById(bookingId);
         if (found == null) {

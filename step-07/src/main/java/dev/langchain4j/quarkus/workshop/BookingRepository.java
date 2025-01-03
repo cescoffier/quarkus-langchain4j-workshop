@@ -32,16 +32,17 @@ public class BookingRepository implements PanacheRepository<Booking> {
     }
 
     @Tool("List booking for a customer")
+    @Transactional
     public List<Booking> listBookingsForCustomer(String customerFirstName, String customerLastName) {
-        var found = Customer.findByFirstAndLastName(customerFirstName, customerLastName);
-
-        return found
-          .map(customer -> list("customer", customer))
-          .orElseThrow(() -> new CustomerNotFoundException(customerFirstName, customerLastName));
+        var found = Customer.find("firstName = ?1 and lastName = ?2", customerFirstName, customerLastName).singleResultOptional();
+        if (found.isEmpty()) {
+            throw new CustomerNotFoundException(customerFirstName, customerLastName);
+        }
+        return list("customer", found.get());
     }
 
-
     @Tool("Get booking details")
+    @Transactional
     public Booking getBookingDetails(long bookingId, String customerFirstName, String customerLastName) {
         var found = findByIdOptional(bookingId)
           .orElseThrow(() -> new BookingNotFoundException(bookingId));

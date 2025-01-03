@@ -20,7 +20,6 @@ public class CustomerSupportAgentWebSocket {
     }
     // --8<-- [start:tools]
     @OnTextMessage
-    @ActivateRequestContext
     public String onTextMessage(String message) {
         return customerSupportAgent.chat(message);
     }

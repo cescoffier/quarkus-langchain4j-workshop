@@ -4,15 +4,13 @@ import dev.langchain4j.data.message.UserMessage;
 import io.quarkiverse.langchain4j.guardrails.InputGuardrail;
 import io.quarkiverse.langchain4j.guardrails.InputGuardrailResult;
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class PromptInjectionGuard implements InputGuardrail {
 
-    private final PromptInjectionDetectionService service;
-
-    public PromptInjectionGuard(PromptInjectionDetectionService service) {
-        this.service = service;
-    }
+    @Inject
+    PromptInjectionDetectionService service;
 
     @Override
     public InputGuardrailResult validate(UserMessage userMessage) {

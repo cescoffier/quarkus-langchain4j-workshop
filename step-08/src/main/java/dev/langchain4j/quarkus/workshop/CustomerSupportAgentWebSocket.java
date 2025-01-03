@@ -23,7 +23,6 @@ public class CustomerSupportAgentWebSocket {
     }
 
     @OnTextMessage
-    @ActivateRequestContext
     public String onTextMessage(String message) {
         try {
             return customerSupportAgent.chat(message);
