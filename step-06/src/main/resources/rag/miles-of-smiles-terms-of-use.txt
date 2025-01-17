@@ -13,7 +13,6 @@ Miles of Smiles rents out vehicles to the end user. We reserve the right to temp
 
 4. Cancellation Policy
 4.1 Reservations can be cancelled up to 11 days prior to the start of the booking period.
-4.2 If the booking period is less than 4 days, cancellations are not permitted.
 
 5. Use of Vehicle
 5.1 All cars rented from Miles of Smiles must not be used:
