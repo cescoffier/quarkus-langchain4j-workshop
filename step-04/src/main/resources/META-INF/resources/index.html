@@ -12,6 +12,18 @@
         import 'components/demo-title.js';
         import 'components/demo-chat.js';
         import 'wc-chatbot';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatBot = document.querySelector('chat-bot');
+            if (chatBot) {
+                const chatbotContainer = chatBot.shadowRoot?.querySelector('.chatbot-container');
+                if (chatbotContainer) {
+                    chatbotContainer.style.width = '1000px'; // Desired width
+                    chatbotContainer.style.resize = 'horizontal'; // Enable resizing
+                    chatbotContainer.style.overflow = 'auto'; // Handle overflow during resize
+                }
+            }
+        });
     </script>
 
     <link rel="stylesheet" href="fonts/red-hat-font.min.css">
