@@ -16,7 +16,7 @@ You are going to learn about:
 ## Workshop Structure
 
 During this workshop we will create an LLM-powered customer support agent chatbot for a car rental company.
-The workshop is divided into 7 steps.
+The workshop is divided into 8 steps.
 Each step builds on the previous one, adding new features and functionality.
 
 We start from the base functionality (step 1) and add features in the subsequent steps.
